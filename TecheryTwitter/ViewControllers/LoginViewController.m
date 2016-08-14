@@ -46,10 +46,12 @@
          switch([errorType integerValue]) {
              case LoginViewModelError_None: {
                  self.statusTextLabel.text = @"Connecting to twitter...";
+                 self.auxiliaryButton.hidden = YES;
                  break;
              }
              case LoginViewModelError_AccessDenied: {
                  self.statusTextLabel.text = @"Please grant access to twitter account in system Settings";
+                 self.auxiliaryButton.hidden = NO;
                  [self.auxiliaryButton setTitle:@"Goto settings" forState:UIControlStateNormal];
 
                  __block RACDisposable *signalForButton = [[self.auxiliaryButton rac_signalForControlEvents:UIControlEventTouchUpInside]
@@ -61,6 +63,7 @@
              }
              case LoginViewModelError_NoAccountExists: {
                  self.statusTextLabel.text = @"Please sign in to twitter account in settings";
+                 self.auxiliaryButton.hidden = NO;
                  [self.auxiliaryButton setTitle:@"Goto settings" forState:UIControlStateNormal];
                  
                  __block RACDisposable *signalForButton = [[self.auxiliaryButton rac_signalForControlEvents:UIControlEventTouchUpInside]
@@ -83,11 +86,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidBecomeActive:)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    [self.viewModel connectToTwitterAccount];
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notif {
     [self.viewModel connectToTwitterAccount];
 }
 
@@ -106,8 +118,7 @@
 #pragma mark Private
 
 - (void)openSystemSettings {
-    // TODO: test on device
-    NSURL *url = [NSURL URLWithString:@"prefs:root=WIFI"];
+    NSURL *url = [NSURL URLWithString:@"prefs:root"];
     [[UIApplication sharedApplication] openURL:url];
 }
 

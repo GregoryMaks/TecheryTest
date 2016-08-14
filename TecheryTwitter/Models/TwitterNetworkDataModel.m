@@ -14,6 +14,7 @@
 
 @property (nonatomic, readwrite, strong) ACAccountStore *accountStore;
 @property (nonatomic, readwrite, strong) ACAccount *account;
+@property (nonatomic, readwrite, strong) NSDictionary *profileInfo;
 
 @end
 
@@ -56,8 +57,16 @@
 }
 
 - (void)retriveTwitterProfileInfoWithResultBlock:(void(^)(BOOL success, NSError *error))resultBlock {
-    NSURL *url = [NSURL URLWithString:@"http://api.twitter.com/1.1/users/show.json"];
-    NSDictionary *params = nil;
+    NSAssert(self.account != nil, @"account is nil");
+    if (self.account == nil) {
+        if (resultBlock) {
+            resultBlock(NO, nil);
+        }
+        return;
+    }
+    
+    NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/1.1/users/show.json"];
+    NSDictionary *params = @{ @"screen_name" : self.account.username };
     
     SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter
                                             requestMethod:SLRequestMethodGET
@@ -66,25 +75,42 @@
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
     {
-        if (error) {
-//            NSString *errorMessage = [NSString stringWithFormat:@"There was an error reading your Twitter feed. %@",
-//                                      [error localizedDescription]];
-//            
-//            [[AppDelegate instance] showError:errorMessage];
+        // TODO: Move status code check to category on NSHTTPURLResponse
+        if (urlResponse.statusCode == 200 && error == nil) {
+            NSError *jsonError = nil;
+            NSDictionary *responseJSON = [NSJSONSerialization
+                                          JSONObjectWithData:responseData
+                                          options:NSJSONReadingMutableLeaves
+                                          error:&jsonError];
+            if (jsonError == nil) {
+                self.profileInfo = responseJSON;
+                NSLog(@"profile info = %@", self.profileInfo);
+                if (resultBlock) {
+                    resultBlock(YES, nil);
+                }
+                
+            }
+            else {
+                if (resultBlock) {
+                    resultBlock(NO, jsonError);
+                }
+            }
         }
         else {
-//            NSError *jsonError;
-//            NSDictionary *responseJSON = [NSJSONSerialization
-//                                          JSONObjectWithData:responseData
-//                                          options:NSJSONReadingMutableLeaves
-//                                          error:&jsonError];
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                self.profile = responseJSON;
-//                [self setupProfile];
-//            });
+            if (resultBlock) {
+                resultBlock(NO, error);
+            }
         }
     }];
+}
+
+- (TwitterNetworkFeedDataModel *)feedDataModel {
+    NSAssert(self.account != nil, @"account is nil");
+    if (self.account == nil) {
+        return nil;
+    }
+    
+    return [[TwitterNetworkFeedDataModel alloc] initWithTwitterAccount:self.account];
 }
 
 @end

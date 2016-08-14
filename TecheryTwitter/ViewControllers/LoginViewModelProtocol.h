@@ -27,7 +27,6 @@ typedef NS_ENUM(NSInteger, LoginViewModelError) {
 
 @protocol LoginViewModelProtocol <NSObject>
 
-// TODO.RAC needs signal here
 @property (nonatomic, readonly, assign) LoginViewModelError error;
 @property (nonatomic, weak) id <LoginViewModelDelegate> delegate;
 

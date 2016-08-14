@@ -13,6 +13,8 @@
 #import "FeedViewController.h"
 #import "TwitterNetworkDataModel.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import "FeedViewModel.h"
+#import "FeedViewController.h"
 
 
 @interface LoginViewModel ()
@@ -39,6 +41,8 @@
 }
 
 - (void)connectToTwitterAccount {
+    self.error = LoginViewModelError_None;
+    
     [self.twitterModel connectToTwitterAccountWithResultBlock:^(BOOL isGranted, BOOL isAccountAvailable) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (isGranted) {
@@ -62,7 +66,13 @@
 
 - (void)prepareViewController:(UIViewController *)viewController forSegueIdentifier:(NSString *)segueIdentifier {
     if ([segueIdentifier isEqualToString:PresentFeedSegueIdentifier]) {
-        // TBD
+        UINavigationController *navController = (UINavigationController *)viewController;
+        FeedViewController *feedVC = navController.viewControllers[0];
+        NSAssert(feedVC != nil, @"NavigationController should contain FeedViewController as root");
+        if (feedVC != nil) {
+            FeedViewModel *viewModel = [[FeedViewModel alloc] initWithTwitterModel:self.twitterModel];
+            [feedVC setViewModelExternally:viewModel];
+        }
     }
 }
 

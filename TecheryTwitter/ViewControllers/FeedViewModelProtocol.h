@@ -17,4 +17,6 @@
 
 - (instancetype)initWithTwitterModel:(TwitterNetworkDataModel *)twitterModel;
 
+- (void)gatherTwittedProfileData;
+
 @end

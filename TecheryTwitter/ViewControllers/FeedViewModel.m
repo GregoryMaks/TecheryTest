@@ -27,6 +27,9 @@
 }
 
 - (void)gatherTwittedProfileData {
+    [self.twitterModel retriveTwitterProfileInfoWithResultBlock:^(BOOL success, NSError *error) {
+        NSLog(@"Twitter profile sucess: %d, error: %@", success, [error localizedDescription]);
+    }];
 }
 
 @end

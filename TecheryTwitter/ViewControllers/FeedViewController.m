@@ -51,6 +51,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.viewModel gatherTwittedProfileData];
 }
 
 - (void)didReceiveMemoryWarning {

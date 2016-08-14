@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 
 
+@protocol FeedViewModelProtocol;
+
+
 @interface FeedViewController : UITableViewController
+
+- (void)setViewModelExternally:(id <FeedViewModelProtocol>)model;
 
 @end

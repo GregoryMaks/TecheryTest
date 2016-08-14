@@ -14,6 +14,7 @@
 		93308FC71D5FBC7500E5437B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93308FB81D5FBC6C00E5437B /* Result.framework */; };
 		93308FC81D5FBC7500E5437B /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 93308FB81D5FBC6C00E5437B /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		93308FD31D5FC37800E5437B /* TwitterNetworkDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FD21D5FC37800E5437B /* TwitterNetworkDataModel.m */; };
+		93308FD61D611A2500E5437B /* TwitterNetworkFeedDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FD51D611A2500E5437B /* TwitterNetworkFeedDataModel.m */; };
 		9370DB361D5C8573004B0934 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB351D5C8573004B0934 /* main.m */; };
 		9370DB391D5C8573004B0934 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB381D5C8573004B0934 /* AppDelegate.m */; };
 		9370DB3F1D5C8573004B0934 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9370DB3D1D5C8573004B0934 /* Main.storyboard */; };
@@ -182,6 +183,8 @@
 		93308FCB1D5FBF1900E5437B /* FeedViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewModelProtocol.h; sourceTree = "<group>"; };
 		93308FD11D5FC37800E5437B /* TwitterNetworkDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterNetworkDataModel.h; sourceTree = "<group>"; };
 		93308FD21D5FC37800E5437B /* TwitterNetworkDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterNetworkDataModel.m; sourceTree = "<group>"; };
+		93308FD41D611A2500E5437B /* TwitterNetworkFeedDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterNetworkFeedDataModel.h; sourceTree = "<group>"; };
+		93308FD51D611A2500E5437B /* TwitterNetworkFeedDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterNetworkFeedDataModel.m; sourceTree = "<group>"; };
 		936DE8F41D5E674800C78652 /* LoginViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewModelProtocol.h; sourceTree = "<group>"; };
 		9370DB311D5C8573004B0934 /* TecheryTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TecheryTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9370DB351D5C8573004B0934 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -308,6 +311,8 @@
 			children = (
 				93308FD11D5FC37800E5437B /* TwitterNetworkDataModel.h */,
 				93308FD21D5FC37800E5437B /* TwitterNetworkDataModel.m */,
+				93308FD41D611A2500E5437B /* TwitterNetworkFeedDataModel.h */,
+				93308FD51D611A2500E5437B /* TwitterNetworkFeedDataModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -717,6 +722,7 @@
 			files = (
 				9370DB391D5C8573004B0934 /* AppDelegate.m in Sources */,
 				93308FD31D5FC37800E5437B /* TwitterNetworkDataModel.m in Sources */,
+				93308FD61D611A2500E5437B /* TwitterNetworkFeedDataModel.m in Sources */,
 				9370DB651D5CC1D3004B0934 /* FeedTableViewCell.m in Sources */,
 				93308F521D5FB95E00E5437B /* FeedViewModel.m in Sources */,
 				9370DB621D5CBE58004B0934 /* FeedViewController.m in Sources */,
