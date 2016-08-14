@@ -7,31 +7,54 @@
 //
 
 #import "FeedViewController.h"
+#import "FeedViewModel.h"
+
 
 @interface FeedViewController ()
 
+@property (nonatomic, strong) id <FeedViewModelProtocol> viewModel;
+
 @end
+
 
 @implementation FeedViewController
 
+#pragma mark ViewModel
+
+- (id <FeedViewModelProtocol>)viewModel {
+    // For easier usage
+    if (_viewModel == nil) {
+        [self bindViewModel:[[FeedViewModel alloc] init]];
+    }
+    return _viewModel;
+}
+
+- (void)setViewModelExternally:(id <FeedViewModelProtocol>)model {
+    NSAssert(model != nil, @"Model should not be nil");
+    if (_viewModel != nil) {
+        [self unbindViewModel];
+    }
+    [self bindViewModel:model];
+}
+
+- (void)bindViewModel:(id <FeedViewModelProtocol>)viewModel {
+    self.viewModel = viewModel;
+//    self.viewModel.delegate = self;
+}
+
+- (void)unbindViewModel {
+//    self.viewModel.delegate = nil;
+    self.viewModel = nil;
+}
+
+#pragma mark Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

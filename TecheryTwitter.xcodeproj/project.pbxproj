@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		2CD1B7608197399F81898F3F /* libPods-TecheryTwitterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CB5E75DE4FDD71107C780E /* libPods-TecheryTwitterTests.a */; };
+		93308F521D5FB95E00E5437B /* FeedViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308F511D5FB95E00E5437B /* FeedViewModel.m */; };
+		93308FC31D5FBC7500E5437B /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93308F9F1D5FBC5500E5437B /* ReactiveCocoa.framework */; };
+		93308FC41D5FBC7500E5437B /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 93308F9F1D5FBC5500E5437B /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		93308FC71D5FBC7500E5437B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93308FB81D5FBC6C00E5437B /* Result.framework */; };
+		93308FC81D5FBC7500E5437B /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 93308FB81D5FBC6C00E5437B /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		93308FD31D5FC37800E5437B /* TwitterNetworkDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FD21D5FC37800E5437B /* TwitterNetworkDataModel.m */; };
 		9370DB361D5C8573004B0934 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB351D5C8573004B0934 /* main.m */; };
 		9370DB391D5C8573004B0934 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB381D5C8573004B0934 /* AppDelegate.m */; };
 		9370DB3F1D5C8573004B0934 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9370DB3D1D5C8573004B0934 /* Main.storyboard */; };
@@ -18,10 +24,126 @@
 		9370DB5F1D5CB6D3004B0934 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB5E1D5CB6D3004B0934 /* LoginViewController.m */; };
 		9370DB621D5CBE58004B0934 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB611D5CBE58004B0934 /* FeedViewController.m */; };
 		9370DB651D5CC1D3004B0934 /* FeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB641D5CC1D3004B0934 /* FeedTableViewCell.m */; };
+		9370DB671D5CE346004B0934 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9370DB661D5CE346004B0934 /* Accounts.framework */; };
+		9370DB691D5CE34C004B0934 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9370DB681D5CE34C004B0934 /* Twitter.framework */; };
+		9370DB6B1D5CE352004B0934 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9370DB6A1D5CE352004B0934 /* Social.framework */; };
+		9370DB6E1D5CE36A004B0934 /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB6D1D5CE36A004B0934 /* LoginViewModel.m */; };
 		B57518927B57C6AD26519274 /* libPods-TecheryTwitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD2996A610D5364ABECC44B /* libPods-TecheryTwitter.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		93308F9A1D5FBC5500E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308F901D5FBC5500E5437B /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D04725EA19E49ED7006002AA;
+			remoteInfo = "ReactiveCocoa-Mac";
+		};
+		93308F9C1D5FBC5500E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308F901D5FBC5500E5437B /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D04725F519E49ED7006002AA;
+			remoteInfo = "ReactiveCocoa-MacTests";
+		};
+		93308F9E1D5FBC5500E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308F901D5FBC5500E5437B /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D047260C19E49F82006002AA;
+			remoteInfo = "ReactiveCocoa-iOS";
+		};
+		93308FA01D5FBC5500E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308F901D5FBC5500E5437B /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D047261619E49F82006002AA;
+			remoteInfo = "ReactiveCocoa-iOSTests";
+		};
+		93308FA21D5FBC5500E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308F901D5FBC5500E5437B /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A9B315541B3940610001CB9C;
+			remoteInfo = "ReactiveCocoa-watchOS";
+		};
+		93308FA41D5FBC5500E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308F901D5FBC5500E5437B /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57A4D2411BA13D7A00F7D4B1;
+			remoteInfo = "ReactiveCocoa-tvOS";
+		};
+		93308FB31D5FBC6C00E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308FA81D5FBC6C00E5437B /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D45480571A9572F5009D7229;
+			remoteInfo = "Result-Mac";
+		};
+		93308FB51D5FBC6C00E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308FA81D5FBC6C00E5437B /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D45480671A9572F5009D7229;
+			remoteInfo = "Result-MacTests";
+		};
+		93308FB71D5FBC6C00E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308FA81D5FBC6C00E5437B /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D454807D1A957361009D7229;
+			remoteInfo = "Result-iOS";
+		};
+		93308FB91D5FBC6C00E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308FA81D5FBC6C00E5437B /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D45480871A957362009D7229;
+			remoteInfo = "Result-iOSTests";
+		};
+		93308FBB1D5FBC6C00E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308FA81D5FBC6C00E5437B /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57FCDE471BA280DC00130C48;
+			remoteInfo = "Result-tvOS";
+		};
+		93308FBD1D5FBC6C00E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308FA81D5FBC6C00E5437B /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57FCDE541BA280E000130C48;
+			remoteInfo = "Result-tvOSTests";
+		};
+		93308FBF1D5FBC6C00E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308FA81D5FBC6C00E5437B /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D03579A31B2B788F005D26AE;
+			remoteInfo = "Result-watchOS";
+		};
+		93308FC11D5FBC6C00E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308FA81D5FBC6C00E5437B /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D03579B01B2B78A1005D26AE;
+			remoteInfo = "Result-watchOSTests";
+		};
+		93308FC51D5FBC7500E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308F901D5FBC5500E5437B /* ReactiveCocoa.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D047260B19E49F82006002AA;
+			remoteInfo = "ReactiveCocoa-iOS";
+		};
+		93308FC91D5FBC7500E5437B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93308FA81D5FBC6C00E5437B /* Result.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D454807C1A957361009D7229;
+			remoteInfo = "Result-iOS";
+		};
 		9370DB4E1D5C8573004B0934 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9370DB291D5C8573004B0934 /* Project object */;
@@ -31,12 +153,36 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		93308F8F1D5FBB0E00E5437B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				93308FC41D5FBC7500E5437B /* ReactiveCocoa.framework in Embed Frameworks */,
+				93308FC81D5FBC7500E5437B /* Result.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		003BD516055A184DAEAD1BA3 /* Pods-TecheryTwitterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TecheryTwitterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TecheryTwitterTests/Pods-TecheryTwitterTests.release.xcconfig"; sourceTree = "<group>"; };
 		14416BADDF041017C08F0DA3 /* Pods-TecheryTwitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TecheryTwitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TecheryTwitter/Pods-TecheryTwitter.debug.xcconfig"; sourceTree = "<group>"; };
 		2AD2996A610D5364ABECC44B /* libPods-TecheryTwitter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TecheryTwitter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		72CB5E75DE4FDD71107C780E /* libPods-TecheryTwitterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TecheryTwitterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CCAC80AE52E9FCF453455DB /* Pods-TecheryTwitterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TecheryTwitterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TecheryTwitterTests/Pods-TecheryTwitterTests.debug.xcconfig"; sourceTree = "<group>"; };
+		93308F4F1D5F685A00E5437B /* LoginViewModelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewModelDelegate.h; sourceTree = "<group>"; };
+		93308F501D5FB95E00E5437B /* FeedViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewModel.h; sourceTree = "<group>"; };
+		93308F511D5FB95E00E5437B /* FeedViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewModel.m; sourceTree = "<group>"; };
+		93308F901D5FBC5500E5437B /* ReactiveCocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveCocoa.xcodeproj; path = Submodules/ReactiveCocoa/ReactiveCocoa.xcodeproj; sourceTree = "<group>"; };
+		93308FA81D5FBC6C00E5437B /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = Submodules/ReactiveCocoa/Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = "<group>"; };
+		93308FCB1D5FBF1900E5437B /* FeedViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewModelProtocol.h; sourceTree = "<group>"; };
+		93308FD11D5FC37800E5437B /* TwitterNetworkDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterNetworkDataModel.h; sourceTree = "<group>"; };
+		93308FD21D5FC37800E5437B /* TwitterNetworkDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterNetworkDataModel.m; sourceTree = "<group>"; };
+		936DE8F41D5E674800C78652 /* LoginViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewModelProtocol.h; sourceTree = "<group>"; };
 		9370DB311D5C8573004B0934 /* TecheryTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TecheryTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9370DB351D5C8573004B0934 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9370DB371D5C8573004B0934 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -55,6 +201,11 @@
 		9370DB611D5CBE58004B0934 /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
 		9370DB631D5CC1D3004B0934 /* FeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedTableViewCell.h; sourceTree = "<group>"; };
 		9370DB641D5CC1D3004B0934 /* FeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedTableViewCell.m; sourceTree = "<group>"; };
+		9370DB661D5CE346004B0934 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		9370DB681D5CE34C004B0934 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		9370DB6A1D5CE352004B0934 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		9370DB6C1D5CE36A004B0934 /* LoginViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
+		9370DB6D1D5CE36A004B0934 /* LoginViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewModel.m; sourceTree = "<group>"; };
 		CC8F7719C52CA0860FC52117 /* Pods-TecheryTwitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TecheryTwitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-TecheryTwitter/Pods-TecheryTwitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,7 +214,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9370DB6B1D5CE352004B0934 /* Social.framework in Frameworks */,
+				9370DB691D5CE34C004B0934 /* Twitter.framework in Frameworks */,
+				9370DB671D5CE346004B0934 /* Accounts.framework in Frameworks */,
+				93308FC71D5FBC7500E5437B /* Result.framework in Frameworks */,
 				B57518927B57C6AD26519274 /* libPods-TecheryTwitter.a in Frameworks */,
+				93308FC31D5FBC7500E5437B /* ReactiveCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +237,9 @@
 		3D1B028343D203205C3284A4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9370DB6A1D5CE352004B0934 /* Social.framework */,
+				9370DB681D5CE34C004B0934 /* Twitter.framework */,
+				9370DB661D5CE346004B0934 /* Accounts.framework */,
 				2AD2996A610D5364ABECC44B /* libPods-TecheryTwitter.a */,
 				72CB5E75DE4FDD71107C780E /* libPods-TecheryTwitterTests.a */,
 			);
@@ -98,9 +257,65 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		93308F531D5FBAB100E5437B /* Submodules */ = {
+			isa = PBXGroup;
+			children = (
+				93308F901D5FBC5500E5437B /* ReactiveCocoa.xcodeproj */,
+				93308FA81D5FBC6C00E5437B /* Result.xcodeproj */,
+			);
+			name = Submodules;
+			sourceTree = "<group>";
+		};
+		93308F911D5FBC5500E5437B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				93308F9B1D5FBC5500E5437B /* ReactiveCocoa.framework */,
+				93308F9D1D5FBC5500E5437B /* ReactiveCocoaTests.xctest */,
+				93308F9F1D5FBC5500E5437B /* ReactiveCocoa.framework */,
+				93308FA11D5FBC5500E5437B /* ReactiveCocoaTests.xctest */,
+				93308FA31D5FBC5500E5437B /* ReactiveCocoa.framework */,
+				93308FA51D5FBC5500E5437B /* ReactiveCocoa.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		93308FA91D5FBC6C00E5437B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				93308FB41D5FBC6C00E5437B /* Result.framework */,
+				93308FB61D5FBC6C00E5437B /* Result-MacTests.xctest */,
+				93308FB81D5FBC6C00E5437B /* Result.framework */,
+				93308FBA1D5FBC6C00E5437B /* Result-iOSTests.xctest */,
+				93308FBC1D5FBC6C00E5437B /* Result.framework */,
+				93308FBE1D5FBC6C00E5437B /* Result-tvOSTests.xctest */,
+				93308FC01D5FBC6C00E5437B /* Result.framework */,
+				93308FC21D5FBC6C00E5437B /* Result-watchOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		93308FCC1D5FC01D00E5437B /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				9370DB631D5CC1D3004B0934 /* FeedTableViewCell.h */,
+				9370DB641D5CC1D3004B0934 /* FeedTableViewCell.m */,
+			);
+			name = TableViewCell;
+			sourceTree = "<group>";
+		};
+		93308FCD1D5FC33B00E5437B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				93308FD11D5FC37800E5437B /* TwitterNetworkDataModel.h */,
+				93308FD21D5FC37800E5437B /* TwitterNetworkDataModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		9370DB281D5C8573004B0934 = {
 			isa = PBXGroup;
 			children = (
+				93308F531D5FBAB100E5437B /* Submodules */,
 				9370DB331D5C8573004B0934 /* TecheryTwitter */,
 				9370DB501D5C8573004B0934 /* TecheryTwitterTests */,
 				9370DB321D5C8573004B0934 /* Products */,
@@ -121,6 +336,7 @@
 		9370DB331D5C8573004B0934 /* TecheryTwitter */ = {
 			isa = PBXGroup;
 			children = (
+				93308FCD1D5FC33B00E5437B /* Models */,
 				9370DB5C1D5CB6A7004B0934 /* ViewControllers */,
 				9370DB371D5C8573004B0934 /* AppDelegate.h */,
 				9370DB381D5C8573004B0934 /* AppDelegate.m */,
@@ -154,14 +370,36 @@
 		9370DB5C1D5CB6A7004B0934 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				9370DB5D1D5CB6D3004B0934 /* LoginViewController.h */,
-				9370DB5E1D5CB6D3004B0934 /* LoginViewController.m */,
-				9370DB601D5CBE58004B0934 /* FeedViewController.h */,
-				9370DB611D5CBE58004B0934 /* FeedViewController.m */,
-				9370DB631D5CC1D3004B0934 /* FeedTableViewCell.h */,
-				9370DB641D5CC1D3004B0934 /* FeedTableViewCell.m */,
+				9370DB6F1D5CE376004B0934 /* Login */,
+				9370DB701D5CE37E004B0934 /* Feed */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9370DB6F1D5CE376004B0934 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9370DB5D1D5CB6D3004B0934 /* LoginViewController.h */,
+				9370DB5E1D5CB6D3004B0934 /* LoginViewController.m */,
+				9370DB6C1D5CE36A004B0934 /* LoginViewModel.h */,
+				9370DB6D1D5CE36A004B0934 /* LoginViewModel.m */,
+				936DE8F41D5E674800C78652 /* LoginViewModelProtocol.h */,
+				93308F4F1D5F685A00E5437B /* LoginViewModelDelegate.h */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		9370DB701D5CE37E004B0934 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				9370DB601D5CBE58004B0934 /* FeedViewController.h */,
+				9370DB611D5CBE58004B0934 /* FeedViewController.m */,
+				93308F501D5FB95E00E5437B /* FeedViewModel.h */,
+				93308F511D5FB95E00E5437B /* FeedViewModel.m */,
+				93308FCB1D5FBF1900E5437B /* FeedViewModelProtocol.h */,
+				93308FCC1D5FC01D00E5437B /* TableViewCell */,
+			);
+			name = Feed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,10 +415,13 @@
 				9370DB2F1D5C8573004B0934 /* Resources */,
 				111F739B9BFA2E14731FB68D /* [CP] Embed Pods Frameworks */,
 				01D1FDECBB3CB8C13100B95D /* [CP] Copy Pods Resources */,
+				93308F8F1D5FBB0E00E5437B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				93308FC61D5FBC7500E5437B /* PBXTargetDependency */,
+				93308FCA1D5FBC7500E5437B /* PBXTargetDependency */,
 			);
 			name = TecheryTwitter;
 			productName = TecheryTwitter;
@@ -237,6 +478,16 @@
 			mainGroup = 9370DB281D5C8573004B0934;
 			productRefGroup = 9370DB321D5C8573004B0934 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 93308F911D5FBC5500E5437B /* Products */;
+					ProjectRef = 93308F901D5FBC5500E5437B /* ReactiveCocoa.xcodeproj */;
+				},
+				{
+					ProductGroup = 93308FA91D5FBC6C00E5437B /* Products */;
+					ProjectRef = 93308FA81D5FBC6C00E5437B /* Result.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9370DB301D5C8573004B0934 /* TecheryTwitter */,
@@ -244,6 +495,107 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		93308F9B1D5FBC5500E5437B /* ReactiveCocoa.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ReactiveCocoa.framework;
+			remoteRef = 93308F9A1D5FBC5500E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		93308F9D1D5FBC5500E5437B /* ReactiveCocoaTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ReactiveCocoaTests.xctest;
+			remoteRef = 93308F9C1D5FBC5500E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		93308F9F1D5FBC5500E5437B /* ReactiveCocoa.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ReactiveCocoa.framework;
+			remoteRef = 93308F9E1D5FBC5500E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		93308FA11D5FBC5500E5437B /* ReactiveCocoaTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ReactiveCocoaTests.xctest;
+			remoteRef = 93308FA01D5FBC5500E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		93308FA31D5FBC5500E5437B /* ReactiveCocoa.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ReactiveCocoa.framework;
+			remoteRef = 93308FA21D5FBC5500E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		93308FA51D5FBC5500E5437B /* ReactiveCocoa.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ReactiveCocoa.framework;
+			remoteRef = 93308FA41D5FBC5500E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		93308FB41D5FBC6C00E5437B /* Result.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Result.framework;
+			remoteRef = 93308FB31D5FBC6C00E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		93308FB61D5FBC6C00E5437B /* Result-MacTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Result-MacTests.xctest";
+			remoteRef = 93308FB51D5FBC6C00E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		93308FB81D5FBC6C00E5437B /* Result.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Result.framework;
+			remoteRef = 93308FB71D5FBC6C00E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		93308FBA1D5FBC6C00E5437B /* Result-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Result-iOSTests.xctest";
+			remoteRef = 93308FB91D5FBC6C00E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		93308FBC1D5FBC6C00E5437B /* Result.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Result.framework;
+			remoteRef = 93308FBB1D5FBC6C00E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		93308FBE1D5FBC6C00E5437B /* Result-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Result-tvOSTests.xctest";
+			remoteRef = 93308FBD1D5FBC6C00E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		93308FC01D5FBC6C00E5437B /* Result.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Result.framework;
+			remoteRef = 93308FBF1D5FBC6C00E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		93308FC21D5FBC6C00E5437B /* Result-watchOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Result-watchOSTests.xctest";
+			remoteRef = 93308FC11D5FBC6C00E5437B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9370DB2F1D5C8573004B0934 /* Resources */ = {
@@ -364,9 +716,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9370DB391D5C8573004B0934 /* AppDelegate.m in Sources */,
+				93308FD31D5FC37800E5437B /* TwitterNetworkDataModel.m in Sources */,
 				9370DB651D5CC1D3004B0934 /* FeedTableViewCell.m in Sources */,
+				93308F521D5FB95E00E5437B /* FeedViewModel.m in Sources */,
 				9370DB621D5CBE58004B0934 /* FeedViewController.m in Sources */,
 				9370DB421D5C8573004B0934 /* TecheryTwitter.xcdatamodeld in Sources */,
+				9370DB6E1D5CE36A004B0934 /* LoginViewModel.m in Sources */,
 				9370DB361D5C8573004B0934 /* main.m in Sources */,
 				9370DB5F1D5CB6D3004B0934 /* LoginViewController.m in Sources */,
 			);
@@ -383,6 +738,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		93308FC61D5FBC7500E5437B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ReactiveCocoa-iOS";
+			targetProxy = 93308FC51D5FBC7500E5437B /* PBXContainerItemProxy */;
+		};
+		93308FCA1D5FBC7500E5437B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Result-iOS";
+			targetProxy = 93308FC91D5FBC7500E5437B /* PBXContainerItemProxy */;
+		};
 		9370DB4F1D5C8573004B0934 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9370DB301D5C8573004B0934 /* TecheryTwitter */;
@@ -499,6 +864,7 @@
 			baseConfigurationReference = 14416BADDF041017C08F0DA3 /* Pods-TecheryTwitter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = TecheryTwitter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -521,6 +887,7 @@
 			baseConfigurationReference = CC8F7719C52CA0860FC52117 /* Pods-TecheryTwitter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_TESTABILITY = NO;
 				INFOPLIST_FILE = TecheryTwitter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

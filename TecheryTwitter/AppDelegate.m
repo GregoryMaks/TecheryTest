@@ -9,6 +9,10 @@
 #import "AppDelegate.h"
 #import <MagicalRecord/MagicalRecord.h>
 
+#import "LoginViewController.h"
+#import "LoginViewModel.h"
+#import "TwitterNetworkDataModel.h"
+
 
 @interface AppDelegate ()
 
@@ -20,6 +24,19 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // CoreData
     [MagicalRecord setupCoreDataStack];
+    
+    // UI
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    // TODO: add MVVM-C scheme here for navigation purposes
+    LoginViewController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+    LoginViewModel *loginViewModel = [[LoginViewModel alloc] initWithTwitterModel:[TwitterNetworkDataModel new]];
+    [loginVC setViewModelExternally:loginViewModel];
+    
+    self.window.rootViewController = loginVC;
     
     return YES;
 }

@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoginViewModelProtocol.h"
+
 
 @interface LoginViewController : UIViewController
 
+- (void)setViewModelExternally:(id <LoginViewModelProtocol>)model;
 
 @end
 
