@@ -87,10 +87,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationDidBecomeActive:)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(applicationDidBecomeActive:)
+//                                                 name:UIApplicationDidBecomeActiveNotification
+//                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -99,9 +99,9 @@
     [self.viewModel connectToTwitterAccount];
 }
 
-- (void)applicationDidBecomeActive:(NSNotification *)notif {
-    [self.viewModel connectToTwitterAccount];
-}
+//- (void)applicationDidBecomeActive:(NSNotification *)notif {
+//    [self.viewModel connectToTwitterAccount];
+//}
 
 #pragma mark ModelViewDelegate
 

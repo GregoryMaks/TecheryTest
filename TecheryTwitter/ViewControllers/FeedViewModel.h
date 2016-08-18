@@ -12,4 +12,6 @@
 
 
 @interface FeedViewModel : NSObject <FeedViewModelProtocol>
+
+
 @end

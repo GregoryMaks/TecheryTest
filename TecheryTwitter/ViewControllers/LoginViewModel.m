@@ -50,6 +50,13 @@
                 if (isAccountAvailable) {
                     NSLog(@"Account available");
                     [self openFeedController];
+                    
+                    [self.twitterModel retrieveHomeTimelineTweetsWithCount:@(10)
+                                                                   sinceId:nil
+                                                                     maxId:nil
+                                                           completionBlock:^(NSArray<NSDictionary *> *rawTweets, NSError *error) {
+                                                               NSLog(@"completed");
+                                                           }];
                 }
                 else {
                     NSLog(@"Account non existant");

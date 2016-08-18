@@ -7,6 +7,7 @@
 //
 
 #import "TwitterNetworkDataModel.h"
+#import "TwitterTweetNetworkDataModel.h"
 @import Social;
 
 
@@ -78,10 +79,9 @@
         // TODO: Move status code check to category on NSHTTPURLResponse
         if (urlResponse.statusCode == 200 && error == nil) {
             NSError *jsonError = nil;
-            NSDictionary *responseJSON = [NSJSONSerialization
-                                          JSONObjectWithData:responseData
-                                          options:NSJSONReadingMutableLeaves
-                                          error:&jsonError];
+            NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:responseData
+                                                                         options:NSJSONReadingMutableLeaves
+                                                                           error:&jsonError];
             if (jsonError == nil) {
                 self.profileInfo = responseJSON;
                 NSLog(@"profile info = %@", self.profileInfo);
@@ -104,13 +104,68 @@
     }];
 }
 
-- (TwitterNetworkFeedDataModel *)feedDataModel {
+- (void)retrieveHomeTimelineTweetsWithCount:(NSNumber *)count
+                                    sinceId:(NSString *)sinceId
+                                      maxId:(NSString *)maxId
+                            completionBlock:(void(^)(NSArray<TwitterTweetNetworkDataModel *> *rawTweets, NSError *error))completionBlock {
     NSAssert(self.account != nil, @"account is nil");
     if (self.account == nil) {
-        return nil;
+        if (completionBlock) {
+            completionBlock(nil, nil);
+        }
+        return;
     }
     
-    return [[TwitterNetworkFeedDataModel alloc] initWithTwitterAccount:self.account];
+    NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/home_timeline.json"];
+    NSMutableDictionary *params = [@{
+                                     @"count" : [NSString stringWithFormat:@"%lu", (long)count],
+                                     @"exclude_replies" : @"true"
+                                    } mutableCopy];
+    if (count) {
+        params[@"count"] = count;
+    }
+    if (sinceId) {
+        params[@"since_id"] = sinceId;
+    }
+    if (maxId) {
+        params[@"max_id"] = maxId;
+    }
+    
+    SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                            requestMethod:SLRequestMethodGET
+                                                      URL:url parameters:params];
+    request.account = self.account;
+    
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
+     {
+         if (urlResponse.statusCode == 200 && error == nil) {
+             NSError *jsonError = nil;
+             id responseJSON = [NSJSONSerialization JSONObjectWithData:responseData
+                                                               options:NSJSONReadingMutableLeaves
+                                                                 error:&jsonError];
+             BOOL success = NO;
+             if (jsonError == nil) {
+                 if ([responseJSON isKindOfClass:[NSArray class]]) {
+                     if (completionBlock) {
+                         completionBlock([self parsedTweetModelsFromRawArray:responseJSON], nil);
+                     }
+                     success = YES;
+                 }
+             }
+             
+             if (success == NO && completionBlock) {
+                 completionBlock(nil, error);
+             }
+         }
+     }];
+}
+
+- (NSArray<TwitterTweetNetworkDataModel *> *)parsedTweetModelsFromRawArray:(NSArray *)rawData {
+    NSMutableArray<TwitterTweetNetworkDataModel *> *result = [NSMutableArray new];
+    for (NSDictionary *rawTweet in rawData) {
+        [result addObject:[[TwitterTweetNetworkDataModel alloc] initWithDictionary:rawTweet]];
+    }
+    return (NSArray<TwitterTweetNetworkDataModel *> *)[result copy];
 }
 
 @end

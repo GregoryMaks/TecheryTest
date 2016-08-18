@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TwitterTweetNetworkDataModel.h"
 @import Accounts;
-#import "TwitterNetworkFeedDataModel.h"
 
 
-// TODO: how to mock the model later for testing?
+/** 
+ The class is designed to work with Twitter API through network
+ */
 @interface TwitterNetworkDataModel : NSObject
 
 @property (nonatomic, readonly, strong) ACAccountStore *accountStore;
@@ -21,6 +23,10 @@
 
 - (void)connectToTwitterAccountWithResultBlock:(void(^)(BOOL isGranted, BOOL isAccountAvailable))resultBlock;
 - (void)retriveTwitterProfileInfoWithResultBlock:(void(^)(BOOL success, NSError *error))resultBlock;
-- (TwitterNetworkFeedDataModel *)feedDataModel;
+
+- (void)retrieveHomeTimelineTweetsWithCount:(NSNumber *)count
+                                    sinceId:(NSString *)sinceId
+                                      maxId:(NSString *)maxId
+                            completionBlock:(void(^)(NSArray<TwitterTweetNetworkDataModel *> *rawTweets, NSError *error))completionBlock;
 
 @end

@@ -91,7 +91,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="tweetImageView" destination="hlh-UD-cPu" id="fZX-Sw-G4o"/>
+                                    <outlet property="tweetImageView" destination="hlh-UD-cPu" id="hhZ-uU-yU4"/>
                                     <outlet property="tweetTextLabel" destination="U7s-sE-vba" id="ZrO-HX-B43"/>
                                 </connections>
                             </tableViewCell>

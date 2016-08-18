@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Automatic">
+    <entity name="TwitterTweet" representedClassName="TwitterTweet" syncable="YES">
+        <attribute name="authorProfileImageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TwitterUser" inverseName="tweets" inverseEntity="TwitterUser" syncable="YES"/>
+    </entity>
+    <entity name="TwitterUser" representedClassName="TwitterUser" syncable="YES">
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tweets" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TwitterTweet" inverseName="user" inverseEntity="TwitterTweet" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="TwitterUser" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="TwitterTweet" positionX="-54" positionY="0" width="128" height="120"/>
+    </elements>
 </model>

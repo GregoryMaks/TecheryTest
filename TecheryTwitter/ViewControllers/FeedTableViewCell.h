@@ -10,7 +10,7 @@
 
 @interface FeedTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIView *tweetImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *tweetImageView;
 @property (weak, nonatomic) IBOutlet UILabel *tweetTextLabel;
 
 @end

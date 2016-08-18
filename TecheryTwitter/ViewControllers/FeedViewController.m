@@ -8,6 +8,7 @@
 
 #import "FeedViewController.h"
 #import "FeedViewModel.h"
+#import "FeedTableViewCell.h"
 
 
 @interface FeedViewController ()
@@ -39,6 +40,12 @@
 
 - (void)bindViewModel:(id <FeedViewModelProtocol>)viewModel {
     self.viewModel = viewModel;
+
+    @weakify(self);
+    [self.viewModel.dataUpdated subscribeNext:^(id parameter) {
+        @strongify(self);
+        [self.tableView reloadData];
+    }];
 //    self.viewModel.delegate = self;
 }
 
@@ -52,11 +59,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.viewModel gatherTwittedProfileData];
+    [self.viewModel refreshFeed];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.viewModel numberOfRowsInFeedTable];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    FeedTableViewCell *cell =
+        (FeedTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FeedTableViewCell class])];
+    
+    [self.viewModel fillCell:cell withDataForRowAtIndexPath:indexPath];
+    
+    return cell;
 }
 
 @end
