@@ -60,7 +60,7 @@
                     [self openFeedController];
                 }
                 else {
-                    NSLog(@"Account non existant");
+                    NSLog(@"Account non existent");
                     self.error = LoginViewModelError_NoAccountExists;
                 }
             }

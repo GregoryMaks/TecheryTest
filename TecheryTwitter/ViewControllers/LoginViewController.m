@@ -29,16 +29,11 @@
 
 - (void)setViewModelExternally:(id <LoginViewModelProtocol>)model {
     NSAssert(model != nil, @"Model should not be nil");
-    if (_viewModel != nil) {
-        [self unbindViewModel];
-    }
-    [self bindViewModel:model];
+    self.viewModel = model;
+    self.viewModel.delegate = self;
 }
 
-- (void)bindViewModel:(id <LoginViewModelProtocol>)viewModel {
-    self.viewModel = viewModel;
-    self.viewModel.delegate = self;
-    
+- (void)bindViewModel {
     @weakify(self);
     [RACObserve(self.viewModel, error)
      subscribeNext:^(NSNumber *errorType) {
@@ -77,16 +72,14 @@
     }];
 }
 
-- (void)unbindViewModel {
-    self.viewModel.delegate = nil;
-    self.viewModel = nil;
-}
-
 #pragma mark Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self bindViewModel];
+    
+    // TODO
 //    [[NSNotificationCenter defaultCenter] addObserver:self
 //                                             selector:@selector(applicationDidBecomeActive:)
 //                                                 name:UIApplicationDidBecomeActiveNotification

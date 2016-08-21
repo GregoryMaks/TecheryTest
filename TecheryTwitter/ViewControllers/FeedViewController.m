@@ -38,24 +38,20 @@
 #pragma mark ViewModel
 
 - (id <FeedViewModelProtocol>)viewModel {
-    // For easier usage
+    // Default model
+    // TODO: maybe delegate to C in MVVM-C
     if (_viewModel == nil) {
-        [self bindViewModel:[[FeedViewModel alloc] init]];
+        _viewModel = [[FeedViewModel alloc] init];
     }
     return _viewModel;
 }
 
 - (void)setViewModelExternally:(id <FeedViewModelProtocol>)model {
     NSAssert(model != nil, @"Model should not be nil");
-    if (_viewModel != nil) {
-        [self unbindViewModel];
-    }
-    [self bindViewModel:model];
+    self.viewModel = model;
 }
 
-- (void)bindViewModel:(id <FeedViewModelProtocol>)viewModel {
-    self.viewModel = viewModel;
-
+- (void)bindViewModel {
     @weakify(self);
     [self.viewModel.dataUpdated subscribeNext:^(id parameter) {
         @strongify(self);
@@ -79,14 +75,12 @@
     }];
 }
 
-- (void)unbindViewModel {
-    self.viewModel = nil;
-}
-
 #pragma mark Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self bindViewModel];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     
