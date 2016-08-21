@@ -22,6 +22,8 @@
 		93308FE61D62066B00E5437B /* TwitterTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FE21D62066B00E5437B /* TwitterTweet.m */; };
 		93308FE91D632A6E00E5437B /* TwitterTweetNetworkDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FE81D632A6E00E5437B /* TwitterTweetNetworkDataModel.m */; };
 		93308FED1D63302300E5437B /* NSDate+Twitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FEC1D63302300E5437B /* NSDate+Twitter.m */; };
+		93308FF11D6A060900E5437B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FF01D6A060900E5437B /* Reachability.m */; };
+		93308FF31D6A062000E5437B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93308FF21D6A062000E5437B /* SystemConfiguration.framework */; };
 		9370DB361D5C8573004B0934 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB351D5C8573004B0934 /* main.m */; };
 		9370DB391D5C8573004B0934 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB381D5C8573004B0934 /* AppDelegate.m */; };
 		9370DB3F1D5C8573004B0934 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9370DB3D1D5C8573004B0934 /* Main.storyboard */; };
@@ -206,6 +208,9 @@
 		93308FE81D632A6E00E5437B /* TwitterTweetNetworkDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterTweetNetworkDataModel.m; sourceTree = "<group>"; };
 		93308FEB1D63302300E5437B /* NSDate+Twitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Twitter.h"; sourceTree = "<group>"; };
 		93308FEC1D63302300E5437B /* NSDate+Twitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Twitter.m"; sourceTree = "<group>"; };
+		93308FEF1D6A060900E5437B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Submodules/Reachability/Reachability.h; sourceTree = "<group>"; };
+		93308FF01D6A060900E5437B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Submodules/Reachability/Reachability.m; sourceTree = "<group>"; };
+		93308FF21D6A062000E5437B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		936DE8F41D5E674800C78652 /* LoginViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewModelProtocol.h; sourceTree = "<group>"; };
 		9370DB311D5C8573004B0934 /* TecheryTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TecheryTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9370DB351D5C8573004B0934 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -238,6 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93308FF31D6A062000E5437B /* SystemConfiguration.framework in Frameworks */,
 				9370DB6B1D5CE352004B0934 /* Social.framework in Frameworks */,
 				9370DB691D5CE34C004B0934 /* Twitter.framework in Frameworks */,
 				9370DB671D5CE346004B0934 /* Accounts.framework in Frameworks */,
@@ -261,6 +267,7 @@
 		3D1B028343D203205C3284A4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93308FF21D6A062000E5437B /* SystemConfiguration.framework */,
 				9370DB6A1D5CE352004B0934 /* Social.framework */,
 				9370DB681D5CE34C004B0934 /* Twitter.framework */,
 				9370DB661D5CE346004B0934 /* Accounts.framework */,
@@ -284,6 +291,7 @@
 		93308F531D5FBAB100E5437B /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
+				93308FEE1D6A05E500E5437B /* Reachability */,
 				93308F901D5FBC5500E5437B /* ReactiveCocoa.xcodeproj */,
 				93308FA81D5FBC6C00E5437B /* Result.xcodeproj */,
 			);
@@ -365,6 +373,15 @@
 				93308FEC1D63302300E5437B /* NSDate+Twitter.m */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		93308FEE1D6A05E500E5437B /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				93308FEF1D6A060900E5437B /* Reachability.h */,
+				93308FF01D6A060900E5437B /* Reachability.m */,
+			);
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 		9370DB281D5C8573004B0934 = {
@@ -787,6 +804,7 @@
 				9370DB6E1D5CE36A004B0934 /* LoginViewModel.m in Sources */,
 				9370DB361D5C8573004B0934 /* main.m in Sources */,
 				9370DB5F1D5CB6D3004B0934 /* LoginViewController.m in Sources */,
+				93308FF11D6A060900E5437B /* Reachability.m in Sources */,
 				93308FE51D62066B00E5437B /* TwitterTweet+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

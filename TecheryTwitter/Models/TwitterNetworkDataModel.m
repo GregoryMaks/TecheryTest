@@ -108,6 +108,17 @@
                                     sinceId:(NSString *)sinceId
                                       maxId:(NSString *)maxId
                             completionBlock:(void(^)(NSArray<TwitterTweetNetworkDataModel *> *rawTweets, NSError *error))completionBlock {
+    // TEST
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        completionBlock(@[[[TwitterTweetNetworkDataModel alloc] initWithDictionary:@{ @"id_str" : @"12345678",
+                                                                                      @"text" : @"Test tweet",
+                                                                                      @"created_at": @"Wed Aug 29 17:12:58 +0000 2012",
+                                                                                      @"profile_image_url" : @""
+                                                                                      }]], nil);
+    });
+    return;
+    // TEST
+    
     NSAssert(self.account != nil, @"account is nil");
     if (self.account == nil) {
         if (completionBlock) {

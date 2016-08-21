@@ -1,3 +1,6 @@
 [submodule "Submodules/ReactiveCocoa"]
 	path = Submodules/ReactiveCocoa
 	url = https://github.com/ReactiveCocoa/ReactiveCocoa.git
+[submodule "Submodules/Reachability"]
+	path = Submodules/Reachability
+	url = https://github.com/tonymillion/Reachability.git

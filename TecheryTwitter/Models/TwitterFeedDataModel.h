@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @import Accounts;
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "TwitterUser.h"
 #import "TwitterTweet.h"
 #import "TwitterNetworkDataModel.h"
@@ -40,12 +41,17 @@
 
 /**
  Loads tweets from the top
+ Signal result: (BOOL)areNewTweetsLoaded
  */
-- (void)loadNewerTweetsWithCompletionBlock:(void(^)(BOOL newTweetsLoaded))completionBlock;
+- (RACSignal *)loadNewerTweetsSignal;
 
 /**
  Loads additional tweets from the bottom
+ Signal result: (BOOL)areNewTweetsLoaded
  */
-- (void)loadOlderTweetsWithCompletionBlock:(void(^)(BOOL newTweetsLoaded))completionBlock;
+- (RACSignal *)loadOlderTweetsSignal;
+
+- (void)TEST_makeSureOneTweetExists;
+- (void)TEST_coreDataFetch;
 
 @end

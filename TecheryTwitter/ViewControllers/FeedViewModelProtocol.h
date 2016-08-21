@@ -15,14 +15,21 @@
 @class FeedTableViewCell;
 
 
+extern NSString * const FeedViewModelErrorDomain;
+typedef NS_ENUM(NSInteger, FeedViewModelErrorCode) {
+    FeedViewModel_NoInternetConnection = 0
+};
+
+
 @protocol FeedViewModelProtocol <NSObject>
 @required
 
-@property (nonatomic, strong, readonly) RACSubject *dataUpdated;
+@property (assign, readonly) BOOL isFeedRefreshing;
+@property (strong, readonly) RACSubject *dataUpdated;
 
 - (instancetype)initWithTwitterModel:(TwitterNetworkDataModel *)twitterModel;
 
-- (void)refreshFeed;
+- (RACSignal *)refreshFeedSignal;
 
 - (NSInteger)numberOfRowsInFeedTable;
 - (void)fillCell:(FeedTableViewCell *)cell withDataForRowAtIndexPath:(NSIndexPath *)indexPath;

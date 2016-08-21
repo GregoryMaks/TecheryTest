@@ -41,6 +41,14 @@
 }
 
 - (void)connectToTwitterAccount {
+    // TEST
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self openFeedController];
+    });
+    
+    return;
+    // TEST
+    
     self.error = LoginViewModelError_None;
     
     [self.twitterModel connectToTwitterAccountWithResultBlock:^(BOOL isGranted, BOOL isAccountAvailable) {
@@ -50,13 +58,6 @@
                 if (isAccountAvailable) {
                     NSLog(@"Account available");
                     [self openFeedController];
-                    
-                    [self.twitterModel retrieveHomeTimelineTweetsWithCount:@(10)
-                                                                   sinceId:nil
-                                                                     maxId:nil
-                                                           completionBlock:^(NSArray<NSDictionary *> *rawTweets, NSError *error) {
-                                                               NSLog(@"completed");
-                                                           }];
                 }
                 else {
                     NSLog(@"Account non existant");

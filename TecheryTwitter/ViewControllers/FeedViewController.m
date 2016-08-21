@@ -62,12 +62,18 @@
         [self.tableView reloadData];
     }];
     
+    // TODO: how to unlink from signal when rebinding?
     [RACObserve(self.viewModel, isFeedRefreshing) subscribeNext:^(NSNumber *value) {
         @strongify(self);
-        if (value.boolValue && !self.refreshControl.isRefreshing) {
+        if (self.refreshControl == nil) {
+            return;
+        }
+        
+        BOOL isRefreshing = self.viewModel.isFeedRefreshing;
+        if (isRefreshing && !self.refreshControl.isRefreshing) {
             [self.refreshControl beginRefreshing];
         }
-        else if (!value.boolValue && self.refreshControl.isRefreshing) {
+        else if (!isRefreshing && self.refreshControl.isRefreshing) {
             [self.refreshControl endRefreshing];
         }
     }];
@@ -88,14 +94,24 @@
     [[self.refreshControl rac_signalForControlEvents:UIControlEventValueChanged]
      subscribeNext:^(UIRefreshControl *control) {
          @strongify(self);
-         [self.viewModel refreshFeed];
+         [self refreshFeed];
      }];
     
-    [self.viewModel refreshFeed];
+    [self refreshFeed];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)refreshFeed {
+    @weakify(self);
+    [[self.viewModel refreshFeedSignal] subscribeNext:^(NSNumber *newTweetsLoaded) {
+        @strongify(self);
+        if ([newTweetsLoaded boolValue]) {
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 #pragma mark UITableViewDataSource
