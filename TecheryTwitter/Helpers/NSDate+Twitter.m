@@ -13,8 +13,7 @@
 
 @implementation NSDate (Twitter)
 
-+ (NSDate *)parseTwitterDate:(NSString *)dateString
-{
++ (NSDate *)parseTwitterDate:(NSString *)dateString {
     // "Wed Aug 29 17:12:58 +0000 2012"
     
     // For performance reasons
@@ -25,12 +24,22 @@
         [dateTimeFormatter setDateFormat:@"EEE MMM d HH:mm:ss Z y"];
     }
     
-    NSDate *theDate = nil;
+    NSDate *date = nil;
     NSError *error = nil;
-    if (NO == [dateTimeFormatter getObjectValue:&theDate forString:dateString range:nil error:&error]) {
+    if (NO == [dateTimeFormatter getObjectValue:&date forString:dateString range:nil error:&error]) {
         NSLog(@"Date '%@' could not be parsed: %@", dateString, error);
     }
-    return theDate;
+    return date;
+}
+
+- (NSString *)tweetDisplayDateString {
+    static NSDateFormatter *dateTimeFormatter = nil;
+    if (dateTimeFormatter == nil) {
+        dateTimeFormatter = [[NSDateFormatter alloc] init];
+        [dateTimeFormatter setDateFormat:@"HH:mm d MMM YYYY"];
+    }
+    
+    return [dateTimeFormatter stringFromDate:self];
 }
 
 @end

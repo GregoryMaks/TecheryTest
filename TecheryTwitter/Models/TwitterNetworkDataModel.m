@@ -157,6 +157,11 @@
                  completionBlock(nil, error);
              }
          }
+         else {
+             if (completionBlock) {
+                 completionBlock(nil, error);
+             }
+         }
      }];
 }
 

@@ -82,15 +82,24 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;tweet date&gt;" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEL-Ew-1Bw">
+                                            <rect key="frame" x="511" y="72" width="81" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="leadingMargin" secondItem="hlh-UD-cPu" secondAttribute="leading" id="2PN-5K-qXh"/>
                                         <constraint firstAttribute="topMargin" secondItem="U7s-sE-vba" secondAttribute="top" id="2oh-nz-HHt"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="OEL-Ew-1Bw" secondAttribute="trailing" id="JeH-Pv-mUE"/>
                                         <constraint firstItem="U7s-sE-vba" firstAttribute="leading" secondItem="hlh-UD-cPu" secondAttribute="trailing" constant="8" id="djx-Ad-YA5"/>
                                         <constraint firstAttribute="topMargin" secondItem="hlh-UD-cPu" secondAttribute="top" id="uDz-Kj-M7R"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="OEL-Ew-1Bw" secondAttribute="bottom" constant="1" id="yoi-eC-ypH"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="tweetDataLabel" destination="OEL-Ew-1Bw" id="WqP-wa-Xfq"/>
                                     <outlet property="tweetImageView" destination="hlh-UD-cPu" id="hhZ-uU-yU4"/>
                                     <outlet property="tweetTextLabel" destination="U7s-sE-vba" id="ZrO-HX-B43"/>
                                 </connections>

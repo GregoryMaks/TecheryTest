@@ -15,10 +15,25 @@
 
 @property (nonatomic, strong) id <FeedViewModelProtocol> viewModel;
 
+@property (nonatomic, strong) UILabel *emptyFeedLabel;
+
 @end
 
 
 @implementation FeedViewController
+
+- (UILabel *)emptyFeedLabel {
+    if (_emptyFeedLabel == nil) {
+        _emptyFeedLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        _emptyFeedLabel.text = @"Feed is empty. Please pull down to refresh.";
+        _emptyFeedLabel.textColor = [UIColor blackColor];
+        _emptyFeedLabel.numberOfLines = 0;
+        _emptyFeedLabel.textAlignment = NSTextAlignmentCenter;
+        _emptyFeedLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    }
+    return _emptyFeedLabel;
+}
 
 #pragma mark ViewModel
 
@@ -46,11 +61,19 @@
         @strongify(self);
         [self.tableView reloadData];
     }];
-//    self.viewModel.delegate = self;
+    
+    [RACObserve(self.viewModel, isFeedRefreshing) subscribeNext:^(NSNumber *value) {
+        @strongify(self);
+        if (value.boolValue && !self.refreshControl.isRefreshing) {
+            [self.refreshControl beginRefreshing];
+        }
+        else if (!value.boolValue && self.refreshControl.isRefreshing) {
+            [self.refreshControl endRefreshing];
+        }
+    }];
 }
 
 - (void)unbindViewModel {
-//    self.viewModel.delegate = nil;
     self.viewModel = nil;
 }
 
@@ -58,6 +81,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    
+    @weakify(self);
+    [[self.refreshControl rac_signalForControlEvents:UIControlEventValueChanged]
+     subscribeNext:^(UIRefreshControl *control) {
+         @strongify(self);
+         [self.viewModel refreshFeed];
+     }];
     
     [self.viewModel refreshFeed];
 }
@@ -69,7 +101,20 @@
 #pragma mark UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    if ([self.viewModel numberOfRowsInFeedTable] > 0) {
+        self.tableView.backgroundView = nil;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        
+        return 1;
+    }
+    else {
+        self.tableView.backgroundView = self.emptyFeedLabel;
+        self.emptyFeedLabel.frame = CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.bounds.size.height);
+        
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        return 0;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
