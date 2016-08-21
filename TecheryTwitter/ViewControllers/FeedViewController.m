@@ -73,6 +73,9 @@
             [self.refreshControl endRefreshing];
         }
     }];
+    
+    // A little bit of overkill, but I'll let it live for the sake of funny test
+    RAC(self.navigationItem, title, @"Loading...") = RACObserve(self.viewModel, twitterUsername);
 }
 
 #pragma mark Lifecycle

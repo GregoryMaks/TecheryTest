@@ -22,6 +22,8 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
 
 @property (assign, readwrite) BOOL isFeedRefreshing;
 
+@property (copy, readwrite) NSString *twitterUsername;
+
 @property (nonatomic, strong) TwitterNetworkDataModel *twitterModel;
 @property (nonatomic, strong) TwitterFeedDataModel *twitterFeedModel;
 
@@ -44,6 +46,9 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
     if (self = [super init]) {
         self.twitterModel = twitterModel;
         self.twitterFeedModel = [[TwitterFeedDataModel alloc] initWithTwitterNetworkDM:twitterModel];
+        
+        // TEST
+        self.twitterUsername = @"testtw";//self.twitterModel.account.username;
         
         self.isFeedRefreshing = NO;
         self.feed = [NSMutableArray new];
