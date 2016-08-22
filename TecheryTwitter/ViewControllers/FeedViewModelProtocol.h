@@ -26,7 +26,10 @@ typedef NS_ENUM(NSInteger, FeedViewModelErrorCode) {
 
 @property (assign, readonly) BOOL isFeedRefreshing;
 @property (strong, readonly) RACSubject *dataUpdated;
+
 @property (copy, readonly) NSString *twitterUsername;
+@property (assign, readonly) BOOL isOnline;
+
 
 - (instancetype)initWithTwitterModel:(TwitterNetworkDataModel *)twitterModel;
 

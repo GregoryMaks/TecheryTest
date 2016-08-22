@@ -74,8 +74,11 @@
         }
     }];
     
-    // A little bit of overkill, but I'll let it live for the sake of funny test
-    RAC(self.navigationItem, title, @"Loading...") = RACObserve(self.viewModel, twitterUsername);
+    RAC(self.navigationItem, title, @"Loading...") =
+    [[[RACObserve(self.viewModel, twitterUsername) combineLatestWith:RACObserve(self.viewModel, isOnline)
+       ] map:^id(RACTuple *value) {
+         return [NSString stringWithFormat:@"%@%@", value.first ?: @"", [value.second boolValue] ? @"" : @" (offline)"];
+    }] deliverOn:[RACScheduler mainThreadScheduler]];
 }
 
 #pragma mark Lifecycle

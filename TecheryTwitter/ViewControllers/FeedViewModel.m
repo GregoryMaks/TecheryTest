@@ -23,6 +23,9 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
 @property (assign, readwrite) BOOL isFeedRefreshing;
 
 @property (copy, readwrite) NSString *twitterUsername;
+@property (assign, readwrite) BOOL isOnline;
+
+@property (strong) Reachability *reachability;
 
 @property (nonatomic, strong) TwitterNetworkDataModel *twitterModel;
 @property (nonatomic, strong) TwitterFeedDataModel *twitterFeedModel;
@@ -50,12 +53,26 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
         // TEST
         self.twitterUsername = @"testtw";//self.twitterModel.account.username;
         
+        self.reachability = [Reachability reachabilityForInternetConnection];
+        self.isOnline = (self.reachability.currentReachabilityStatus != NotReachable);
+        
+        @weakify(self);
+        self.reachability.reachabilityBlock = ^(Reachability * reachability, SCNetworkConnectionFlags flags) {
+            @strongify(self);
+            self.isOnline = (reachability.currentReachabilityStatus != NotReachable);
+        };
+        [self.reachability startNotifier];
+        
         self.isFeedRefreshing = NO;
         self.feed = [NSMutableArray new];
         
         [self refreshCachedTweets];
     }
     return self;
+}
+
+- (void)dealloc {
+    [self.reachability stopNotifier];
 }
 
 - (RACSignal *)refreshFeedSignal {
