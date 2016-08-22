@@ -51,7 +51,7 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
         self.twitterFeedModel = [[TwitterFeedDataModel alloc] initWithTwitterNetworkDM:twitterModel];
         
         // TEST
-        self.twitterUsername = @"testtw";//self.twitterModel.account.username;
+        self.twitterUsername = self.twitterModel.account.username;//@"testtw";
         
         self.reachability = [Reachability reachabilityForInternetConnection];
         self.isOnline = (self.reachability.currentReachabilityStatus != NotReachable);
@@ -90,15 +90,15 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
                 self.isFeedRefreshing = YES;
                 
                 // TEST
-//                BOOL isNetworkReachable = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] != NotReachable;
-//                if (!isNetworkReachable) {
-//                    NSLog(@"Network is not reachable");
-//                    [subscriber sendError:[NSError errorWithDomain:FeedViewModelErrorDomain
-//                                                              code:FeedViewModel_NoInternetConnection
-//                                                          userInfo:nil]];
-//                    self.isFeedRefreshing = NO;
-//                    return nil;
-//                }
+                BOOL isNetworkReachable = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] != NotReachable;
+                if (!isNetworkReachable) {
+                    NSLog(@"Network is not reachable");
+                    [subscriber sendError:[NSError errorWithDomain:FeedViewModelErrorDomain
+                                                              code:FeedViewModel_NoInternetConnection
+                                                          userInfo:nil]];
+                    self.isFeedRefreshing = NO;
+                    return nil;
+                }
                 
                 // TODO: convert loadNewer to cold signal and chain them
                 @weakify(self);

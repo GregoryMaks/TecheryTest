@@ -170,7 +170,7 @@ static NSInteger const kDefaultTweetBatchSize = 20;
 - (void)getOrCreateTwitterUserFromAccount:(ACAccount *)account {
     NSString *username = account.username;
     // TEST
-    username = @"testtw";
+//    username = @"testtw";
     // TEST
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"username = %@", username];
