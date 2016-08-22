@@ -14,4 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *tweetTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tweetDataLabel;
 
+- (void)loadImageAtURL:(NSURL *)authorImageURL;
+
 @end

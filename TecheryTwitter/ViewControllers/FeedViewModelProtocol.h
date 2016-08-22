@@ -13,6 +13,7 @@
 
 @class TwitterNetworkDataModel;
 @class FeedTableViewCell;
+@class TwitterTweet;
 
 
 extern NSString * const FeedViewModelErrorDomain;
@@ -36,6 +37,6 @@ typedef NS_ENUM(NSInteger, FeedViewModelErrorCode) {
 - (RACSignal *)refreshFeedSignal;
 
 - (NSInteger)numberOfRowsInFeedTable;
-- (void)fillCell:(FeedTableViewCell *)cell withDataForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (TwitterTweet *)tweetForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

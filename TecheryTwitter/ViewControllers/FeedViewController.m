@@ -9,6 +9,8 @@
 #import "FeedViewController.h"
 #import "FeedViewModel.h"
 #import "FeedTableViewCell.h"
+#import "TwitterTweet.h"
+#import "NSDate+Twitter.h"
 
 
 @interface FeedViewController ()
@@ -89,6 +91,8 @@
     [self bindViewModel];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 100;
     
     @weakify(self);
     [[self.refreshControl rac_signalForControlEvents:UIControlEventValueChanged]
@@ -141,7 +145,16 @@
     FeedTableViewCell *cell =
         (FeedTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FeedTableViewCell class])];
     
-    [self.viewModel fillCell:cell withDataForRowAtIndexPath:indexPath];
+    TwitterTweet *tweet = [self.viewModel tweetForRowAtIndexPath:indexPath];
+    if (tweet != nil) {
+        cell.tweetTextLabel.text = tweet.text;
+        cell.tweetDataLabel.text = [[NSDate dateWithTimeIntervalSinceReferenceDate:tweet.createdAt] tweetDisplayDateString];
+        
+        // TODO: can be improved with AFNetworking or separate thread
+        if (tweet.authorProfileImageUrl.length > 0) {
+            [cell loadImageAtURL:[NSURL URLWithString:tweet.authorProfileImageUrl]];
+        }
+    }
     
     return cell;
 }

@@ -122,20 +122,8 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
     return self.feed.count;
 }
 
-- (void)fillCell:(FeedTableViewCell *)cell withDataForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TwitterTweet *tweet = (indexPath.row < self.feed.count) ? self.feed[indexPath.row] : nil;
-    if (tweet != nil) {
-        cell.tweetTextLabel.text = tweet.text;
-        cell.tweetDataLabel.text = [[NSDate dateWithTimeIntervalSinceReferenceDate:tweet.createdAt] tweetDisplayDateString];
-        
-        // TODO: can be improved with AFNetworking or separate thread
-        if (tweet.authorProfileImageUrl.length > 0) {
-            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:tweet.authorProfileImageUrl]];
-            if (imageData != nil) {
-                cell.tweetImageView.image = [UIImage imageWithData:imageData];
-            }
-        }
-    }
+- (TwitterTweet *)tweetForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return (indexPath.row < self.feed.count) ? self.feed[indexPath.row] : nil;
 }
 
 #pragma mark Private

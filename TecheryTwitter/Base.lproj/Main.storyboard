@@ -69,16 +69,16 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="97"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hlh-UD-cPu">
-                                            <rect key="frame" x="8" y="8" width="80" height="80"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-loading" translatesAutoresizingMaskIntoConstraints="NO" id="hlh-UD-cPu">
+                                            <rect key="frame" x="8" y="8" width="48" height="48"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="Zby-Hi-4gp"/>
-                                                <constraint firstAttribute="height" constant="80" id="x0O-mA-Nnc"/>
+                                                <constraint firstAttribute="width" constant="48" id="Zby-Hi-4gp"/>
+                                                <constraint firstAttribute="height" constant="48" id="x0O-mA-Nnc"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;tweet text&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7s-sE-vba">
-                                            <rect key="frame" x="96" y="8" width="98" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="64" y="8" width="88" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -92,7 +92,10 @@
                                     <constraints>
                                         <constraint firstAttribute="leadingMargin" secondItem="hlh-UD-cPu" secondAttribute="leading" id="2PN-5K-qXh"/>
                                         <constraint firstAttribute="topMargin" secondItem="U7s-sE-vba" secondAttribute="top" id="2oh-nz-HHt"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="hlh-UD-cPu" secondAttribute="bottom" constant="8" id="5o5-Uy-ZuR"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="OEL-Ew-1Bw" secondAttribute="trailing" id="JeH-Pv-mUE"/>
+                                        <constraint firstItem="OEL-Ew-1Bw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="U7s-sE-vba" secondAttribute="bottom" constant="4" id="Jzr-v0-643"/>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="U7s-sE-vba" secondAttribute="trailing" id="Sa5-Hl-rzX"/>
                                         <constraint firstItem="U7s-sE-vba" firstAttribute="leading" secondItem="hlh-UD-cPu" secondAttribute="trailing" constant="8" id="djx-Ad-YA5"/>
                                         <constraint firstAttribute="topMargin" secondItem="hlh-UD-cPu" secondAttribute="top" id="uDz-Kj-M7R"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="OEL-Ew-1Bw" secondAttribute="bottom" constant="1" id="yoi-eC-ypH"/>
@@ -133,4 +136,7 @@
             <point key="canvasLocation" x="1146" y="491"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon-loading" width="48" height="48"/>
+    </resources>
 </document>

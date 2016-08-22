@@ -384,6 +384,13 @@
 			name = Reachability;
 			sourceTree = "<group>";
 		};
+		93308FF41D6B5F3400E5437B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		9370DB281D5C8573004B0934 = {
 			isa = PBXGroup;
 			children = (
@@ -418,6 +425,7 @@
 				9370DB451D5C8573004B0934 /* LaunchScreen.storyboard */,
 				9370DB481D5C8573004B0934 /* Info.plist */,
 				9370DB401D5C8573004B0934 /* TecheryTwitter.xcdatamodeld */,
+				93308FF41D6B5F3400E5437B /* Resources */,
 				9370DB341D5C8573004B0934 /* Supporting Files */,
 			);
 			path = TecheryTwitter;

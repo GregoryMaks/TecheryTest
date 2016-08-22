@@ -41,6 +41,7 @@ static NSInteger const kDefaultTweetBatchSize = 20;
     NSFetchRequest *request = [TwitterTweet MR_requestAllSortedBy:@"createdAt"
                                                         ascending:NO
                                                         inContext:[NSManagedObjectContext MR_defaultContext]];
+    request.predicate = [NSPredicate predicateWithFormat:@"user = %@", self.user];
     request.returnsObjectsAsFaults = YES;
     
     NSError *error = nil;
