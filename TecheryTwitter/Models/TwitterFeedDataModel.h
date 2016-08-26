@@ -51,7 +51,4 @@
  */
 //- (RACSignal *)loadOlderTweetsSignal;
 
-- (void)TEST_makeSureOneTweetExists;
-- (void)TEST_coreDataFetch;
-
 @end
