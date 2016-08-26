@@ -49,7 +49,7 @@
  Loads additional tweets from the bottom
  Signal result: (BOOL)areNewTweetsLoaded
  */
-- (RACSignal *)loadOlderTweetsSignal;
+//- (RACSignal *)loadOlderTweetsSignal;
 
 - (void)TEST_makeSureOneTweetExists;
 - (void)TEST_coreDataFetch;

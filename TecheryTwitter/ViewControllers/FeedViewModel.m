@@ -50,8 +50,7 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
         self.twitterModel = twitterModel;
         self.twitterFeedModel = [[TwitterFeedDataModel alloc] initWithTwitterNetworkDM:twitterModel];
         
-        // TEST
-        self.twitterUsername = self.twitterModel.account.username;//@"testtw";
+        self.twitterUsername = self.twitterModel.account.username;
         
         self.reachability = [Reachability reachabilityForInternetConnection];
         self.isOnline = (self.reachability.currentReachabilityStatus != NotReachable);
@@ -59,7 +58,13 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
         @weakify(self);
         self.reachability.reachabilityBlock = ^(Reachability * reachability, SCNetworkConnectionFlags flags) {
             @strongify(self);
-            self.isOnline = (reachability.currentReachabilityStatus != NotReachable);
+            BOOL newOnlineStatus = (reachability.currentReachabilityStatus != NotReachable);
+            
+            if (!self.isOnline && newOnlineStatus) {
+                [[self refreshFeedSignal] subscribeNext:^(id x) {}];
+            }
+            
+            self.isOnline = newOnlineStatus;
         };
         [self.reachability startNotifier];
         
@@ -89,7 +94,6 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
                 }
                 self.isFeedRefreshing = YES;
                 
-                // TEST
                 BOOL isNetworkReachable = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] != NotReachable;
                 if (!isNetworkReachable) {
                     NSLog(@"Network is not reachable");
@@ -117,6 +121,9 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
                 return nil;
             }];
 }
+
+//- (RACSignal *)loadMoreFeedSignal {
+//}
 
 - (NSInteger)numberOfRowsInFeedTable {
     return self.feed.count;

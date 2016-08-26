@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger, FeedViewModelErrorCode) {
 - (instancetype)initWithTwitterModel:(TwitterNetworkDataModel *)twitterModel;
 
 - (RACSignal *)refreshFeedSignal;
+//- (RACSignal *)loadMoreFeedSignal;
 
 - (NSInteger)numberOfRowsInFeedTable;
 - (TwitterTweet *)tweetForRowAtIndexPath:(NSIndexPath *)indexPath;

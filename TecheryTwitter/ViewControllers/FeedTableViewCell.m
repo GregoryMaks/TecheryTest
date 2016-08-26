@@ -44,9 +44,8 @@
     self.imageLoadingTask =
     [[NSURLSession sharedSession] dataTaskWithURL:authorImageURL
                                 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                    NSLog(@"image arrived");
                                     if (error != nil) {
-                                        NSLog(@"error loading userpic, %@", [error localizedDescription]);
+                                        NSLog(@"Error loading userpic, %@", [error localizedDescription]);
                                         return;
                                     }
                                     

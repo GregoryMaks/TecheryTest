@@ -23,7 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // CoreData
-    [MagicalRecord setupCoreDataStack];
+    [self setupCoreData];
     
     // UI
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -62,6 +62,12 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     [MagicalRecord cleanUp];
+}
+
+#pragma mark Private 
+
+- (void)setupCoreData {
+    [MagicalRecord setupCoreDataStack];
 }
 
 @end

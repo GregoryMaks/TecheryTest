@@ -12,7 +12,7 @@
         <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TwitterTweet" inverseName="user" inverseEntity="TwitterTweet" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TwitterUser" positionX="-63" positionY="-18" width="128" height="75"/>
         <element name="TwitterTweet" positionX="-54" positionY="0" width="128" height="120"/>
+        <element name="TwitterUser" positionX="-63" positionY="-18" width="128" height="75"/>
     </elements>
 </model>

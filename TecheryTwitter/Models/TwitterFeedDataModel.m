@@ -63,10 +63,11 @@ static NSInteger const kDefaultTweetBatchSize = 20;
         @strongify(self);
         NSLog(@"loadNewerTweets");
         
-        long long int maxStoredTweetId = [self tweetIdWithPredicate:[NSPredicate predicateWithFormat:@"identifier = max(identifier)"]];
+        long long int maxStoredTweetId = [self tweetIdWithPredicate:[NSPredicate predicateWithFormat:@"identifier = max(identifier) AND user = %@", self.user]];
         NSLog(@"maxId = %lld", maxStoredTweetId != NSNotFound ? maxStoredTweetId : -1);
         
-        NSString *sinceId = (maxStoredTweetId == NSNotFound) ? nil : [NSString stringWithFormat:@"%lld", maxStoredTweetId];
+        // Reason for (maxStoredTweetId - 1): we should retrieve the duplicating tweet with maxStoredTweetId for merging logic
+        NSString *sinceId = (maxStoredTweetId == NSNotFound) ? nil : [NSString stringWithFormat:@"%lld", maxStoredTweetId - 1];
         [self.networkDataModel retrieveHomeTimelineTweetsWithCount:@(kDefaultTweetBatchSize)
                                                            sinceId:sinceId
                                                              maxId:nil
@@ -75,20 +76,41 @@ static NSInteger const kDefaultTweetBatchSize = 20;
              if (error) {
                  NSLog(@"error retrieving tweets, %@", [error localizedDescription]);
                  [subscriber sendError:error];
+                 [subscriber sendCompleted];
                  return;
              }
              
              dispatch_async(dispatch_get_main_queue(), ^{
-                 for (TwitterTweetNetworkDataModel *rawTweet in rawTweets) {
-                     TwitterTweet *tweet = [TwitterTweet MR_createEntity];
-                     tweet.user = self.user;
-                     [tweet fillFromNetworkDataModel:rawTweet];
-                 }
                  
-                 [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-                 
-                 [subscriber sendNext:@(rawTweets.count > 0)];
-                 [subscriber sendCompleted];
+                 [[NSManagedObjectContext MR_defaultContext] MR_saveWithBlock:^(NSManagedObjectContext * _Nonnull localContext) {
+                     TwitterUser *localUser = [self.user MR_inContext:localContext];
+                     
+                     BOOL tweetWithMaxStoredTweetIdPresentInResultSet = NO;
+                     
+                     for (TwitterTweetNetworkDataModel *rawTweet in rawTweets) {
+                         if ([rawTweet.identifier longLongValue] == maxStoredTweetId) {
+                             tweetWithMaxStoredTweetIdPresentInResultSet = YES;
+                         }
+                         else {
+                             TwitterTweet *tweet = [TwitterTweet MR_createEntityInContext:localContext];
+                             tweet.user = localUser;
+                             [tweet fillFromNetworkDataModel:rawTweet];
+                         }
+                     }
+                     
+                     if (maxStoredTweetId != NSNotFound && tweetWithMaxStoredTweetIdPresentInResultSet == NO) {
+                         // For now we are going to delete old tweets if newer create a gap between batches (old batch and new batch)
+                         [self deleteTweetsWithIdLessOrEqualThan:maxStoredTweetId forUser:localUser inContext:localContext];
+                     }
+                     
+                     NSLog(@"Saving new tweets to context...");
+                     
+                 } completion:^(BOOL contextDidSave, NSError * _Nullable error) {
+                     NSLog(@"Saved status: %d, error: %@", contextDidSave, [error localizedDescription]);
+                     
+                     [subscriber sendNext:@(rawTweets.count > 0)];
+                     [subscriber sendCompleted];
+                 }];
              });
          }];
         
@@ -96,7 +118,8 @@ static NSInteger const kDefaultTweetBatchSize = 20;
     }];
 }
 
-- (RACSignal *)loadOlderTweetsSignal {
+// TODO: in progress
+/*- (RACSignal *)loadOlderTweetsSignal {
     @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self);
@@ -115,17 +138,22 @@ static NSInteger const kDefaultTweetBatchSize = 20;
              if (error) {
                  NSLog(@"error retrieving tweets, %@", [error localizedDescription]);
                  [subscriber sendError:error];
+                 [subscriber sendCompleted];
                  return;
              }
              
              dispatch_async(dispatch_get_main_queue(), ^{
-                 for (TwitterTweetNetworkDataModel *rawTweet in rawTweets) {
-                     TwitterTweet *tweet = [TwitterTweet MR_createEntity];
-                     tweet.user = self.user;
-                     [tweet fillFromNetworkDataModel:rawTweet];
-                 }
-                 
-                 [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+                 [[NSManagedObjectContext MR_defaultContext] MR_saveWithBlock:^(NSManagedObjectContext * _Nonnull localContext) {
+                     
+                     // We should not overwrite tweets with the same id (id is unique)
+                     [localContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
+                     
+                     for (TwitterTweetNetworkDataModel *rawTweet in rawTweets) {
+                         TwitterTweet *tweet = [TwitterTweet MR_createEntityInContext:localContext];
+                         tweet.user = self.user;
+                         [tweet fillFromNetworkDataModel:rawTweet];
+                     }
+                 }];
                  
                  [subscriber sendNext:@(rawTweets.count > 0)];
                  [subscriber sendCompleted];
@@ -134,44 +162,12 @@ static NSInteger const kDefaultTweetBatchSize = 20;
         
         return nil;
     }];
-}
-
-- (void)TEST_makeSureOneTweetExists {
-    NSFetchRequest *req = [TwitterTweet MR_createFetchRequest];
-    req.predicate = [NSPredicate predicateWithFormat:@"user = %@", self.user];
-    req.resultType = NSCountResultType;
-    
-    NSError *error = nil;
-    NSArray *result = [[NSManagedObjectContext MR_defaultContext] executeFetchRequest:req error:&error];
-    BOOL exists = NO;
-    if (result != nil && error == nil) {
-        exists = [result[0] boolValue];
-    }
-    
-    if (!exists) {
-        TwitterTweet *tweet = [TwitterTweet MR_createEntity];
-        tweet.user = self.user;
-        tweet.identifier = 12345678;
-        tweet.text = @"test tweet No. 1";
-        tweet.authorProfileImageUrl = nil;
-        tweet.createdAt = [[NSDate date] timeIntervalSinceReferenceDate];
-        
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-    }
-}
-
-- (void)TEST_coreDataFetch {
-    long long int tweetId = [self tweetIdWithPredicate:[NSPredicate predicateWithFormat:@"identifier = min(identifier)"]];
-    NSLog(@"id = %lld", tweetId);
-}
+}*/
 
 #pragma mark Private methods
 
 - (void)getOrCreateTwitterUserFromAccount:(ACAccount *)account {
     NSString *username = account.username;
-    // TEST
-//    username = @"testtw";
-    // TEST
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"username = %@", username];
     TwitterUser *user = [TwitterUser MR_findFirstWithPredicate:predicate
@@ -200,6 +196,21 @@ static NSInteger const kDefaultTweetBatchSize = 20;
     }
     else {
         return [result[0][@"identifier"] longLongValue];
+    }
+}
+
+- (void)deleteTweetsWithIdLessOrEqualThan:(long long int)identifier forUser:(TwitterUser *)user inContext:(NSManagedObjectContext *)context {
+    NSError *error = nil;
+    NSFetchRequest *request = [TwitterTweet MR_createFetchRequestInContext:context];
+    request.predicate = [NSPredicate predicateWithFormat:@"user = %@ AND identifier <= %@", user, @(identifier)];
+    NSArray *deleteArray = [context executeFetchRequest:request error:&error];
+    if (deleteArray != nil && error == nil) {
+        [deleteArray enumerateObjectsUsingBlock:^(NSManagedObject* _Nonnull object, NSUInteger idx, BOOL * _Nonnull stop) {
+            [context deleteObject:object];
+        }];
+    }
+    else {
+        NSLog(@"Error deleting tweets, %@", [error localizedDescription]);
     }
 }
 

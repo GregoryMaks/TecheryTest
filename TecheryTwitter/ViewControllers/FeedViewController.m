@@ -13,6 +13,9 @@
 #import "NSDate+Twitter.h"
 
 
+static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell";
+
+
 @interface FeedViewController ()
 
 @property (nonatomic, strong) id <FeedViewModelProtocol> viewModel;
@@ -109,13 +112,7 @@
 }
 
 - (void)refreshFeed {
-    @weakify(self);
-    [[self.viewModel refreshFeedSignal] subscribeNext:^(NSNumber *newTweetsLoaded) {
-        @strongify(self);
-        if ([newTweetsLoaded boolValue]) {
-            [self.tableView reloadData];
-        }
-    }];
+    [[self.viewModel refreshFeedSignal] subscribeNext:^(NSNumber *newTweetsLoaded) {}];
 }
 
 #pragma mark UITableViewDataSource
@@ -138,25 +135,36 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.viewModel numberOfRowsInFeedTable];
+    return [self.viewModel numberOfRowsInFeedTable] + 1;    // Load more button
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    FeedTableViewCell *cell =
-        (FeedTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FeedTableViewCell class])];
-    
-    TwitterTweet *tweet = [self.viewModel tweetForRowAtIndexPath:indexPath];
-    if (tweet != nil) {
-        cell.tweetTextLabel.text = tweet.text;
-        cell.tweetDataLabel.text = [[NSDate dateWithTimeIntervalSinceReferenceDate:tweet.createdAt] tweetDisplayDateString];
+    if (indexPath.row < [self.viewModel numberOfRowsInFeedTable]) {
+        FeedTableViewCell *cell =
+            (FeedTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FeedTableViewCell class])];
         
-        // TODO: can be improved with AFNetworking or separate thread
-        if (tweet.authorProfileImageUrl.length > 0) {
-            [cell loadImageAtURL:[NSURL URLWithString:tweet.authorProfileImageUrl]];
+        TwitterTweet *tweet = [self.viewModel tweetForRowAtIndexPath:indexPath];
+        if (tweet != nil) {
+            cell.tweetTextLabel.text = tweet.text;
+            cell.tweetDataLabel.text = [[NSDate dateWithTimeIntervalSinceReferenceDate:tweet.createdAt] tweetDisplayDateString];
+            
+            // TODO: can be improved with AFNetworking or separate thread
+            if (tweet.authorProfileImageUrl.length > 0) {
+                [cell loadImageAtURL:[NSURL URLWithString:tweet.authorProfileImageUrl]];
+            }
         }
+        return cell;
     }
-    
-    return cell;
+    else {
+        return [self.tableView dequeueReusableCellWithIdentifier:kLoadMoreFeedTableViewCell];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row >= [self.viewModel numberOfRowsInFeedTable]) {
+        NSLog(@"not implemented");
+//        [[self.viewModel loadMoreFeedSignal] subscribeNext:^(NSNumber *newTweetsLoaded) {}];
+    }
 }
 
 @end

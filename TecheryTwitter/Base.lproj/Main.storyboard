@@ -107,6 +107,26 @@
                                     <outlet property="tweetTextLabel" destination="U7s-sE-vba" id="ZrO-HX-B43"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMoreFeedTableViewCell" rowHeight="45" id="dUP-hg-Nju">
+                                <rect key="frame" x="0.0" y="190" width="600" height="45"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dUP-hg-Nju" id="HG4-B8-0oJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Load more tweets..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0x-kR-Ug4">
+                                            <rect key="frame" x="236" y="14" width="128" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.41568627450000001" green="0.41568627450000001" blue="0.41568627450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="f0x-kR-Ug4" firstAttribute="centerY" secondItem="HG4-B8-0oJ" secondAttribute="centerY" id="mts-Wn-22F"/>
+                                        <constraint firstItem="f0x-kR-Ug4" firstAttribute="centerX" secondItem="HG4-B8-0oJ" secondAttribute="centerX" id="uFj-hC-GIO"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="epp-6W-JT3" id="zhD-Yc-RNg"/>
