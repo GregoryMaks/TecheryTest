@@ -133,7 +133,18 @@
                             <outlet property="delegate" destination="epp-6W-JT3" id="gEa-c8-32j"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Feed" id="QXv-4d-emR"/>
+                    <navigationItem key="navigationItem" title="Feed" id="QXv-4d-emR">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="eem-gY-mf7">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="35c-v9-Sdn">
+                                <rect key="frame" x="558" y="11" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="icon-create-new-tweet"/>
+                                <connections>
+                                    <action selector="createNewTweetButtonClicked:" destination="epp-6W-JT3" eventType="touchUpInside" id="FIL-Zy-vAE"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uBz-fM-x01" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -157,6 +168,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon-create-new-tweet" width="22" height="22"/>
         <image name="icon-loading" width="48" height="48"/>
     </resources>
 </document>

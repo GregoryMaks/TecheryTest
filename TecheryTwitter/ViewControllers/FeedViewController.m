@@ -11,9 +11,11 @@
 #import "FeedTableViewCell.h"
 #import "TwitterTweet.h"
 #import "NSDate+Twitter.h"
+@import Social;
 
 
 static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell";
+static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
 
 
 @interface FeedViewController ()
@@ -97,6 +99,8 @@ static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 100;
     
+    self.tableView.allowsSelection = NO;
+    
     @weakify(self);
     [[self.refreshControl rac_signalForControlEvents:UIControlEventValueChanged]
      subscribeNext:^(UIRefreshControl *control) {
@@ -135,7 +139,7 @@ static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.viewModel numberOfRowsInFeedTable] + 1;    // Load more button
+    return [self.viewModel numberOfRowsInFeedTable];// + 1;    // Load more button
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -166,5 +170,25 @@ static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell
 //        [[self.viewModel loadMoreFeedSignal] subscribeNext:^(NSNumber *newTweetsLoaded) {}];
     }
 }
+
+#pragma mark Actions
+
+- (IBAction)createNewTweetButtonClicked:(id)sender {
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        
+        @weakify(self);
+        tweetSheet.completionHandler = ^(SLComposeViewControllerResult result) {
+            if (result == SLComposeViewControllerResultDone) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kDelayToRefreshFeedAfterPosting * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    @strongify(self);
+                    [self refreshFeed];
+                });
+            }
+        };
+        [self presentViewController:tweetSheet animated:YES completion:nil];
+    }
+}
+
 
 @end
