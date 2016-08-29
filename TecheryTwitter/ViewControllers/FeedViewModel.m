@@ -13,6 +13,7 @@
 #import "NSDate+Twitter.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "Reachability.h"
+#import "ReachabilityProtocol.h"
 
 
 NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
@@ -21,11 +22,14 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
 @interface FeedViewModel ()
 
 @property (assign, readwrite) BOOL isFeedRefreshing;
+@property (strong, readwrite) RACSubject *dataUpdatedSignal;
+@property (strong, readwrite) RACSubject *errorOccuredSignal;
 
 @property (copy, readwrite) NSString *twitterUsername;
 @property (assign, readwrite) BOOL isOnline;
 
-@property (strong) Reachability *reachability;
+@property (copy) Class reachabilityClass;
+@property (strong) id<ReachabilityProtocol> reachability;
 
 @property (nonatomic, strong) TwitterNetworkDataModel *twitterModel;
 @property (nonatomic, strong) TwitterFeedDataModel *twitterFeedModel;
@@ -37,31 +41,36 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
 
 @implementation FeedViewModel
 
-- (RACSubject *)dataUpdated {
-    static RACSubject *instance = nil;
-    if (instance == nil) {
-        instance = [RACSubject subject];
-    }
-    return instance;
-}
+@synthesize delegate;
 
 - (instancetype)initWithTwitterModel:(TwitterNetworkDataModel *)twitterModel {
+    return [self initWithTwitterModel:twitterModel reachabilityClass:[Reachability class]];
+}
+
+- (instancetype)initWithTwitterModel:(TwitterNetworkDataModel *)twitterModel reachabilityClass:(Class)reachabilityClass {
     if (self = [super init]) {
         self.twitterModel = twitterModel;
         self.twitterFeedModel = [[TwitterFeedDataModel alloc] initWithTwitterNetworkDM:twitterModel];
         
+        self.dataUpdatedSignal = [RACSubject subject];
+        self.errorOccuredSignal = [RACSubject subject];
+        
         self.twitterUsername = self.twitterModel.account.username;
         
-        self.reachability = [Reachability reachabilityForInternetConnection];
-        self.isOnline = (self.reachability.currentReachabilityStatus != NotReachable);
+        self.reachability = [reachabilityClass reachabilityForInternetConnection];
+        self.isOnline = ([self.reachability isReachable]);
         
         @weakify(self);
         self.reachability.reachabilityBlock = ^(Reachability * reachability, SCNetworkConnectionFlags flags) {
             @strongify(self);
-            BOOL newOnlineStatus = (reachability.currentReachabilityStatus != NotReachable);
+            BOOL newOnlineStatus = [reachability isReachable];
             
+            @weakify(self);
             if (!self.isOnline && newOnlineStatus) {
-                [[self refreshFeedSignal] subscribeNext:^(id x) {}];
+                [[self refreshFeedSignal] subscribeNext:^(id x) {} error:^(NSError *error) {
+                    @strongify(self);
+                    [self.errorOccuredSignal sendNext:error];
+                }];
             }
             
             self.isOnline = newOnlineStatus;
@@ -94,12 +103,12 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
                 }
                 self.isFeedRefreshing = YES;
                 
-                BOOL isNetworkReachable = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] != NotReachable;
+                BOOL isNetworkReachable = [self.reachability isReachable];
                 if (!isNetworkReachable) {
                     NSLog(@"Network is not reachable");
                     [subscriber sendError:[NSError errorWithDomain:FeedViewModelErrorDomain
                                                               code:FeedViewModel_NoInternetConnection
-                                                          userInfo:nil]];
+                                                          userInfo:@{ NSLocalizedDescriptionKey : @"Internet connection is down" }]];
                     self.isFeedRefreshing = NO;
                     return nil;
                 }
@@ -114,16 +123,15 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
                         [self refreshCachedTweets];
                     }
                     [subscriber sendNext:newTweetsLoaded];
-                    
+                } error:^(NSError *error) {
+                    [subscriber sendError:error];
+                } completed:^{
                     [subscriber sendCompleted];
                 }];
                 
                 return nil;
             }];
 }
-
-//- (RACSignal *)loadMoreFeedSignal {
-//}
 
 - (NSInteger)numberOfRowsInFeedTable {
     return self.feed.count;
@@ -133,11 +141,25 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
     return (indexPath.row < self.feed.count) ? self.feed[indexPath.row] : nil;
 }
 
+- (void)initiateNewTweetCreation {
+    if (self.delegate == nil) {
+        return;
+    }
+    
+    @weakify(self);
+    [self.delegate feedViewModel:self needsToDisplayNewTweetDialogWithCompletionHandler:^(BOOL success) {
+        [[self refreshFeedSignal] subscribeNext:^(id x) {} error:^(NSError *error) {
+            @strongify(self);
+            [self.errorOccuredSignal sendNext:error];
+        }];
+    }];
+}
+
 #pragma mark Private
 
 - (void)refreshCachedTweets {
     self.feed = [self.twitterFeedModel orderedTweets];
-    [self.dataUpdated sendNext:nil];
+    [self.dataUpdatedSignal sendNext:nil];
 }
 
 @end

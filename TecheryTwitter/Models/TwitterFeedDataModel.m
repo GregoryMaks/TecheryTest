@@ -63,7 +63,7 @@ static NSInteger const kDefaultTweetBatchSize = 20;
         @strongify(self);
         NSLog(@"loadNewerTweets");
         
-        long long int maxStoredTweetId = [self tweetIdWithPredicate:[NSPredicate predicateWithFormat:@"identifier = max(identifier) AND user = %@", self.user]];
+        long long int maxStoredTweetId = [self maxTweetIdForUser:self.user];
         NSLog(@"maxId = %lld", maxStoredTweetId != NSNotFound ? maxStoredTweetId : -1);
         
         // Reason for (maxStoredTweetId - 1): we should retrieve the duplicating tweet with maxStoredTweetId for merging logic
@@ -74,7 +74,7 @@ static NSInteger const kDefaultTweetBatchSize = 20;
                                                    completionBlock:^(NSArray<TwitterTweetNetworkDataModel *> *rawTweets, NSError *error)
          {
              if (error) {
-                 NSLog(@"error retrieving tweets, %@", [error localizedDescription]);
+                 NSLog(@"Error retrieving tweets, %@", [error localizedDescription]);
                  [subscriber sendError:error];
                  [subscriber sendCompleted];
                  return;
@@ -118,52 +118,6 @@ static NSInteger const kDefaultTweetBatchSize = 20;
     }];
 }
 
-// TODO: in progress
-/*- (RACSignal *)loadOlderTweetsSignal {
-    @weakify(self);
-    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        @strongify(self);
-
-        NSLog(@"loading older tweets");
-        
-        long long int minStoredTweetId = [self tweetIdWithPredicate:[NSPredicate predicateWithFormat:@"identifier = min(identifier)"]];
-        NSLog(@"minId = %lld", minStoredTweetId != NSNotFound ? minStoredTweetId : -1);
-        
-        NSString *maxId = (minStoredTweetId == NSNotFound) ? nil : [NSString stringWithFormat:@"%lld", minStoredTweetId];
-        [self.networkDataModel retrieveHomeTimelineTweetsWithCount:@(kDefaultTweetBatchSize)
-                                                           sinceId:nil
-                                                             maxId:maxId
-                                                   completionBlock:^(NSArray<TwitterTweetNetworkDataModel *> *rawTweets, NSError *error)
-         {
-             if (error) {
-                 NSLog(@"error retrieving tweets, %@", [error localizedDescription]);
-                 [subscriber sendError:error];
-                 [subscriber sendCompleted];
-                 return;
-             }
-             
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 [[NSManagedObjectContext MR_defaultContext] MR_saveWithBlock:^(NSManagedObjectContext * _Nonnull localContext) {
-                     
-                     // We should not overwrite tweets with the same id (id is unique)
-                     [localContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
-                     
-                     for (TwitterTweetNetworkDataModel *rawTweet in rawTweets) {
-                         TwitterTweet *tweet = [TwitterTweet MR_createEntityInContext:localContext];
-                         tweet.user = self.user;
-                         [tweet fillFromNetworkDataModel:rawTweet];
-                     }
-                 }];
-                 
-                 [subscriber sendNext:@(rawTweets.count > 0)];
-                 [subscriber sendCompleted];
-             });
-         }];
-        
-        return nil;
-    }];
-}*/
-
 #pragma mark Private methods
 
 - (void)getOrCreateTwitterUserFromAccount:(ACAccount *)account {
@@ -181,12 +135,14 @@ static NSInteger const kDefaultTweetBatchSize = 20;
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }
 
-- (long long int)tweetIdWithPredicate:(NSPredicate *)predicate {
+- (long long int)maxTweetIdForUser:(TwitterUser *)user {
     NSFetchRequest *req = [TwitterTweet MR_createFetchRequest];
-    req.predicate = predicate;
+    req.predicate = [NSPredicate predicateWithFormat:@"user = %@", self.user];
     req.propertiesToFetch = [TwitterTweet MR_propertiesNamed:@[@"identifier"]];
     req.resultType = NSDictionaryResultType;
     req.returnsDistinctResults = YES;
+    req.fetchLimit = 1;
+    req.sortDescriptors = [TwitterTweet MR_descendingSortDescriptors:@[@"identifier"]];
     
     NSError *error = nil;
     NSArray *result = [[NSManagedObjectContext MR_defaultContext] executeFetchRequest:req error:&error];

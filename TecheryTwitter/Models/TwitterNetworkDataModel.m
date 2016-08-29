@@ -11,6 +11,9 @@
 @import Social;
 
 
+NSString * const TwitterNetworkDataModelErrorDomain = @"TwitterNetworkDataModelErrorDomain";
+
+
 @interface TwitterNetworkDataModel ()
 
 @property (nonatomic, readwrite, strong) ACAccountStore *accountStore;
@@ -77,7 +80,7 @@
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
     {
         // TODO: Move status code check to category on NSHTTPURLResponse
-        if (urlResponse.statusCode == 200 && error == nil) {
+        if (urlResponse.statusCode == 200) {
             NSError *jsonError = nil;
             NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:responseData
                                                                          options:NSJSONReadingMutableLeaves
@@ -98,6 +101,11 @@
         }
         else {
             if (resultBlock) {
+                if (error == nil) {
+                    error = [NSError errorWithDomain:TwitterNetworkDataModelErrorDomain
+                                                code:TwitterNetworkDataModelError_HTTPStatusError
+                                            userInfo:@{ NSLocalizedDescriptionKey : [NSString stringWithFormat:@"HTTP Status: %ld", urlResponse.statusCode]}];
+                }
                 resultBlock(NO, error);
             }
         }
@@ -136,7 +144,7 @@
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
      {
-         if (urlResponse.statusCode == 200 && error == nil) {
+         if (urlResponse.statusCode == 200) {
              NSError *jsonError = nil;
              id responseJSON = [NSJSONSerialization JSONObjectWithData:responseData
                                                                options:NSJSONReadingMutableLeaves
@@ -157,6 +165,11 @@
          }
          else {
              if (completionBlock) {
+                 if (error == nil) {
+                     error = [NSError errorWithDomain:TwitterNetworkDataModelErrorDomain
+                                                 code:TwitterNetworkDataModelError_HTTPStatusError
+                                             userInfo:@{ NSLocalizedDescriptionKey : [NSString stringWithFormat:@"HTTP Status: %ld", urlResponse.statusCode]}];
+                 }
                  completionBlock(nil, error);
              }
          }

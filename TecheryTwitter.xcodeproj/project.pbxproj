@@ -15,7 +15,6 @@
 		93308FC81D5FBC7500E5437B /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 93308FB81D5FBC6C00E5437B /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		93308FD31D5FC37800E5437B /* TwitterNetworkDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FD21D5FC37800E5437B /* TwitterNetworkDataModel.m */; };
 		93308FD61D611A2500E5437B /* TwitterFeedDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FD51D611A2500E5437B /* TwitterFeedDataModel.m */; };
-		93308FD91D62043500E5437B /* TwitterStorageDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FD81D62043500E5437B /* TwitterStorageDataModel.m */; };
 		93308FE31D62066B00E5437B /* TwitterUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FDC1D62066B00E5437B /* TwitterUser+CoreDataProperties.m */; };
 		93308FE41D62066B00E5437B /* TwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FDE1D62066B00E5437B /* TwitterUser.m */; };
 		93308FE51D62066B00E5437B /* TwitterTweet+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FE01D62066B00E5437B /* TwitterTweet+CoreDataProperties.m */; };
@@ -194,8 +193,6 @@
 		93308FD21D5FC37800E5437B /* TwitterNetworkDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterNetworkDataModel.m; sourceTree = "<group>"; };
 		93308FD41D611A2500E5437B /* TwitterFeedDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterFeedDataModel.h; sourceTree = "<group>"; };
 		93308FD51D611A2500E5437B /* TwitterFeedDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFeedDataModel.m; sourceTree = "<group>"; };
-		93308FD71D62043500E5437B /* TwitterStorageDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterStorageDataModel.h; sourceTree = "<group>"; };
-		93308FD81D62043500E5437B /* TwitterStorageDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterStorageDataModel.m; sourceTree = "<group>"; };
 		93308FDB1D62066B00E5437B /* TwitterUser+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TwitterUser+CoreDataProperties.h"; sourceTree = "<group>"; };
 		93308FDC1D62066B00E5437B /* TwitterUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TwitterUser+CoreDataProperties.m"; sourceTree = "<group>"; };
 		93308FDD1D62066B00E5437B /* TwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterUser.h; sourceTree = "<group>"; };
@@ -235,6 +232,9 @@
 		9370DB6A1D5CE352004B0934 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		9370DB6C1D5CE36A004B0934 /* LoginViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
 		9370DB6D1D5CE36A004B0934 /* LoginViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewModel.m; sourceTree = "<group>"; };
+		937803221D73667000FE4BA6 /* FeedViewModelDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedViewModelDelegate.h; sourceTree = "<group>"; };
+		937803241D74643900FE4BA6 /* Reachability+ReachabilityProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Reachability+ReachabilityProtocol.h"; sourceTree = "<group>"; };
+		937803271D74645C00FE4BA6 /* ReachabilityProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReachabilityProtocol.h; sourceTree = "<group>"; };
 		CC8F7719C52CA0860FC52117 /* Pods-TecheryTwitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TecheryTwitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-TecheryTwitter/Pods-TecheryTwitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -345,8 +345,6 @@
 				93308FE81D632A6E00E5437B /* TwitterTweetNetworkDataModel.m */,
 				93308FD41D611A2500E5437B /* TwitterFeedDataModel.h */,
 				93308FD51D611A2500E5437B /* TwitterFeedDataModel.m */,
-				93308FD71D62043500E5437B /* TwitterStorageDataModel.h */,
-				93308FD81D62043500E5437B /* TwitterStorageDataModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -415,6 +413,7 @@
 		9370DB331D5C8573004B0934 /* TecheryTwitter */ = {
 			isa = PBXGroup;
 			children = (
+				937803231D74641B00FE4BA6 /* Services */,
 				93308FEA1D632FFD00E5437B /* Helpers */,
 				93308FCD1D5FC33B00E5437B /* Models */,
 				9370DB5C1D5CB6A7004B0934 /* ViewControllers */,
@@ -478,9 +477,19 @@
 				93308F501D5FB95E00E5437B /* FeedViewModel.h */,
 				93308F511D5FB95E00E5437B /* FeedViewModel.m */,
 				93308FCB1D5FBF1900E5437B /* FeedViewModelProtocol.h */,
+				937803221D73667000FE4BA6 /* FeedViewModelDelegate.h */,
 				93308FCC1D5FC01D00E5437B /* TableViewCell */,
 			);
 			name = Feed;
+			sourceTree = "<group>";
+		};
+		937803231D74641B00FE4BA6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				937803241D74643900FE4BA6 /* Reachability+ReachabilityProtocol.h */,
+				937803271D74645C00FE4BA6 /* ReachabilityProtocol.h */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -803,7 +812,6 @@
 				93308FD61D611A2500E5437B /* TwitterFeedDataModel.m in Sources */,
 				9370DB651D5CC1D3004B0934 /* FeedTableViewCell.m in Sources */,
 				93308FE31D62066B00E5437B /* TwitterUser+CoreDataProperties.m in Sources */,
-				93308FD91D62043500E5437B /* TwitterStorageDataModel.m in Sources */,
 				93308F521D5FB95E00E5437B /* FeedViewModel.m in Sources */,
 				9370DB621D5CBE58004B0934 /* FeedViewController.m in Sources */,
 				9370DB421D5C8573004B0934 /* TecheryTwitter.xcdatamodeld in Sources */,

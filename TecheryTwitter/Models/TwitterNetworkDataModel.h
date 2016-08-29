@@ -11,7 +11,14 @@
 @import Accounts;
 
 
-/** 
+extern NSString * const TwitterNetworkDataModelErrorDomain;
+
+typedef NS_ENUM(NSInteger, TwitterNetworkDataModelErrorCode) {
+    TwitterNetworkDataModelError_HTTPStatusError = 0
+};
+
+
+/**
  The class is designed to work with Twitter API through network
  */
 @interface TwitterNetworkDataModel : NSObject

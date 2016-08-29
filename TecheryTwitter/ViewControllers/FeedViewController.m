@@ -12,13 +12,14 @@
 #import "TwitterTweet.h"
 #import "NSDate+Twitter.h"
 @import Social;
+#import "FeedViewModelDelegate.h"
 
 
 static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell";
 static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
 
 
-@interface FeedViewController ()
+@interface FeedViewController () <FeedViewModelDelegate>
 
 @property (nonatomic, strong) id <FeedViewModelProtocol> viewModel;
 
@@ -59,10 +60,17 @@ static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
 }
 
 - (void)bindViewModel {
+    self.viewModel.delegate = self;
+    
     @weakify(self);
-    [self.viewModel.dataUpdated subscribeNext:^(id parameter) {
+    [self.viewModel.dataUpdatedSignal subscribeNext:^(id parameter) {
         @strongify(self);
         [self.tableView reloadData];
+    }];
+    
+    [self.viewModel.errorOccuredSignal subscribeNext:^(NSError *error) {
+        @strongify(self);
+        [self displayError:error];
     }];
     
     // TODO: how to unlink from signal when rebinding?
@@ -88,6 +96,24 @@ static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
     }] deliverOn:[RACScheduler mainThreadScheduler]];
 }
 
+#pragma mark ViewModel delegate
+
+- (void)feedViewModel:(FeedViewModel *)viewModel needsToDisplayNewTweetDialogWithCompletionHandler:(void(^)(BOOL success))completion {
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        tweetSheet.completionHandler = ^(SLComposeViewControllerResult result) {
+            if (result == SLComposeViewControllerResultDone) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kDelayToRefreshFeedAfterPosting * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    if (completion) {
+                        completion(YES);
+                    }
+                });
+            }
+        };
+        [self presentViewController:tweetSheet animated:YES completion:nil];
+    }
+}
+
 #pragma mark Lifecycle
 
 - (void)viewDidLoad {
@@ -97,7 +123,7 @@ static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 100;
+    self.tableView.estimatedRowHeight = 100;    // Any default number will do
     
     self.tableView.allowsSelection = NO;
     
@@ -116,7 +142,12 @@ static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
 }
 
 - (void)refreshFeed {
-    [[self.viewModel refreshFeedSignal] subscribeNext:^(NSNumber *newTweetsLoaded) {}];
+    @weakify(self);
+    [[self.viewModel refreshFeedSignal] subscribeNext:^(id x) {
+    } error:^(NSError *error) {
+        @strongify(self);
+        [self displayError:error];
+    }];
 }
 
 #pragma mark UITableViewDataSource
@@ -174,21 +205,19 @@ static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
 #pragma mark Actions
 
 - (IBAction)createNewTweetButtonClicked:(id)sender {
-    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
-        SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-        
-        @weakify(self);
-        tweetSheet.completionHandler = ^(SLComposeViewControllerResult result) {
-            if (result == SLComposeViewControllerResultDone) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kDelayToRefreshFeedAfterPosting * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    @strongify(self);
-                    [self refreshFeed];
-                });
-            }
-        };
-        [self presentViewController:tweetSheet animated:YES completion:nil];
-    }
+    [self.viewModel initiateNewTweetCreation];
 }
 
+#pragma mark Private
+
+- (void)displayError:(NSError *)error {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                   message:[error localizedDescription]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"Ok"
+                                                style:UIAlertActionStyleCancel
+                                              handler:nil]];
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
 
 @end

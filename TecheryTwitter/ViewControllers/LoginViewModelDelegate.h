@@ -12,7 +12,6 @@
 @protocol LoginViewModelDelegate <NSObject>
 @required
 
-// TODO: rewrite as RACSubject in model, remove this delegate at all
 - (void)loginViewModel:(id <LoginViewModelProtocol>)viewModel needsToPerformSegueWithIdentifier:(NSString *)identifier;
 
 @end
