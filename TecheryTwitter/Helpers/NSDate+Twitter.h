@@ -15,6 +15,6 @@
 
 + (NSDate *)parseTwitterDate:(NSString *)dateString;
 
-- (NSString *)tweetDisplayDateString;
+- (NSString *)tweetDisplayDateStringWithTimeZone:(NSTimeZone *)timeZone;
 
 @end

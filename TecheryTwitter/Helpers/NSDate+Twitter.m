@@ -28,18 +28,24 @@
     NSError *error = nil;
     if (NO == [dateTimeFormatter getObjectValue:&date forString:dateString range:nil error:&error]) {
         NSLog(@"Date '%@' could not be parsed: %@", dateString, error);
+        return nil;
     }
     return date;
 }
 
-- (NSString *)tweetDisplayDateString {
+- (NSString *)tweetDisplayDateStringWithTimeZone:(NSTimeZone *)timeZone {
     static NSDateFormatter *dateTimeFormatter = nil;
     if (dateTimeFormatter == nil) {
         dateTimeFormatter = [[NSDateFormatter alloc] init];
-        [dateTimeFormatter setDateFormat:@"HH:mm d MMM YYYY"];
+        [dateTimeFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+        [dateTimeFormatter setDateFormat:@"EEE MMM d HH:mm:ss Z y"];
     }
+    dateTimeFormatter.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
     
-    return [dateTimeFormatter stringFromDate:self];
+    NSString *result = [dateTimeFormatter stringFromDate:self];
+    
+    dateTimeFormatter.timeZone = [NSTimeZone defaultTimeZone];
+    return result;
 }
 
 @end
