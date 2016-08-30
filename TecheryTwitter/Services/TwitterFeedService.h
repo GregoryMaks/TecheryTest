@@ -1,5 +1,5 @@
 //
-//  TwitterFeedDataModel.h
+//  TwitterFeedService.h
 //  TecheryTwitter
 //
 //  Created by GregoryM on 8/15/16.
@@ -11,19 +11,19 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "TwitterUser.h"
 #import "TwitterTweet.h"
-#import "TwitterNetworkDataModel.h"
+#import "TwitterNetworkService.h"
 
 
 /**
  The class is designed to work with Twitter Feed
  It gives the ability to retrieve the feed data without worrying about working with twitter API or local cache storage directly
  */
-@interface TwitterFeedDataModel : NSObject
+@interface TwitterFeedService : NSObject
 
-@property (nonatomic, readonly, strong) TwitterNetworkDataModel *networkDataModel;
+@property (nonatomic, readonly, strong) TwitterNetworkService *networkDataModel;
 
 
-- (instancetype)initWithTwitterNetworkDM:(TwitterNetworkDataModel *)networkDM;
+- (instancetype)initWithTwitterNetworkDM:(TwitterNetworkService *)networkDM;
 
 - (NSInteger)numberOfTweetsForCurrentUser;
 

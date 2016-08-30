@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "TwitterNetworkDataModel.h"
+#import "TwitterNetworkService.h"
 
 
 @protocol LoginViewModelDelegate;
@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, LoginViewModelError) {
 @property (nonatomic, weak) id <LoginViewModelDelegate> delegate;
 
 
-- (instancetype)initWithTwitterModel:(TwitterNetworkDataModel *)twitterModel;
+- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel;
 
 - (void)connectToTwitterAccount;
 

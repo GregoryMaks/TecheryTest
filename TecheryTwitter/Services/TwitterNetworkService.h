@@ -1,5 +1,5 @@
 //
-//  TwitterNetworkDataModel.h
+//  TwitterNetworkService.h
 //  TecheryTwitter
 //
 //  Created by GregoryM on 8/14/16.
@@ -7,21 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TwitterTweetNetworkDataModel.h"
+#import "TwitterRawTweetDataModel.h"
 @import Accounts;
 
 
-extern NSString * const TwitterNetworkDataModelErrorDomain;
+extern NSString * const TwitterNetworkServiceErrorDomain;
 
-typedef NS_ENUM(NSInteger, TwitterNetworkDataModelErrorCode) {
-    TwitterNetworkDataModelError_HTTPStatusError = 0
+typedef NS_ENUM(NSInteger, TwitterNetworkServiceErrorCode) {
+    TwitterNetworkServiceError_HTTPStatusError = 0
 };
 
 
 /**
  The class is designed to work with Twitter API through network
  */
-@interface TwitterNetworkDataModel : NSObject
+@interface TwitterNetworkService : NSObject
 
 @property (nonatomic, readonly, strong) ACAccountStore *accountStore;
 @property (nonatomic, readonly, strong) ACAccount *account;
@@ -34,6 +34,6 @@ typedef NS_ENUM(NSInteger, TwitterNetworkDataModelErrorCode) {
 - (void)retrieveHomeTimelineTweetsWithCount:(NSNumber *)count
                                     sinceId:(NSString *)sinceId
                                       maxId:(NSString *)maxId
-                            completionBlock:(void(^)(NSArray<TwitterTweetNetworkDataModel *> *rawTweets, NSError *error))completionBlock;
+                            completionBlock:(void(^)(NSArray<TwitterRawTweetDataModel *> *rawTweets, NSError *error))completionBlock;
 
 @end

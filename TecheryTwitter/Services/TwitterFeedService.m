@@ -1,29 +1,29 @@
 //
-//  TwitterFeedDataModel.m
+//  TwitterFeedService.m
 //  TecheryTwitter
 //
 //  Created by GregoryM on 8/15/16.
 //  Copyright © 2016 None. All rights reserved.
 //
 
-#import "TwitterFeedDataModel.h"
+#import "TwitterFeedService.h"
 #import "MagicalRecord/MagicalRecord.h"
 
 
 static NSInteger const kDefaultTweetBatchSize = 20;
 
 
-@interface TwitterFeedDataModel ()
+@interface TwitterFeedService ()
 
-@property (nonatomic, readwrite, strong) TwitterNetworkDataModel *networkDataModel;
+@property (nonatomic, readwrite, strong) TwitterNetworkService *networkDataModel;
 @property (nonatomic, strong) TwitterUser *user;
 
 @end
 
 
-@implementation TwitterFeedDataModel
+@implementation TwitterFeedService
 
-- (instancetype)initWithTwitterNetworkDM:(TwitterNetworkDataModel *)networkDM {
+- (instancetype)initWithTwitterNetworkDM:(TwitterNetworkService *)networkDM {
     if (self = [super init]) {
         self.networkDataModel = networkDM;
         
@@ -71,7 +71,7 @@ static NSInteger const kDefaultTweetBatchSize = 20;
         [self.networkDataModel retrieveHomeTimelineTweetsWithCount:@(kDefaultTweetBatchSize)
                                                            sinceId:sinceId
                                                              maxId:nil
-                                                   completionBlock:^(NSArray<TwitterTweetNetworkDataModel *> *rawTweets, NSError *error)
+                                                   completionBlock:^(NSArray<TwitterRawTweetDataModel *> *rawTweets, NSError *error)
          {
              if (error) {
                  NSLog(@"Error retrieving tweets, %@", [error localizedDescription]);
@@ -87,7 +87,7 @@ static NSInteger const kDefaultTweetBatchSize = 20;
                      
                      BOOL tweetWithMaxStoredTweetIdPresentInResultSet = NO;
                      
-                     for (TwitterTweetNetworkDataModel *rawTweet in rawTweets) {
+                     for (TwitterRawTweetDataModel *rawTweet in rawTweets) {
                          if ([rawTweet.identifier longLongValue] == maxStoredTweetId) {
                              tweetWithMaxStoredTweetIdPresentInResultSet = YES;
                          }

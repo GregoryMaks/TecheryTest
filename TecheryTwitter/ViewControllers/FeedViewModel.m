@@ -8,7 +8,7 @@
 
 #import "FeedViewModel.h"
 @import Social;
-#import "TwitterFeedDataModel.h"
+#import "TwitterFeedService.h"
 #import "FeedTableViewCell.h"
 #import "NSDate+Twitter.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
@@ -31,8 +31,8 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
 @property (copy) Class reachabilityClass;
 @property (strong) id<ReachabilityProtocol> reachability;
 
-@property (nonatomic, strong) TwitterNetworkDataModel *twitterModel;
-@property (nonatomic, strong) TwitterFeedDataModel *twitterFeedModel;
+@property (nonatomic, strong) TwitterNetworkService *twitterModel;
+@property (nonatomic, strong) TwitterFeedService *twitterFeedModel;
 
 @property (nonatomic, strong) NSArray<TwitterTweet *> *feed;
 
@@ -43,14 +43,14 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
 
 @synthesize delegate;
 
-- (instancetype)initWithTwitterModel:(TwitterNetworkDataModel *)twitterModel {
+- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel {
     return [self initWithTwitterModel:twitterModel reachabilityClass:[Reachability class]];
 }
 
-- (instancetype)initWithTwitterModel:(TwitterNetworkDataModel *)twitterModel reachabilityClass:(Class)reachabilityClass {
+- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel reachabilityClass:(Class)reachabilityClass {
     if (self = [super init]) {
         self.twitterModel = twitterModel;
-        self.twitterFeedModel = [[TwitterFeedDataModel alloc] initWithTwitterNetworkDM:twitterModel];
+        self.twitterFeedModel = [[TwitterFeedService alloc] initWithTwitterNetworkDM:twitterModel];
         
         self.dataUpdatedSignal = [RACSubject subject];
         self.errorOccuredSignal = [RACSubject subject];

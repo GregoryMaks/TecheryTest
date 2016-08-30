@@ -11,7 +11,7 @@
 @import Accounts;
 
 #import "FeedViewController.h"
-#import "TwitterNetworkDataModel.h"
+#import "TwitterNetworkService.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "FeedViewModel.h"
 #import "FeedViewController.h"
@@ -21,7 +21,7 @@
 
 @property (nonatomic, readwrite, assign) LoginViewModelError error;
 
-@property (nonatomic, strong) TwitterNetworkDataModel *twitterModel;
+@property (nonatomic, strong) TwitterNetworkService *twitterModel;
 
 @end
 
@@ -31,7 +31,7 @@
 @synthesize error;
 @synthesize delegate;
 
-- (instancetype)initWithTwitterModel:(TwitterNetworkDataModel *)twitterModel {
+- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel {
     self = [super init];
     if (self) {
         self.error = LoginViewModelError_None;

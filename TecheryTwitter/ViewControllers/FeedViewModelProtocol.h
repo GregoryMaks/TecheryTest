@@ -12,7 +12,7 @@
 #import "FeedViewModelDelegate.h"
 
 
-@class TwitterNetworkDataModel;
+@class TwitterNetworkService;
 @class FeedTableViewCell;
 @class TwitterTweet;
 
@@ -36,8 +36,8 @@ typedef NS_ENUM(NSInteger, FeedViewModelErrorCode) {
 @property (assign, readonly) BOOL isOnline;
 
 
-- (instancetype)initWithTwitterModel:(TwitterNetworkDataModel *)twitterModel;
-- (instancetype)initWithTwitterModel:(TwitterNetworkDataModel *)twitterModel reachabilityClass:(Class)reachabilityClass;
+- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel;
+- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel reachabilityClass:(Class)reachabilityClass;
 
 - (RACSignal *)refreshFeedSignal;
 

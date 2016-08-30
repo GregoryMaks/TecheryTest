@@ -1,20 +1,20 @@
 //
-//  TwitterNetworkDataModel.m
+//  TwitterNetworkService.m
 //  TecheryTwitter
 //
 //  Created by GregoryM on 8/14/16.
 //  Copyright © 2016 None. All rights reserved.
 //
 
-#import "TwitterNetworkDataModel.h"
-#import "TwitterTweetNetworkDataModel.h"
+#import "TwitterNetworkService.h"
+#import "TwitterRawTweetDataModel.h"
 @import Social;
 
 
-NSString * const TwitterNetworkDataModelErrorDomain = @"TwitterNetworkDataModelErrorDomain";
+NSString * const TwitterNetworkServiceErrorDomain = @"TwitterNetworkServiceErrorDomain";
 
 
-@interface TwitterNetworkDataModel ()
+@interface TwitterNetworkService ()
 
 @property (nonatomic, readwrite, strong) ACAccountStore *accountStore;
 @property (nonatomic, readwrite, strong) ACAccount *account;
@@ -23,7 +23,7 @@ NSString * const TwitterNetworkDataModelErrorDomain = @"TwitterNetworkDataModelE
 @end
 
 
-@implementation TwitterNetworkDataModel
+@implementation TwitterNetworkService
 
 - (void)connectToTwitterAccountWithResultBlock:(void(^)(BOOL isGranted, BOOL isAccountAvailable))resultBlock {
     self.accountStore = [[ACAccountStore alloc] init];
@@ -102,8 +102,8 @@ NSString * const TwitterNetworkDataModelErrorDomain = @"TwitterNetworkDataModelE
         else {
             if (resultBlock) {
                 if (error == nil) {
-                    error = [NSError errorWithDomain:TwitterNetworkDataModelErrorDomain
-                                                code:TwitterNetworkDataModelError_HTTPStatusError
+                    error = [NSError errorWithDomain:TwitterNetworkServiceErrorDomain
+                                                code:TwitterNetworkServiceError_HTTPStatusError
                                             userInfo:@{ NSLocalizedDescriptionKey : [NSString stringWithFormat:@"HTTP Status: %ld", urlResponse.statusCode]}];
                 }
                 resultBlock(NO, error);
@@ -115,7 +115,7 @@ NSString * const TwitterNetworkDataModelErrorDomain = @"TwitterNetworkDataModelE
 - (void)retrieveHomeTimelineTweetsWithCount:(NSNumber *)count
                                     sinceId:(NSString *)sinceId
                                       maxId:(NSString *)maxId
-                            completionBlock:(void(^)(NSArray<TwitterTweetNetworkDataModel *> *rawTweets, NSError *error))completionBlock {
+                            completionBlock:(void(^)(NSArray<TwitterRawTweetDataModel *> *rawTweets, NSError *error))completionBlock {
     
     NSAssert(self.account != nil, @"account is nil");
     if (self.account == nil) {
@@ -166,8 +166,8 @@ NSString * const TwitterNetworkDataModelErrorDomain = @"TwitterNetworkDataModelE
          else {
              if (completionBlock) {
                  if (error == nil) {
-                     error = [NSError errorWithDomain:TwitterNetworkDataModelErrorDomain
-                                                 code:TwitterNetworkDataModelError_HTTPStatusError
+                     error = [NSError errorWithDomain:TwitterNetworkServiceErrorDomain
+                                                 code:TwitterNetworkServiceError_HTTPStatusError
                                              userInfo:@{ NSLocalizedDescriptionKey : [NSString stringWithFormat:@"HTTP Status: %ld", urlResponse.statusCode]}];
                  }
                  completionBlock(nil, error);
@@ -176,12 +176,12 @@ NSString * const TwitterNetworkDataModelErrorDomain = @"TwitterNetworkDataModelE
      }];
 }
 
-- (NSArray<TwitterTweetNetworkDataModel *> *)parsedTweetModelsFromRawArray:(NSArray *)rawData {
-    NSMutableArray<TwitterTweetNetworkDataModel *> *result = [NSMutableArray new];
+- (NSArray<TwitterRawTweetDataModel *> *)parsedTweetModelsFromRawArray:(NSArray *)rawData {
+    NSMutableArray<TwitterRawTweetDataModel *> *result = [NSMutableArray new];
     for (NSDictionary *rawTweet in rawData) {
-        [result addObject:[[TwitterTweetNetworkDataModel alloc] initWithDictionary:rawTweet]];
+        [result addObject:[[TwitterRawTweetDataModel alloc] initWithDictionary:rawTweet]];
     }
-    return (NSArray<TwitterTweetNetworkDataModel *> *)[result copy];
+    return (NSArray<TwitterRawTweetDataModel *> *)[result copy];
 }
 
 @end

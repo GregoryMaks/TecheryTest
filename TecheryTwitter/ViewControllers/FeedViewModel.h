@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FeedViewModelProtocol.h"
-#import "TwitterNetworkDataModel.h"
+#import "TwitterNetworkService.h"
 
 
 @interface FeedViewModel : NSObject <FeedViewModelProtocol>
