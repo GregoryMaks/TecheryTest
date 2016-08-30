@@ -27,16 +27,6 @@
 
 - (NSInteger)numberOfTweetsForCurrentUser;
 
-///**
-// Retrieves all tweets since tweet with id == sinceId (newer tweets with id > sinceId). If 'tweetId' is nil, will return all tweets from the beginning.
-// */
-//- (NSArray<TwitterTweet *> *)newerTweetsSinceId:(NSNumber *)sinceId;
-//
-///**
-// Retrieves all tweets older than maxId (older tweets . If 'tweetId' is nil, will return from the beginning.
-// */
-//- (NSArray<TwitterTweet *> *)olderTweetsWithMaxId:(NSNumber *)maxId;
-
 - (NSArray<TwitterTweet *> *)orderedTweets;
 
 /**
@@ -44,11 +34,5 @@
  Signal result: (BOOL)areNewTweetsLoaded
  */
 - (RACSignal *)loadNewerTweetsSignal;
-
-/**
- Loads additional tweets from the bottom
- Signal result: (BOOL)areNewTweetsLoaded
- */
-//- (RACSignal *)loadOlderTweetsSignal;
 
 @end

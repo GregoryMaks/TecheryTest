@@ -17,7 +17,7 @@
 		93308FE41D62066B00E5437B /* TwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FDE1D62066B00E5437B /* TwitterUser.m */; };
 		93308FE51D62066B00E5437B /* TwitterTweet+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FE01D62066B00E5437B /* TwitterTweet+CoreDataProperties.m */; };
 		93308FE61D62066B00E5437B /* TwitterTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FE21D62066B00E5437B /* TwitterTweet.m */; };
-		93308FE91D632A6E00E5437B /* TwitterRawTweetDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FE81D632A6E00E5437B /* TwitterRawTweetDataModel.m */; };
+		93308FE91D632A6E00E5437B /* RawTweetDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FE81D632A6E00E5437B /* RawTweetDataModel.m */; };
 		93308FED1D63302300E5437B /* NSDate+Twitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FEC1D63302300E5437B /* NSDate+Twitter.m */; };
 		93308FF11D6A060900E5437B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FF01D6A060900E5437B /* Reachability.m */; };
 		93308FF31D6A062000E5437B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93308FF21D6A062000E5437B /* SystemConfiguration.framework */; };
@@ -197,8 +197,8 @@
 		93308FE01D62066B00E5437B /* TwitterTweet+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TwitterTweet+CoreDataProperties.m"; sourceTree = "<group>"; };
 		93308FE11D62066B00E5437B /* TwitterTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterTweet.h; sourceTree = "<group>"; };
 		93308FE21D62066B00E5437B /* TwitterTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterTweet.m; sourceTree = "<group>"; };
-		93308FE71D632A6E00E5437B /* TwitterRawTweetDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterRawTweetDataModel.h; sourceTree = "<group>"; };
-		93308FE81D632A6E00E5437B /* TwitterRawTweetDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterRawTweetDataModel.m; sourceTree = "<group>"; };
+		93308FE71D632A6E00E5437B /* RawTweetDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawTweetDataModel.h; sourceTree = "<group>"; };
+		93308FE81D632A6E00E5437B /* RawTweetDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawTweetDataModel.m; sourceTree = "<group>"; };
 		93308FEB1D63302300E5437B /* NSDate+Twitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Twitter.h"; sourceTree = "<group>"; };
 		93308FEC1D63302300E5437B /* NSDate+Twitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Twitter.m"; sourceTree = "<group>"; };
 		93308FEF1D6A060900E5437B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Submodules/Reachability/Reachability.h; sourceTree = "<group>"; };
@@ -339,8 +339,8 @@
 			isa = PBXGroup;
 			children = (
 				93308FDA1D62064500E5437B /* Entities */,
-				93308FE71D632A6E00E5437B /* TwitterRawTweetDataModel.h */,
-				93308FE81D632A6E00E5437B /* TwitterRawTweetDataModel.m */,
+				93308FE71D632A6E00E5437B /* RawTweetDataModel.h */,
+				93308FE81D632A6E00E5437B /* RawTweetDataModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -814,7 +814,7 @@
 				9370DB621D5CBE58004B0934 /* FeedViewController.m in Sources */,
 				93EDF9611D7615A000E59152 /* TwitterFeedService.m in Sources */,
 				9370DB421D5C8573004B0934 /* TecheryTwitter.xcdatamodeld in Sources */,
-				93308FE91D632A6E00E5437B /* TwitterRawTweetDataModel.m in Sources */,
+				93308FE91D632A6E00E5437B /* RawTweetDataModel.m in Sources */,
 				93308FE41D62066B00E5437B /* TwitterUser.m in Sources */,
 				9370DB6E1D5CE36A004B0934 /* LoginViewModel.m in Sources */,
 				9370DB361D5C8573004B0934 /* main.m in Sources */,

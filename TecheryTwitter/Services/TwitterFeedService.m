@@ -71,7 +71,7 @@ static NSInteger const kDefaultTweetBatchSize = 20;
         [self.networkDataModel retrieveHomeTimelineTweetsWithCount:@(kDefaultTweetBatchSize)
                                                            sinceId:sinceId
                                                              maxId:nil
-                                                   completionBlock:^(NSArray<TwitterRawTweetDataModel *> *rawTweets, NSError *error)
+                                                   completionBlock:^(NSArray<RawTweetDataModel *> *rawTweets, NSError *error)
          {
              if (error) {
                  NSLog(@"Error retrieving tweets, %@", [error localizedDescription]);
@@ -87,7 +87,7 @@ static NSInteger const kDefaultTweetBatchSize = 20;
                      
                      BOOL tweetWithMaxStoredTweetIdPresentInResultSet = NO;
                      
-                     for (TwitterRawTweetDataModel *rawTweet in rawTweets) {
+                     for (RawTweetDataModel *rawTweet in rawTweets) {
                          if ([rawTweet.identifier longLongValue] == maxStoredTweetId) {
                              tweetWithMaxStoredTweetIdPresentInResultSet = YES;
                          }

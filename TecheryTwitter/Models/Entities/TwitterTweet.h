@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "TwitterRawTweetDataModel.h"
+#import "RawTweetDataModel.h"
 
 @class TwitterUser;
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TwitterTweet : NSManagedObject
 
-- (void)fillFromNetworkDataModel:(TwitterRawTweetDataModel *)model;
+- (void)fillFromNetworkDataModel:(RawTweetDataModel *)model;
 
 @end
 

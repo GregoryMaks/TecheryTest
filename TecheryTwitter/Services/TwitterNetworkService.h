@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TwitterRawTweetDataModel.h"
+#import "RawTweetDataModel.h"
 @import Accounts;
 
 
@@ -34,6 +34,6 @@ typedef NS_ENUM(NSInteger, TwitterNetworkServiceErrorCode) {
 - (void)retrieveHomeTimelineTweetsWithCount:(NSNumber *)count
                                     sinceId:(NSString *)sinceId
                                       maxId:(NSString *)maxId
-                            completionBlock:(void(^)(NSArray<TwitterRawTweetDataModel *> *rawTweets, NSError *error))completionBlock;
+                            completionBlock:(void(^)(NSArray<RawTweetDataModel *> *rawTweets, NSError *error))completionBlock;
 
 @end

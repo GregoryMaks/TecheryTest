@@ -1,5 +1,5 @@
 //
-//  TwitterRawTweetDataModel.h
+//  RawTweetDataModel.h
 //  TecheryTwitter
 //
 //  Created by GregoryM on 8/16/16.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface TwitterRawTweetDataModel : NSObject
+@interface RawTweetDataModel : NSObject
 
 @property (nonatomic, copy, readonly) NSString *identifier;
 @property (nonatomic, copy, readonly) NSString *text;

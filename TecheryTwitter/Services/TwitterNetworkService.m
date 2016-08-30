@@ -7,7 +7,7 @@
 //
 
 #import "TwitterNetworkService.h"
-#import "TwitterRawTweetDataModel.h"
+#import "RawTweetDataModel.h"
 @import Social;
 
 
@@ -115,7 +115,7 @@ NSString * const TwitterNetworkServiceErrorDomain = @"TwitterNetworkServiceError
 - (void)retrieveHomeTimelineTweetsWithCount:(NSNumber *)count
                                     sinceId:(NSString *)sinceId
                                       maxId:(NSString *)maxId
-                            completionBlock:(void(^)(NSArray<TwitterRawTweetDataModel *> *rawTweets, NSError *error))completionBlock {
+                            completionBlock:(void(^)(NSArray<RawTweetDataModel *> *rawTweets, NSError *error))completionBlock {
     
     NSAssert(self.account != nil, @"account is nil");
     if (self.account == nil) {
@@ -176,12 +176,12 @@ NSString * const TwitterNetworkServiceErrorDomain = @"TwitterNetworkServiceError
      }];
 }
 
-- (NSArray<TwitterRawTweetDataModel *> *)parsedTweetModelsFromRawArray:(NSArray *)rawData {
-    NSMutableArray<TwitterRawTweetDataModel *> *result = [NSMutableArray new];
+- (NSArray<RawTweetDataModel *> *)parsedTweetModelsFromRawArray:(NSArray *)rawData {
+    NSMutableArray<RawTweetDataModel *> *result = [NSMutableArray new];
     for (NSDictionary *rawTweet in rawData) {
-        [result addObject:[[TwitterRawTweetDataModel alloc] initWithDictionary:rawTweet]];
+        [result addObject:[[RawTweetDataModel alloc] initWithDictionary:rawTweet]];
     }
-    return (NSArray<TwitterRawTweetDataModel *> *)[result copy];
+    return (NSArray<RawTweetDataModel *> *)[result copy];
 }
 
 @end

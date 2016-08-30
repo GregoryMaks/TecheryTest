@@ -11,7 +11,7 @@
 
 @implementation TwitterTweet
 
-- (void)fillFromNetworkDataModel:(TwitterRawTweetDataModel *)model {
+- (void)fillFromNetworkDataModel:(RawTweetDataModel *)model {
     self.identifier = [model.identifier longLongValue];
     self.text = model.text;
     self.createdAt = [model.createdAt timeIntervalSinceReferenceDate];

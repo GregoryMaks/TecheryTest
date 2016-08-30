@@ -1,16 +1,16 @@
 //
-//  TwitterRawTweetDataModel.m
+//  RawTweetDataModel.m
 //  TecheryTwitter
 //
 //  Created by GregoryM on 8/16/16.
 //  Copyright © 2016 None. All rights reserved.
 //
 
-#import "TwitterRawTweetDataModel.h"
+#import "RawTweetDataModel.h"
 #import "NSDate+Twitter.h"
 
 
-@interface TwitterRawTweetDataModel ()
+@interface RawTweetDataModel ()
 
 @property (nonatomic, copy, readwrite) NSString *identifier;
 @property (nonatomic, copy, readwrite) NSString *text;
@@ -20,7 +20,7 @@
 @end
 
 
-@implementation TwitterRawTweetDataModel
+@implementation RawTweetDataModel
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     if (self = [super init]) {
