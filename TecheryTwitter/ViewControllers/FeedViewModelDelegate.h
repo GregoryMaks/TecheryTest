@@ -13,6 +13,6 @@
 @protocol FeedViewModelDelegate <NSObject>
 @required
 
-- (void)feedViewModel:(FeedViewModel *)viewModel needsToDisplayNewTweetDialogWithCompletionHandler:(void(^)(BOOL success))completion;
+- (void)feedViewModelNeedsToDisplayNewTweetDialog:(FeedViewModel *)viewModel;
 
 @end

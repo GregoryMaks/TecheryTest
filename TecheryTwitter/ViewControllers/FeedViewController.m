@@ -104,9 +104,7 @@ static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
         tweetSheet.completionHandler = ^(SLComposeViewControllerResult result) {
             if (result == SLComposeViewControllerResultDone) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kDelayToRefreshFeedAfterPosting * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    if (completion) {
-                        completion(YES);
-                    }
+                    [self.viewModel initiateNewSuccessfulTweetAftereffects];
                 });
             }
         };
@@ -181,7 +179,7 @@ static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
         TwitterTweet *tweet = [self.viewModel tweetForRowAtIndexPath:indexPath];
         if (tweet != nil) {
             cell.tweetTextLabel.text = tweet.text;
-            cell.tweetDataLabel.text = [[NSDate dateWithTimeIntervalSinceReferenceDate:tweet.createdAt] tweetDisplayDateString];
+            cell.tweetDataLabel.text = [[NSDate dateWithTimeIntervalSinceReferenceDate:tweet.createdAt] tweetDisplayDateStringWithTimeZone:[NSTimeZone systemTimeZone]];
             
             // TODO: can be improved with AFNetworking or separate thread
             if (tweet.authorProfileImageUrl.length > 0) {

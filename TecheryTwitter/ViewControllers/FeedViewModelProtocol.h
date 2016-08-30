@@ -45,5 +45,6 @@ typedef NS_ENUM(NSInteger, FeedViewModelErrorCode) {
 - (TwitterTweet *)tweetForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 - (void)initiateNewTweetCreation;
+- (void)initiateNewSuccessfulTweetAftereffects;
 
 @end

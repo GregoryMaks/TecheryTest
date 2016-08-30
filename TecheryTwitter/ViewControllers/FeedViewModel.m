@@ -146,12 +146,14 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
         return;
     }
     
+    [self.delegate feedViewModelNeedsToDisplayNewTweetDialog:self];
+}
+
+- (void)initiateNewSuccessfulTweetAftereffects {
     @weakify(self);
-    [self.delegate feedViewModel:self needsToDisplayNewTweetDialogWithCompletionHandler:^(BOOL success) {
-        [[self refreshFeedSignal] subscribeNext:^(id x) {} error:^(NSError *error) {
-            @strongify(self);
-            [self.errorOccuredSignal sendNext:error];
-        }];
+    [[self refreshFeedSignal] subscribeNext:^(id x) {} error:^(NSError *error) {
+        @strongify(self);
+        [self.errorOccuredSignal sendNext:error];
     }];
 }
 

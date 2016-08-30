@@ -29,7 +29,6 @@
 		9370DB421D5C8573004B0934 /* TecheryTwitter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB401D5C8573004B0934 /* TecheryTwitter.xcdatamodeld */; };
 		9370DB441D5C8573004B0934 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9370DB431D5C8573004B0934 /* Assets.xcassets */; };
 		9370DB471D5C8573004B0934 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9370DB451D5C8573004B0934 /* LaunchScreen.storyboard */; };
-		9370DB521D5C8573004B0934 /* TecheryTwitterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB511D5C8573004B0934 /* TecheryTwitterTests.m */; };
 		9370DB5F1D5CB6D3004B0934 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB5E1D5CB6D3004B0934 /* LoginViewController.m */; };
 		9370DB621D5CBE58004B0934 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB611D5CBE58004B0934 /* FeedViewController.m */; };
 		9370DB651D5CC1D3004B0934 /* FeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB641D5CC1D3004B0934 /* FeedTableViewCell.m */; };
@@ -220,7 +219,6 @@
 		9370DB461D5C8573004B0934 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9370DB481D5C8573004B0934 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9370DB4D1D5C8573004B0934 /* TecheryTwitterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TecheryTwitterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9370DB511D5C8573004B0934 /* TecheryTwitterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TecheryTwitterTests.m; sourceTree = "<group>"; };
 		9370DB531D5C8573004B0934 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9370DB5D1D5CB6D3004B0934 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		9370DB5E1D5CB6D3004B0934 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
@@ -444,7 +442,6 @@
 			isa = PBXGroup;
 			children = (
 				93EDF94F1D748CC400E59152 /* NSDateTwitterTest.m */,
-				9370DB511D5C8573004B0934 /* TecheryTwitterTests.m */,
 				9370DB531D5C8573004B0934 /* Info.plist */,
 			);
 			path = TecheryTwitterTests;
@@ -833,7 +830,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				93EDF9501D748CC400E59152 /* NSDateTwitterTest.m in Sources */,
-				9370DB521D5C8573004B0934 /* TecheryTwitterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

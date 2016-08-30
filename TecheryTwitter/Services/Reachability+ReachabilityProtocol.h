@@ -11,6 +11,6 @@
 #import "Reachability.h"
 #import "ReachabilityServiceProtocol.h"
 
-@interface Reachability () <ReachabilityProtocol>
 
+@interface Reachability () <ReachabilityProtocol>
 @end
