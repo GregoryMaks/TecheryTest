@@ -181,7 +181,6 @@ static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
             cell.tweetTextLabel.text = tweet.text;
             cell.tweetDataLabel.text = [[NSDate dateWithTimeIntervalSinceReferenceDate:tweet.createdAt] tweetDisplayDateStringWithTimeZone:[NSTimeZone systemTimeZone]];
             
-            // TODO: can be improved with AFNetworking or separate thread
             if (tweet.authorProfileImageUrl.length > 0) {
                 [cell loadImageAtURL:[NSURL URLWithString:tweet.authorProfileImageUrl]];
             }
@@ -196,7 +195,6 @@ static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row >= [self.viewModel numberOfRowsInFeedTable]) {
         NSLog(@"not implemented");
-//        [[self.viewModel loadMoreFeedSignal] subscribeNext:^(NSNumber *newTweetsLoaded) {}];
     }
 }
 

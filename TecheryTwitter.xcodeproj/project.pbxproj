@@ -37,6 +37,8 @@
 		93EDF9501D748CC400E59152 /* NSDateTwitterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF94F1D748CC400E59152 /* NSDateTwitterTest.m */; };
 		93EDF9611D7615A000E59152 /* TwitterFeedService.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF95E1D7615A000E59152 /* TwitterFeedService.m */; };
 		93EDF9621D7615A000E59152 /* TwitterNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9601D7615A000E59152 /* TwitterNetworkService.m */; };
+		93EDF9641D76207300E59152 /* RawTweetDataModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9631D76207300E59152 /* RawTweetDataModelTest.m */; };
+		93EDF9671D7627A300E59152 /* EmptyTestsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9661D7627A300E59152 /* EmptyTestsAppDelegate.m */; };
 		B57518927B57C6AD26519274 /* libPods-TecheryTwitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD2996A610D5364ABECC44B /* libPods-TecheryTwitter.a */; };
 /* End PBXBuildFile section */
 
@@ -235,6 +237,9 @@
 		93EDF95E1D7615A000E59152 /* TwitterFeedService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFeedService.m; sourceTree = "<group>"; };
 		93EDF95F1D7615A000E59152 /* TwitterNetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterNetworkService.h; sourceTree = "<group>"; };
 		93EDF9601D7615A000E59152 /* TwitterNetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterNetworkService.m; sourceTree = "<group>"; };
+		93EDF9631D76207300E59152 /* RawTweetDataModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawTweetDataModelTest.m; sourceTree = "<group>"; };
+		93EDF9651D7627A300E59152 /* EmptyTestsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyTestsAppDelegate.h; sourceTree = "<group>"; };
+		93EDF9661D7627A300E59152 /* EmptyTestsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyTestsAppDelegate.m; sourceTree = "<group>"; };
 		CC8F7719C52CA0860FC52117 /* Pods-TecheryTwitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TecheryTwitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-TecheryTwitter/Pods-TecheryTwitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -415,6 +420,8 @@
 				9370DB5C1D5CB6A7004B0934 /* ViewControllers */,
 				9370DB371D5C8573004B0934 /* AppDelegate.h */,
 				9370DB381D5C8573004B0934 /* AppDelegate.m */,
+				93EDF9651D7627A300E59152 /* EmptyTestsAppDelegate.h */,
+				93EDF9661D7627A300E59152 /* EmptyTestsAppDelegate.m */,
 				9370DB3D1D5C8573004B0934 /* Main.storyboard */,
 				9370DB431D5C8573004B0934 /* Assets.xcassets */,
 				9370DB451D5C8573004B0934 /* LaunchScreen.storyboard */,
@@ -438,6 +445,7 @@
 			isa = PBXGroup;
 			children = (
 				93EDF94F1D748CC400E59152 /* NSDateTwitterTest.m */,
+				93EDF9631D76207300E59152 /* RawTweetDataModelTest.m */,
 				9370DB531D5C8573004B0934 /* Info.plist */,
 			);
 			path = TecheryTwitterTests;
@@ -813,6 +821,7 @@
 				93308F521D5FB95E00E5437B /* FeedViewModel.m in Sources */,
 				9370DB621D5CBE58004B0934 /* FeedViewController.m in Sources */,
 				93EDF9611D7615A000E59152 /* TwitterFeedService.m in Sources */,
+				93EDF9671D7627A300E59152 /* EmptyTestsAppDelegate.m in Sources */,
 				9370DB421D5C8573004B0934 /* TecheryTwitter.xcdatamodeld in Sources */,
 				93308FE91D632A6E00E5437B /* RawTweetDataModel.m in Sources */,
 				93308FE41D62066B00E5437B /* TwitterUser.m in Sources */,
@@ -829,6 +838,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93EDF9641D76207300E59152 /* RawTweetDataModelTest.m in Sources */,
 				93EDF9501D748CC400E59152 /* NSDateTwitterTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
