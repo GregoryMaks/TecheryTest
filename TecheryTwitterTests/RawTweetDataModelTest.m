@@ -13,8 +13,8 @@
 
 SPEC_BEGIN(RawTweetDataModelSpec)
 
-describe(@"Initializes", ^{
-    it(@"with correct data", ^{
+describe(@"When initializing with dictionary", ^{
+    it(@"should initialize correctly", ^{
         NSString *identifier = @"<identifier>";
         NSString *text = @"<text>";
         NSDate *date = [NSDate date];

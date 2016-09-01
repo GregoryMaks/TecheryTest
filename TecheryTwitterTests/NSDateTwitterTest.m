@@ -12,8 +12,8 @@
 
 SPEC_BEGIN(NSDateTwitterSpec)
 
-describe(@"Parses", ^{
-    it(@"valid twitter date", ^{
+describe(@"When parsing twitter date from string", ^{
+    it(@"should parse correct date", ^{
         NSString *str = @"Wed Aug 29 17:12:58 +0000 2012";
         
         NSDate *date = [NSDate parseTwitterDate:str];
@@ -37,7 +37,7 @@ describe(@"Parses", ^{
         [[theValue(comps.second) should] equal:theValue(58)];
     });
     
-    it(@"invalid twitter date", ^{
+    it(@"should not parse incorrect date", ^{
         NSString *str = @"08/29/2012 17:12:58";
         
         NSDate *date = [NSDate parseTwitterDate:str];
@@ -45,8 +45,8 @@ describe(@"Parses", ^{
     });
 });
 
-describe(@"Converts", ^{
-    it(@"date to valid twitter string", ^{
+describe(@"When converting date to twitter string", ^{
+    it(@"should return correct string", ^{
         NSDateComponents *comps = [[NSDateComponents alloc] init];
         comps.day = 29;
         comps.month = 8;

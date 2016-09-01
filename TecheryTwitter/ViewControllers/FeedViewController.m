@@ -98,7 +98,8 @@ static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
 
 #pragma mark ViewModel delegate
 
-- (void)feedViewModel:(FeedViewModel *)viewModel needsToDisplayNewTweetDialogWithCompletionHandler:(void(^)(BOOL success))completion {
+
+- (void)feedViewModelNeedsToDisplayNewTweetDialog:(FeedViewModel *)viewModel {
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
         SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         tweetSheet.completionHandler = ^(SLComposeViewControllerResult result) {
