@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, LoginViewModelError) {
 @property (nonatomic, weak) id <LoginViewModelDelegate> delegate;
 
 
-- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel;
+- (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)twitterNetworkService;
 
 - (void)connectToTwitterAccount;
 

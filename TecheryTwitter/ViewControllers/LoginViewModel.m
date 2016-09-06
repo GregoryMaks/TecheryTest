@@ -21,7 +21,7 @@
 
 @property (nonatomic, readwrite, assign) LoginViewModelError error;
 
-@property (nonatomic, strong) TwitterNetworkService *twitterModel;
+@property (nonatomic, strong) TwitterNetworkService *twitterNetworkService;
 
 @end
 
@@ -31,11 +31,11 @@
 @synthesize error;
 @synthesize delegate;
 
-- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel {
+- (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)twitterNetworkService {
     self = [super init];
     if (self) {
         self.error = LoginViewModelError_None;
-        self.twitterModel = twitterModel;
+        self.twitterNetworkService = twitterNetworkService;
     }
     return self;
 }
@@ -43,7 +43,7 @@
 - (void)connectToTwitterAccount {
     self.error = LoginViewModelError_None;
     
-    [self.twitterModel connectToTwitterAccountWithResultBlock:^(BOOL isGranted, BOOL isAccountAvailable) {
+    [self.twitterNetworkService connectToTwitterAccountWithResultBlock:^(BOOL isGranted, BOOL isAccountAvailable) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (isGranted) {
                 NSLog(@"Granted primary access");
@@ -70,7 +70,7 @@
         FeedViewController *feedVC = navController.viewControllers[0];
         NSAssert(feedVC != nil, @"NavigationController should contain FeedViewController as root");
         if (feedVC != nil) {
-            FeedViewModel *viewModel = [[FeedViewModel alloc] initWithTwitterModel:self.twitterModel];
+            FeedViewModel *viewModel = [[FeedViewModel alloc] initWithTwitterNetworkService:self.twitterNetworkService];
             [feedVC setViewModelExternally:viewModel];
         }
     }

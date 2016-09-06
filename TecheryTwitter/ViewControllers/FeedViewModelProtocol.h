@@ -13,6 +13,7 @@
 
 
 @class TwitterNetworkService;
+@class TwitterFeedService;
 @class FeedTableViewCell;
 @class TwitterTweet;
 @protocol ReachabilityProtocol;
@@ -37,8 +38,10 @@ typedef NS_ENUM(NSInteger, FeedViewModelErrorCode) {
 @property (assign, readonly) BOOL isOnline;
 
 
-- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel;
-- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel reachability:(id <ReachabilityProtocol>)reachability;
+- (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)twitterNetworkService;
+- (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)twitterNetworkService
+                           twitterFeedService:(TwitterFeedService *)twitterFeedService
+                                 reachability:(id <ReachabilityProtocol>)reachability;
 
 - (RACSignal *)refreshFeedSignal;
 

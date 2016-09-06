@@ -23,7 +23,7 @@
 @property (nonatomic, readonly, strong) TwitterNetworkService *networkDataModel;
 
 
-- (instancetype)initWithTwitterNetworkDM:(TwitterNetworkService *)networkDM;
+- (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)networkDM;
 
 - (NSInteger)numberOfTweetsForCurrentUser;
 

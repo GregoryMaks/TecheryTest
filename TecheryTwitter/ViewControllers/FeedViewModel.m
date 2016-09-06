@@ -30,7 +30,7 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
 
 @property (strong) id<ReachabilityProtocol> reachability;
 
-@property (nonatomic, strong) TwitterNetworkService *twitterModel;
+@property (nonatomic, strong) TwitterNetworkService *twitterNetworkService;
 @property (nonatomic, strong) TwitterFeedService *twitterFeedModel;
 
 @property (nonatomic, strong) NSArray<TwitterTweet *> *feed;
@@ -43,17 +43,21 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
 @synthesize delegate;
 
 - (NSString *)twitterUsername {
-    return self.twitterModel.account.username;
+    return self.twitterNetworkService.account.username;
 }
 
-- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel {
-    return [self initWithTwitterModel:twitterModel reachability:[Reachability reachabilityForInternetConnection]];
+- (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)twitterNetworkService {
+    return [self initWithTwitterNetworkService:twitterNetworkService
+                            twitterFeedService:[[TwitterFeedService alloc] initWithTwitterNetworkService:twitterNetworkService]
+                                  reachability:[Reachability reachabilityForInternetConnection]];
 }
 
-- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel reachability:(id <ReachabilityProtocol>)reachability {
+- (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)twitterNetworkService
+                           twitterFeedService:(TwitterFeedService *)twitterFeedService
+                                 reachability:(id <ReachabilityProtocol>)reachability {
     if (self = [super init]) {
-        self.twitterModel = twitterModel;
-        self.twitterFeedModel = [[TwitterFeedService alloc] initWithTwitterNetworkDM:twitterModel];
+        self.twitterNetworkService = twitterNetworkService;
+        self.twitterFeedModel = twitterFeedService;
         
         self.dataUpdatedSignal = [RACSubject subject];
         self.errorOccuredSignal = [RACSubject subject];

@@ -33,7 +33,7 @@
     
     // TODO: add MVVM-C scheme here for navigation purposes
     LoginViewController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-    LoginViewModel *loginViewModel = [[LoginViewModel alloc] initWithTwitterModel:[TwitterNetworkService new]];
+    LoginViewModel *loginViewModel = [[LoginViewModel alloc] initWithTwitterNetworkService:[TwitterNetworkService new]];
     [loginVC setViewModelExternally:loginViewModel];
     
     self.window.rootViewController = loginVC;

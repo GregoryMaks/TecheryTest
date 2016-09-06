@@ -23,7 +23,7 @@ static NSInteger const kDefaultTweetBatchSize = 20;
 
 @implementation TwitterFeedService
 
-- (instancetype)initWithTwitterNetworkDM:(TwitterNetworkService *)networkDM {
+- (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)networkDM {
     if (self = [super init]) {
         self.networkDataModel = networkDM;
         

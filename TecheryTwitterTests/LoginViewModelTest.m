@@ -25,7 +25,7 @@ describe(@"When initializing", ^{
         return [[TwitterNetworkServiceMock alloc] init];
     });
     let(viewModel, ^{
-        return [[LoginViewModel alloc] initWithTwitterModel:(id)twitterServiceMock];
+        return [[LoginViewModel alloc] initWithTwitterNetworkService:(id)twitterServiceMock];
     });
     
     it(@"should initialize correctly", ^{
@@ -38,7 +38,7 @@ describe(@"When connecting to twitter account", ^{
         return [[TwitterNetworkServiceMock alloc] init];
     });
     let(viewModel, ^{
-        return [[LoginViewModel alloc] initWithTwitterModel:(id)twitterServiceMock];
+        return [[LoginViewModel alloc] initWithTwitterNetworkService:(id)twitterServiceMock];
     });
     
     it(@"should proceed if granted and available", ^{
@@ -78,7 +78,7 @@ describe(@"When preparing for segue", ^{
         return [[TwitterNetworkServiceMock alloc] init];
     });
     let(viewModel, ^{
-        return [[LoginViewModel alloc] initWithTwitterModel:(id)twitterServiceMock];
+        return [[LoginViewModel alloc] initWithTwitterNetworkService:(id)twitterServiceMock];
     });
     beforeEach(^{
         [MagicalRecord setupCoreDataStackWithInMemoryStore];

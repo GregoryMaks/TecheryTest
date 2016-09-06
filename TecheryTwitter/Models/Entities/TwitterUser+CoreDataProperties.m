@@ -2,7 +2,7 @@
 //  TwitterUser+CoreDataProperties.m
 //  TecheryTwitter
 //
-//  Created by GregoryM on 8/15/16.
+//  Created by GregoryM on 9/6/16.
 //  Copyright © 2016 None. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
