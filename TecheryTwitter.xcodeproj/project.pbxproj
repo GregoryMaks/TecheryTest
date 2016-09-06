@@ -42,6 +42,7 @@
 		93EDF96A1D76DB0B00E59152 /* LoginViewModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9691D76DB0B00E59152 /* LoginViewModelTest.m */; };
 		93EDF9711D7872FA00E59152 /* TwitterNetworkServiceMock.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9701D7872FA00E59152 /* TwitterNetworkServiceMock.m */; };
 		93EDF9731D7894AF00E59152 /* FeedViewModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9721D7894AF00E59152 /* FeedViewModelTest.m */; };
+		93EDF9761D78BDFA00E59152 /* ReachabilityMock.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9751D78BDFA00E59152 /* ReachabilityMock.m */; };
 		B57518927B57C6AD26519274 /* libPods-TecheryTwitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD2996A610D5364ABECC44B /* libPods-TecheryTwitter.a */; };
 /* End PBXBuildFile section */
 
@@ -247,6 +248,8 @@
 		93EDF96F1D7872FA00E59152 /* TwitterNetworkServiceMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterNetworkServiceMock.h; sourceTree = "<group>"; };
 		93EDF9701D7872FA00E59152 /* TwitterNetworkServiceMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterNetworkServiceMock.m; sourceTree = "<group>"; };
 		93EDF9721D7894AF00E59152 /* FeedViewModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewModelTest.m; sourceTree = "<group>"; };
+		93EDF9741D78BDFA00E59152 /* ReachabilityMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityMock.h; sourceTree = "<group>"; };
+		93EDF9751D78BDFA00E59152 /* ReachabilityMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityMock.m; sourceTree = "<group>"; };
 		CC8F7719C52CA0860FC52117 /* Pods-TecheryTwitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TecheryTwitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-TecheryTwitter/Pods-TecheryTwitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -515,6 +518,8 @@
 			children = (
 				93EDF96F1D7872FA00E59152 /* TwitterNetworkServiceMock.h */,
 				93EDF9701D7872FA00E59152 /* TwitterNetworkServiceMock.m */,
+				93EDF9741D78BDFA00E59152 /* ReachabilityMock.h */,
+				93EDF9751D78BDFA00E59152 /* ReachabilityMock.m */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -861,6 +866,7 @@
 				93EDF96A1D76DB0B00E59152 /* LoginViewModelTest.m in Sources */,
 				93EDF9711D7872FA00E59152 /* TwitterNetworkServiceMock.m in Sources */,
 				93EDF9501D748CC400E59152 /* NSDateTwitterTest.m in Sources */,
+				93EDF9761D78BDFA00E59152 /* ReachabilityMock.m in Sources */,
 				93EDF9731D7894AF00E59152 /* FeedViewModelTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

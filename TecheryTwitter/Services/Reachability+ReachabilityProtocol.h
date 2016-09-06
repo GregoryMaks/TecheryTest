@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Reachability.h"
-#import "ReachabilityServiceProtocol.h"
+#import "ReachabilityProtocol.h"
 
 
 @interface Reachability () <ReachabilityProtocol>

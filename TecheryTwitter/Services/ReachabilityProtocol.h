@@ -6,6 +6,9 @@
 //  Copyright (c) 2016 None. All rights reserved.
 //
 
+#import "Reachability.h"
+
+
 @protocol ReachabilityProtocol <NSObject>
 @required
 

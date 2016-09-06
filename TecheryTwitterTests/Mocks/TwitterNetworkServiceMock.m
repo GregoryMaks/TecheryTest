@@ -10,7 +10,26 @@
 #import "TwitterNetworkService.h"
 
 
+@interface TwitterNetworkServiceMock ()
+@end
+
+
 @implementation TwitterNetworkServiceMock
+
+@synthesize accountMock;
+
+- (KWMock *)accountMock {
+    @synchronized (self) {
+        if (accountMock == nil) {
+            accountMock = [ACAccount nullMock];
+        }
+        return accountMock;
+    }
+}
+
+- (ACAccount *)account {
+    return (ACAccount *)self.accountMock;
+}
 
 - (instancetype)init {
     self = [super initAsNullMockForClass:[TwitterNetworkService class]];

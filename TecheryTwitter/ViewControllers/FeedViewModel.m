@@ -14,6 +14,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "Reachability.h"
 #import "ReachabilityProtocol.h"
+#import "Reachability+ReachabilityProtocol.h"
 
 
 NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
@@ -25,10 +26,8 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
 @property (strong, readwrite) RACSubject *dataUpdatedSignal;
 @property (strong, readwrite) RACSubject *errorOccuredSignal;
 
-@property (copy, readwrite) NSString *twitterUsername;
 @property (assign, readwrite) BOOL isOnline;
 
-@property (copy) Class reachabilityClass;
 @property (strong) id<ReachabilityProtocol> reachability;
 
 @property (nonatomic, strong) TwitterNetworkService *twitterModel;
@@ -43,11 +42,15 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
 
 @synthesize delegate;
 
-- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel {
-    return [self initWithTwitterModel:twitterModel reachabilityClass:[Reachability class]];
+- (NSString *)twitterUsername {
+    return self.twitterModel.account.username;
 }
 
-- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel reachabilityClass:(Class)reachabilityClass {
+- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel {
+    return [self initWithTwitterModel:twitterModel reachability:[Reachability reachabilityForInternetConnection]];
+}
+
+- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel reachability:(id <ReachabilityProtocol>)reachability {
     if (self = [super init]) {
         self.twitterModel = twitterModel;
         self.twitterFeedModel = [[TwitterFeedService alloc] initWithTwitterNetworkDM:twitterModel];
@@ -55,9 +58,7 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
         self.dataUpdatedSignal = [RACSubject subject];
         self.errorOccuredSignal = [RACSubject subject];
         
-        self.twitterUsername = self.twitterModel.account.username;
-        
-        self.reachability = [reachabilityClass reachabilityForInternetConnection];
+        self.reachability = reachability;
         self.isOnline = ([self.reachability isReachable]);
         
         @weakify(self);

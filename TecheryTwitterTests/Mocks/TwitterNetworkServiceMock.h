@@ -12,7 +12,9 @@
 
 @interface TwitterNetworkServiceMock : KWMock
 
-@property (nonatomic, assign) BOOL connectGrantedReply;
-@property (nonatomic, assign) BOOL connectAccountAvailableReply;
+@property (assign) BOOL connectGrantedReply;
+@property (assign) BOOL connectAccountAvailableReply;
+
+@property (strong, readonly) KWMock *accountMock;
 
 @end

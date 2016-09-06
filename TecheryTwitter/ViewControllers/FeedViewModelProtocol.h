@@ -15,6 +15,7 @@
 @class TwitterNetworkService;
 @class FeedTableViewCell;
 @class TwitterTweet;
+@protocol ReachabilityProtocol;
 
 
 extern NSString * const FeedViewModelErrorDomain;
@@ -37,7 +38,7 @@ typedef NS_ENUM(NSInteger, FeedViewModelErrorCode) {
 
 
 - (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel;
-- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel reachabilityClass:(Class)reachabilityClass;
+- (instancetype)initWithTwitterModel:(TwitterNetworkService *)twitterModel reachability:(id <ReachabilityProtocol>)reachability;
 
 - (RACSignal *)refreshFeedSignal;
 
