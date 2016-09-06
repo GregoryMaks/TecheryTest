@@ -15,19 +15,19 @@ static NSInteger const kDefaultTweetBatchSize = 20;
 
 @interface TwitterFeedService ()
 
-@property (nonatomic, readwrite, strong) TwitterNetworkService *networkDataModel;
-@property (nonatomic, strong) TwitterUser *user;
+@property (readwrite, strong) TwitterNetworkService *twitterNetworkService;
+@property (strong) TwitterUser *user;
 
 @end
 
 
 @implementation TwitterFeedService
 
-- (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)networkDM {
+- (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)twitterNetworkService {
     if (self = [super init]) {
-        self.networkDataModel = networkDM;
+        self.twitterNetworkService = twitterNetworkService;
         
-        [self getOrCreateTwitterUserFromAccount:self.networkDataModel.account];
+        [self getOrCreateTwitterUserFromAccount:self.twitterNetworkService.account];
     }
     return self;
 }
@@ -68,10 +68,10 @@ static NSInteger const kDefaultTweetBatchSize = 20;
         
         // Reason for (maxStoredTweetId - 1): we should retrieve the duplicating tweet with maxStoredTweetId for merging logic
         NSString *sinceId = (maxStoredTweetId == NSNotFound) ? nil : [NSString stringWithFormat:@"%lld", maxStoredTweetId - 1];
-        [self.networkDataModel retrieveHomeTimelineTweetsWithCount:@(kDefaultTweetBatchSize)
-                                                           sinceId:sinceId
-                                                             maxId:nil
-                                                   completionBlock:^(NSArray<RawTweetDataModel *> *rawTweets, NSError *error)
+        [self.twitterNetworkService retrieveHomeTimelineTweetsWithCount:@(kDefaultTweetBatchSize)
+                                                                sinceId:sinceId
+                                                                  maxId:nil
+                                                        completionBlock:^(NSArray<RawTweetDataModel *> *rawTweets, NSError *error)
          {
              if (error) {
                  NSLog(@"Error retrieving tweets, %@", [error localizedDescription]);

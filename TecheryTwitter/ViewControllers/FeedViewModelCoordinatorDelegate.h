@@ -1,16 +1,18 @@
 //
-//  FeedViewModelDelegate.h
+//  FeedViewModelCoordinatorDelegate.h
 //  TecheryTwitter
 //
-//  Created by GregoryM on 8/28/16.
+//  Created by GregoryM on 9/6/16.
 //  Copyright © 2016 None. All rights reserved.
 //
+
+#import "Coordinator.h"
 
 
 @class FeedViewModel;
 
 
-@protocol FeedViewModelDelegate <NSObject>
+@protocol FeedViewModelCoordinatorDelegate <NSObject>
 @required
 
 - (void)feedViewModelNeedsToDisplayNewTweetDialog:(FeedViewModel *)viewModel;

@@ -12,10 +12,10 @@
 
 @interface RawTweetDataModel ()
 
-@property (nonatomic, copy, readwrite) NSString *identifier;
-@property (nonatomic, copy, readwrite) NSString *text;
-@property (nonatomic, strong, readwrite) NSDate *createdAt;
-@property (nonatomic, copy, readwrite) NSString *authorProfileImageUrl;
+@property (copy, readwrite) NSString *identifier;
+@property (copy, readwrite) NSString *text;
+@property (strong, readwrite) NSDate *createdAt;
+@property (copy, readwrite) NSString *authorProfileImageUrl;
 
 @end
 

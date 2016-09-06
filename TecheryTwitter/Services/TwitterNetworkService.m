@@ -16,9 +16,9 @@ NSString * const TwitterNetworkServiceErrorDomain = @"TwitterNetworkServiceError
 
 @interface TwitterNetworkService ()
 
-@property (nonatomic, readwrite, strong) ACAccountStore *accountStore;
-@property (nonatomic, readwrite, strong) ACAccount *account;
-@property (nonatomic, readwrite, strong) NSDictionary *profileInfo;
+@property (readwrite, strong) ACAccountStore *accountStore;
+@property (readwrite, strong) ACAccount *account;
+@property (readwrite, strong) NSDictionary *profileInfo;
 
 @end
 

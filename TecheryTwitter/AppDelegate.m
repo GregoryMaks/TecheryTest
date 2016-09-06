@@ -9,12 +9,12 @@
 #import "AppDelegate.h"
 #import <MagicalRecord/MagicalRecord.h>
 
-#import "LoginViewController.h"
-#import "LoginViewModel.h"
-#import "TwitterNetworkService.h"
+#import "AppCoordinator.h"
 
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) AppCoordinator *appCoordinator;
 
 @end
 
@@ -26,17 +26,12 @@
     [self setupCoreData];
     
     // UI
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window = [[UIWindow alloc] init];
+
+    self.appCoordinator = [[AppCoordinator alloc] initWithWindow:self.window];
+    [self.appCoordinator start];
     
-    self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
-    // TODO: add MVVM-C scheme here for navigation purposes
-    LoginViewController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-    LoginViewModel *loginViewModel = [[LoginViewModel alloc] initWithTwitterNetworkService:[TwitterNetworkService new]];
-    [loginVC setViewModelExternally:loginViewModel];
-    
-    self.window.rootViewController = loginVC;
     
     return YES;
 }

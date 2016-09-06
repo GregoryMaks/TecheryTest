@@ -9,7 +9,7 @@
 @import Foundation;
 @import Accounts;
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import "FeedViewModelDelegate.h"
+#import "FeedViewModelCoordinatorDelegate.h"
 
 
 @class TwitterNetworkService;
@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, FeedViewModelErrorCode) {
 @protocol FeedViewModelProtocol <NSObject>
 @required
 
-@property (nonatomic, weak) id <FeedViewModelDelegate> delegate;
+@property (weak) id <FeedViewModelCoordinatorDelegate> coordinatorDelegate;
 
 @property (assign, readonly) BOOL isFeedRefreshing;
 @property (strong, readonly) RACSubject *dataUpdatedSignal;   ///< hot signal for notifying about new data

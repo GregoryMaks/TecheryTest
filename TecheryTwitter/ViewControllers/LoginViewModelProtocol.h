@@ -9,7 +9,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "TwitterNetworkService.h"
+#import "LoginViewModelCoordinatorDelegate.h"
 
 
 @protocol LoginViewModelDelegate;
@@ -27,15 +29,16 @@ typedef NS_ENUM(NSInteger, LoginViewModelError) {
 
 @protocol LoginViewModelProtocol <NSObject>
 
-@property (nonatomic, readonly, assign) LoginViewModelError error;
-@property (nonatomic, weak) id <LoginViewModelDelegate> delegate;
+@property (assign, readonly) LoginViewModelError error;
+
+@property (weak) id <LoginViewModelCoordinatorDelegate> coordinatorDelegate;
 
 
 - (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)twitterNetworkService;
 
 - (void)connectToTwitterAccount;
 
-- (void)prepareViewController:(UIViewController *)viewController forSegueIdentifier:(NSString *)segueIdentifier;
+- (void)navigateToExternalTwitterSettings;
 
 @end
 

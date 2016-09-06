@@ -30,17 +30,17 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
 
 @property (strong) id<ReachabilityProtocol> reachability;
 
-@property (nonatomic, strong) TwitterNetworkService *twitterNetworkService;
-@property (nonatomic, strong) TwitterFeedService *twitterFeedModel;
+@property (strong) TwitterNetworkService *twitterNetworkService;
+@property (strong) TwitterFeedService *twitterFeedModel;
 
-@property (nonatomic, strong) NSArray<TwitterTweet *> *feed;
+@property (strong) NSArray<TwitterTweet *> *feed;
 
 @end
 
 
 @implementation FeedViewModel
 
-@synthesize delegate;
+@synthesize coordinatorDelegate;
 
 - (NSString *)twitterUsername {
     return self.twitterNetworkService.account.username;
@@ -147,11 +147,11 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
 }
 
 - (void)initiateNewTweetCreation {
-    if (self.delegate == nil) {
+    if (self.coordinatorDelegate == nil) {
         return;
     }
     
-    [self.delegate feedViewModelNeedsToDisplayNewTweetDialog:self];
+    [self.coordinatorDelegate feedViewModelNeedsToDisplayNewTweetDialog:self];
 }
 
 - (void)initiateNewSuccessfulTweetAftereffects {

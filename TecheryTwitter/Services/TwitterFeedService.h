@@ -20,10 +20,10 @@
  */
 @interface TwitterFeedService : NSObject
 
-@property (nonatomic, readonly, strong) TwitterNetworkService *networkDataModel;
+@property (readonly, strong) TwitterNetworkService *twitterNetworkService;
 
 
-- (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)networkDM;
+- (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)twitterNetworkService;
 
 - (NSInteger)numberOfTweetsForCurrentUser;
 

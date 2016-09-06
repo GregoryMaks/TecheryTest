@@ -12,17 +12,14 @@
 #import "TwitterTweet.h"
 #import "NSDate+Twitter.h"
 @import Social;
-#import "FeedViewModelDelegate.h"
 
 
 static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell";
-static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
 
 
-@interface FeedViewController () <FeedViewModelDelegate>
+@interface FeedViewController ()
 
 @property (nonatomic, strong) id <FeedViewModelProtocol> viewModel;
-
 @property (nonatomic, strong) UILabel *emptyFeedLabel;
 
 @end
@@ -60,8 +57,6 @@ static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
 }
 
 - (void)bindViewModel {
-    self.viewModel.delegate = self;
-    
     @weakify(self);
     [self.viewModel.dataUpdatedSignal subscribeNext:^(id parameter) {
         @strongify(self);
@@ -94,23 +89,6 @@ static NSTimeInterval kDelayToRefreshFeedAfterPosting = 2.0;
        ] map:^id(RACTuple *value) {
          return [NSString stringWithFormat:@"%@%@", value.first ?: @"", [value.second boolValue] ? @"" : @" (offline)"];
     }] deliverOn:[RACScheduler mainThreadScheduler]];
-}
-
-#pragma mark ViewModel delegate
-
-
-- (void)feedViewModelNeedsToDisplayNewTweetDialog:(FeedViewModel *)viewModel {
-    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
-        SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-        tweetSheet.completionHandler = ^(SLComposeViewControllerResult result) {
-            if (result == SLComposeViewControllerResultDone) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kDelayToRefreshFeedAfterPosting * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self.viewModel initiateNewSuccessfulTweetAftereffects];
-                });
-            }
-        };
-        [self presentViewController:tweetSheet animated:YES completion:nil];
-    }
 }
 
 #pragma mark Lifecycle

@@ -19,9 +19,9 @@
 
 @interface LoginViewModel ()
 
-@property (nonatomic, readwrite, assign) LoginViewModelError error;
+@property (readwrite, assign) LoginViewModelError error;
 
-@property (nonatomic, strong) TwitterNetworkService *twitterNetworkService;
+@property (strong) TwitterNetworkService *twitterNetworkService;
 
 @end
 
@@ -29,7 +29,8 @@
 @implementation LoginViewModel
 
 @synthesize error;
-@synthesize delegate;
+@synthesize coordinatorDelegate;
+
 
 - (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)twitterNetworkService {
     self = [super init];
@@ -64,24 +65,19 @@
     }];
 }
 
-- (void)prepareViewController:(UIViewController *)viewController forSegueIdentifier:(NSString *)segueIdentifier {
-    if ([segueIdentifier isEqualToString:PresentFeedSegueIdentifier]) {
-        UINavigationController *navController = (UINavigationController *)viewController;
-        FeedViewController *feedVC = navController.viewControllers[0];
-        NSAssert(feedVC != nil, @"NavigationController should contain FeedViewController as root");
-        if (feedVC != nil) {
-            FeedViewModel *viewModel = [[FeedViewModel alloc] initWithTwitterNetworkService:self.twitterNetworkService];
-            [feedVC setViewModelExternally:viewModel];
-        }
+- (void)navigateToExternalTwitterSettings {
+    NSAssert(self.coordinatorDelegate != nil, @"Delegate not set");
+    if (self.coordinatorDelegate != nil) {
+        [self.coordinatorDelegate loginViewModelShouldOpenExternalTwitterSetings:self];
     }
 }
 
 #pragma mark Private methods
 
 - (void)openFeedController {
-    NSAssert(self.delegate != nil, @"Delegate not set");
-    if (self.delegate != nil) {
-        [self.delegate loginViewModel:self needsToPerformSegueWithIdentifier:PresentFeedSegueIdentifier];
+    NSAssert(self.coordinatorDelegate != nil, @"Delegate not set");
+    if (self.coordinatorDelegate != nil) {
+        [self.coordinatorDelegate loginViewModelDidAuthenticate:self];
     }
 }
 

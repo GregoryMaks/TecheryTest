@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "LoginViewModelProtocol.h"
-#import "LoginViewModelDelegate.h"
 
 
 @interface LoginViewModel : NSObject <LoginViewModelProtocol>

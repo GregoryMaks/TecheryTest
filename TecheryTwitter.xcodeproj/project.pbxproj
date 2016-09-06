@@ -44,6 +44,10 @@
 		93EDF9781D7EDC4A00E59152 /* TwitterFeedServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9771D7EDC4900E59152 /* TwitterFeedServiceTest.m */; };
 		93EDF97B1D7EFBCF00E59152 /* TwitterUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF97A1D7EFBCF00E59152 /* TwitterUser+CoreDataProperties.m */; };
 		93EDF97E1D7EFBE800E59152 /* TwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF97D1D7EFBE800E59152 /* TwitterUser.m */; };
+		93EDF9851D7F5F0200E59152 /* Coordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9841D7F5F0200E59152 /* Coordinator.m */; };
+		93EDF9881D7F5F4300E59152 /* AppCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9871D7F5F4300E59152 /* AppCoordinator.m */; };
+		93EDF98B1D7F60F700E59152 /* LoginCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF98A1D7F60F700E59152 /* LoginCoordinator.m */; };
+		93EDF98E1D7F625900E59152 /* FeedCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF98D1D7F625900E59152 /* FeedCoordinator.m */; };
 		B57518927B57C6AD26519274 /* libPods-TecheryTwitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD2996A610D5364ABECC44B /* libPods-TecheryTwitter.a */; };
 /* End PBXBuildFile section */
 
@@ -190,7 +194,6 @@
 		2AD2996A610D5364ABECC44B /* libPods-TecheryTwitter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TecheryTwitter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		72CB5E75DE4FDD71107C780E /* libPods-TecheryTwitterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TecheryTwitterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CCAC80AE52E9FCF453455DB /* Pods-TecheryTwitterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TecheryTwitterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TecheryTwitterTests/Pods-TecheryTwitterTests.debug.xcconfig"; sourceTree = "<group>"; };
-		93308F4F1D5F685A00E5437B /* LoginViewModelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewModelDelegate.h; sourceTree = "<group>"; };
 		93308F501D5FB95E00E5437B /* FeedViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewModel.h; sourceTree = "<group>"; };
 		93308F511D5FB95E00E5437B /* FeedViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewModel.m; sourceTree = "<group>"; };
 		93308F901D5FBC5500E5437B /* ReactiveCocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveCocoa.xcodeproj; path = Submodules/ReactiveCocoa/ReactiveCocoa.xcodeproj; sourceTree = "<group>"; };
@@ -230,7 +233,6 @@
 		9370DB6A1D5CE352004B0934 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		9370DB6C1D5CE36A004B0934 /* LoginViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
 		9370DB6D1D5CE36A004B0934 /* LoginViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewModel.m; sourceTree = "<group>"; };
-		937803221D73667000FE4BA6 /* FeedViewModelDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedViewModelDelegate.h; sourceTree = "<group>"; };
 		937803241D74643900FE4BA6 /* Reachability+ReachabilityProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Reachability+ReachabilityProtocol.h"; sourceTree = "<group>"; };
 		937803271D74645C00FE4BA6 /* ReachabilityProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReachabilityProtocol.h; sourceTree = "<group>"; };
 		93EDF94F1D748CC400E59152 /* NSDateTwitterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateTwitterTest.m; sourceTree = "<group>"; };
@@ -252,6 +254,16 @@
 		93EDF97A1D7EFBCF00E59152 /* TwitterUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TwitterUser+CoreDataProperties.m"; sourceTree = "<group>"; };
 		93EDF97C1D7EFBE800E59152 /* TwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterUser.h; sourceTree = "<group>"; };
 		93EDF97D1D7EFBE800E59152 /* TwitterUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterUser.m; sourceTree = "<group>"; };
+		93EDF97F1D7F599B00E59152 /* LoginViewModelCoordinatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewModelCoordinatorDelegate.h; sourceTree = "<group>"; };
+		93EDF9831D7F5F0200E59152 /* Coordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coordinator.h; sourceTree = "<group>"; };
+		93EDF9841D7F5F0200E59152 /* Coordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coordinator.m; sourceTree = "<group>"; };
+		93EDF9861D7F5F4300E59152 /* AppCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCoordinator.h; sourceTree = "<group>"; };
+		93EDF9871D7F5F4300E59152 /* AppCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppCoordinator.m; sourceTree = "<group>"; };
+		93EDF9891D7F60F700E59152 /* LoginCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginCoordinator.h; sourceTree = "<group>"; };
+		93EDF98A1D7F60F700E59152 /* LoginCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginCoordinator.m; sourceTree = "<group>"; };
+		93EDF98C1D7F625900E59152 /* FeedCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCoordinator.h; sourceTree = "<group>"; };
+		93EDF98D1D7F625900E59152 /* FeedCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCoordinator.m; sourceTree = "<group>"; };
+		93EDF98F1D7F64D700E59152 /* FeedViewModelCoordinatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewModelCoordinatorDelegate.h; sourceTree = "<group>"; };
 		CC8F7719C52CA0860FC52117 /* Pods-TecheryTwitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TecheryTwitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-TecheryTwitter/Pods-TecheryTwitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -430,6 +442,7 @@
 				93308FEA1D632FFD00E5437B /* Helpers */,
 				93308FCD1D5FC33B00E5437B /* Models */,
 				9370DB5C1D5CB6A7004B0934 /* ViewControllers */,
+				93EDF9821D7F5EC200E59152 /* Coordinators */,
 				9370DB371D5C8573004B0934 /* AppDelegate.h */,
 				9370DB381D5C8573004B0934 /* AppDelegate.m */,
 				93EDF9651D7627A300E59152 /* EmptyTestsAppDelegate.h */,
@@ -484,7 +497,7 @@
 				9370DB6C1D5CE36A004B0934 /* LoginViewModel.h */,
 				9370DB6D1D5CE36A004B0934 /* LoginViewModel.m */,
 				936DE8F41D5E674800C78652 /* LoginViewModelProtocol.h */,
-				93308F4F1D5F685A00E5437B /* LoginViewModelDelegate.h */,
+				93EDF97F1D7F599B00E59152 /* LoginViewModelCoordinatorDelegate.h */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -497,7 +510,7 @@
 				93308F501D5FB95E00E5437B /* FeedViewModel.h */,
 				93308F511D5FB95E00E5437B /* FeedViewModel.m */,
 				93308FCB1D5FBF1900E5437B /* FeedViewModelProtocol.h */,
-				937803221D73667000FE4BA6 /* FeedViewModelDelegate.h */,
+				93EDF98F1D7F64D700E59152 /* FeedViewModelCoordinatorDelegate.h */,
 				93308FCC1D5FC01D00E5437B /* TableViewCell */,
 			);
 			name = Feed;
@@ -525,6 +538,21 @@
 				93EDF9751D78BDFA00E59152 /* ReachabilityMock.m */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		93EDF9821D7F5EC200E59152 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				93EDF9831D7F5F0200E59152 /* Coordinator.h */,
+				93EDF9841D7F5F0200E59152 /* Coordinator.m */,
+				93EDF9861D7F5F4300E59152 /* AppCoordinator.h */,
+				93EDF9871D7F5F4300E59152 /* AppCoordinator.m */,
+				93EDF9891D7F60F700E59152 /* LoginCoordinator.h */,
+				93EDF98A1D7F60F700E59152 /* LoginCoordinator.m */,
+				93EDF98C1D7F625900E59152 /* FeedCoordinator.h */,
+				93EDF98D1D7F625900E59152 /* FeedCoordinator.m */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -846,18 +874,22 @@
 				9370DB651D5CC1D3004B0934 /* FeedTableViewCell.m in Sources */,
 				93308F521D5FB95E00E5437B /* FeedViewModel.m in Sources */,
 				9370DB621D5CBE58004B0934 /* FeedViewController.m in Sources */,
+				93EDF98E1D7F625900E59152 /* FeedCoordinator.m in Sources */,
 				93EDF9611D7615A000E59152 /* TwitterFeedService.m in Sources */,
 				93EDF9671D7627A300E59152 /* EmptyTestsAppDelegate.m in Sources */,
 				9370DB421D5C8573004B0934 /* TecheryTwitter.xcdatamodeld in Sources */,
 				93308FE91D632A6E00E5437B /* RawTweetDataModel.m in Sources */,
+				93EDF98B1D7F60F700E59152 /* LoginCoordinator.m in Sources */,
 				9370DB6E1D5CE36A004B0934 /* LoginViewModel.m in Sources */,
 				9370DB361D5C8573004B0934 /* main.m in Sources */,
+				93EDF9881D7F5F4300E59152 /* AppCoordinator.m in Sources */,
 				9370DB5F1D5CB6D3004B0934 /* LoginViewController.m in Sources */,
 				93308FF11D6A060900E5437B /* Reachability.m in Sources */,
 				93EDF97B1D7EFBCF00E59152 /* TwitterUser+CoreDataProperties.m in Sources */,
 				93308FE51D62066B00E5437B /* TwitterTweet+CoreDataProperties.m in Sources */,
 				93EDF97E1D7EFBE800E59152 /* TwitterUser.m in Sources */,
 				93EDF9621D7615A000E59152 /* TwitterNetworkService.m in Sources */,
+				93EDF9851D7F5F0200E59152 /* Coordinator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

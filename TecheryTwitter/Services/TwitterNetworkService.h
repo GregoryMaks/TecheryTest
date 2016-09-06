@@ -23,9 +23,9 @@ typedef NS_ENUM(NSInteger, TwitterNetworkServiceErrorCode) {
  */
 @interface TwitterNetworkService : NSObject
 
-@property (nonatomic, readonly, strong) ACAccountStore *accountStore;
-@property (nonatomic, readonly, strong) ACAccount *account;
-@property (nonatomic, readonly, strong) NSDictionary *profileInfo;
+@property (readonly, strong) ACAccountStore *accountStore;
+@property (readonly, strong) ACAccount *account;
+@property (readonly, strong) NSDictionary *profileInfo;
 
 
 - (void)connectToTwitterAccountWithResultBlock:(void(^)(BOOL isGranted, BOOL isAccountAvailable))resultBlock;

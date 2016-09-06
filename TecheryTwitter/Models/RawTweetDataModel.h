@@ -11,10 +11,10 @@
 
 @interface RawTweetDataModel : NSObject
 
-@property (nonatomic, copy, readonly) NSString *identifier;
-@property (nonatomic, copy, readonly) NSString *text;
-@property (nonatomic, strong, readonly) NSDate *createdAt;
-@property (nonatomic, copy, readonly) NSString *authorProfileImageUrl;
+@property (copy, readonly) NSString *identifier;
+@property (copy, readonly) NSString *text;
+@property (strong, readonly) NSDate *createdAt;
+@property (copy, readonly) NSString *authorProfileImageUrl;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 

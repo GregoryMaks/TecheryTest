@@ -46,7 +46,7 @@
                     <connections>
                         <outlet property="auxiliaryButton" destination="stz-c3-eWV" id="Z4m-G5-FTr"/>
                         <outlet property="statusTextLabel" destination="EbP-5t-YzU" id="ciL-JM-dnd"/>
-                        <segue destination="nJi-um-RKi" kind="show" identifier="PresentFeedSegue" id="hiC-9N-ZRQ"/>
+                        <segue destination="nJi-um-RKi" kind="show" identifier="" id="hiC-9N-ZRQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -153,7 +153,7 @@
         <!--Navigation Controller-->
         <scene sceneID="m6L-K9-O2p">
             <objects>
-                <navigationController id="nJi-um-RKi" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FeedNavigationViewController" id="nJi-um-RKi" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="q0p-Qm-UJc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

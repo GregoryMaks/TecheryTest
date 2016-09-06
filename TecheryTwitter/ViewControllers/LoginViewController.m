@@ -8,17 +8,16 @@
 
 #import "LoginViewController.h"
 #import "LoginViewModelProtocol.h"
-#import "LoginViewModelDelegate.h"
 #import "LoginViewModel.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 
-@interface LoginViewController () <LoginViewModelDelegate>
+@interface LoginViewController ()
 
-@property (nonatomic, strong) id <LoginViewModelProtocol> viewModel;
+@property (strong) id <LoginViewModelProtocol> viewModel;
 
-@property (weak, nonatomic) IBOutlet UILabel *statusTextLabel;
-@property (weak, nonatomic) IBOutlet UIButton *auxiliaryButton;
+@property (weak) IBOutlet UILabel *statusTextLabel;
+@property (weak) IBOutlet UIButton *auxiliaryButton;
 
 @end
 
@@ -30,7 +29,6 @@
 - (void)setViewModelExternally:(id <LoginViewModelProtocol>)model {
     NSAssert(model != nil, @"Model should not be nil");
     self.viewModel = model;
-    self.viewModel.delegate = self;
 }
 
 - (void)bindViewModel {
@@ -48,10 +46,13 @@
                  self.statusTextLabel.text = @"Please grant access to twitter account in system Settings";
                  self.auxiliaryButton.hidden = NO;
                  [self.auxiliaryButton setTitle:@"Goto settings" forState:UIControlStateNormal];
-
+                 
+                 @weakify(self);
+                 // TODO: there should be a better way of chaining
                  __block RACDisposable *signalForButton = [[self.auxiliaryButton rac_signalForControlEvents:UIControlEventTouchUpInside]
                                                            subscribeNext:^(UIButton *button) {
-                                                               [self openSystemSettings];
+                                                               @strongify(self);
+                                                               [self.viewModel navigateToExternalTwitterSettings];
                                                                [signalForButton dispose];
                                                            }];
                  break;
@@ -61,9 +62,12 @@
                  self.auxiliaryButton.hidden = NO;
                  [self.auxiliaryButton setTitle:@"Goto settings" forState:UIControlStateNormal];
                  
+                 @weakify(self);
+                 // TODO: there should be a better way of chaining
                  __block RACDisposable *signalForButton = [[self.auxiliaryButton rac_signalForControlEvents:UIControlEventTouchUpInside]
                                                            subscribeNext:^(UIButton *button) {
-                                                               [self openSystemSettings];
+                                                               @strongify(self);
+                                                               [self.viewModel navigateToExternalTwitterSettings];
                                                                [signalForButton dispose];
                                                            }];
                  break;
@@ -79,41 +83,21 @@
     
     [self bindViewModel];
     
+    [self.viewModel connectToTwitterAccount];
+    
     // TODO
 //    [[NSNotificationCenter defaultCenter] addObserver:self
 //                                             selector:@selector(applicationDidBecomeActive:)
 //                                                 name:UIApplicationDidBecomeActiveNotification
 //                                               object:nil];
 }
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [self.viewModel connectToTwitterAccount];
-}
+//
+//- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+//}
 
 //- (void)applicationDidBecomeActive:(NSNotification *)notif {
 //    [self.viewModel connectToTwitterAccount];
 //}
-
-#pragma mark ModelViewDelegate
-
-- (void)loginViewModel:(id <LoginViewModelProtocol>)viewModel needsToPerformSegueWithIdentifier:(NSString *)identifier {
-    [self performSegueWithIdentifier:identifier sender:nil];
-}
-
-#pragma mark Storyboards
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    [self.viewModel prepareViewController:segue.destinationViewController forSegueIdentifier:segue.identifier];
-}
-
-#pragma mark Private
-
-- (void)openSystemSettings {
-    NSURL *url = [NSURL URLWithString:@"prefs:root"];
-    [[UIApplication sharedApplication] openURL:url];
-}
-
 
 @end

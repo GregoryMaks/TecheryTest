@@ -277,6 +277,7 @@ describe(@"When feed is updated", ^{
         });
     });
     
+    // TODO: add test cases
     context(@"with initial data", ^{
         context(@"without new data", ^{
             pending(@"feed should remain unchanged", ^{
