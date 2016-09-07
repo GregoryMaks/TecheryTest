@@ -11,7 +11,7 @@
 
 #import "LoginViewModel.h"
 #import "LoginViewModelProtocol.h"
-#import "LoginViewModelDelegate.h"
+#import "LoginViewModelCoordinatorDelegate.h"
 
 #import "FeedViewController.h"
 
@@ -29,7 +29,7 @@ describe(@"When initializing", ^{
     });
     
     it(@"should initialize correctly", ^{
-        [[theValue(viewModel.error) should] equal:theValue(LoginViewModelError_None)];
+        [[viewModel.error should] beNil];
     });
 });
 
@@ -37,19 +37,20 @@ describe(@"When connecting to twitter account", ^{
     let(twitterServiceMock, ^{
         return [[TwitterNetworkServiceMock alloc] init];
     });
+    let(delegateMock, ^{
+        return [KWMock mockForProtocol:@protocol(LoginViewModelCoordinatorDelegate)];
+    });
     let(viewModel, ^{
-        return [[LoginViewModel alloc] initWithTwitterNetworkService:(id)twitterServiceMock];
+        LoginViewModel *viewModel = [[LoginViewModel alloc] initWithTwitterNetworkService:(id)twitterServiceMock];
+        viewModel.coordinatorDelegate = delegateMock;
+        return viewModel;
     });
     
     it(@"should proceed if granted and available", ^{
-        id delegateMock = [KWMock mockForProtocol:@protocol(LoginViewModelDelegate)];
-        viewModel.delegate = delegateMock;
-        
         twitterServiceMock.connectGrantedReply = YES;
         twitterServiceMock.connectAccountAvailableReply = YES;
         
-        [[delegateMock shouldEventually] receive:@selector(loginViewModel:needsToPerformSegueWithIdentifier:)
-                         withArguments:viewModel, PresentFeedSegueIdentifier, nil];
+        [[delegateMock shouldEventually] receive:@selector(loginViewModelDidAuthenticate:)];
         
         [viewModel connectToTwitterAccount];
     });
@@ -60,7 +61,7 @@ describe(@"When connecting to twitter account", ^{
         
         [viewModel connectToTwitterAccount];
         
-        [[expectFutureValue(theValue(viewModel.error)) shouldEventually] equal:theValue(LoginViewModelError_NoAccountExists)];
+        [[expectFutureValue(theValue(viewModel.error.code)) shouldEventually] equal:theValue(LoginViewModelErrorNoAccountExistsCode)];
     });
     
     it(@"should give error if not granted", ^{
@@ -69,16 +70,21 @@ describe(@"When connecting to twitter account", ^{
         
         [viewModel connectToTwitterAccount];
         
-        [[expectFutureValue(theValue(viewModel.error)) shouldEventually] equal:theValue(LoginViewModelError_AccessDenied)];
+        [[expectFutureValue(theValue(viewModel.error.code)) shouldEventually] equal:theValue(LoginViewModelErrorAccessDeniedCode)];
     });
 });
 
-describe(@"When preparing for segue", ^{
+describe(@"When navigating away", ^{
     let(twitterServiceMock, ^{
         return [[TwitterNetworkServiceMock alloc] init];
     });
+    let(delegateMock, ^{
+        return [KWMock mockForProtocol:@protocol(LoginViewModelCoordinatorDelegate)];
+    });
     let(viewModel, ^{
-        return [[LoginViewModel alloc] initWithTwitterNetworkService:(id)twitterServiceMock];
+        LoginViewModel *viewModel = [[LoginViewModel alloc] initWithTwitterNetworkService:(id)twitterServiceMock];
+        viewModel.coordinatorDelegate = delegateMock;
+        return viewModel;
     });
     beforeEach(^{
         [MagicalRecord setupCoreDataStackWithInMemoryStore];
@@ -88,14 +94,10 @@ describe(@"When preparing for segue", ^{
         [MagicalRecord cleanUp];
     });
     
-    it(@"should prepare correctly for PresentFeedSegueIdentifier", ^{
-        FeedViewController *feedVCMock = [FeedViewController nullMock];
-        UINavigationController *navVCMock = [[UINavigationController alloc] initWithRootViewController:feedVCMock];
+    it(@"should call coordinator method correctly", ^{
+        [[delegateMock shouldEventually] receive:@selector(loginViewModelShouldOpenExternalTwitterSetings:)];
         
-        [[feedVCMock shouldEventually] receive:@selector(setViewModelExternally:)
-                                 withArguments:any(), nil];
-        
-        [viewModel prepareViewController:navVCMock forSegueIdentifier:PresentFeedSegueIdentifier];
+        [viewModel navigateToExternalTwitterSettings];
     });
 });
 

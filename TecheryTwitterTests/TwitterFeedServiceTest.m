@@ -9,7 +9,7 @@
 #import "Kiwi.h"
 
 // TODO: add test cases
-SPEC_BEGIN(FeedViewModelSpec)
+SPEC_BEGIN(TwitterFeedServiceSpec)
 
 describe(@"", ^{
 });
