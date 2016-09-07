@@ -118,7 +118,9 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
                     return nil;
                 }
                 
-                // TODO: convert loadNewer to cold signal and chain them
+                
+                
+                // TODO: convert loadNewer to cold signal and chain them, how?
                 @weakify(self);
                 [[self.twitterFeedModel loadNewerTweetsSignal] subscribeNext:^(NSNumber *newTweetsLoaded) {
                     @strongify(self);

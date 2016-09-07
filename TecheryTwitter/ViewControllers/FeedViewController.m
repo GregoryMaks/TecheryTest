@@ -64,7 +64,6 @@ static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell
         [self displayError:error];
     }];
     
-    // TODO: how to unlink from signal when rebinding?
     [RACObserve(self.viewModel, isFeedRefreshing) subscribeNext:^(NSNumber *value) {
         @strongify(self);
         if (self.refreshControl == nil) {

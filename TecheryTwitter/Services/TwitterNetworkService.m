@@ -79,7 +79,6 @@ NSString * const TwitterNetworkServiceErrorDomain = @"TwitterNetworkServiceError
     
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
     {
-        // TODO: Move status code check to category on NSHTTPURLResponse
         if (urlResponse.statusCode == 200) {
             NSError *jsonError = nil;
             NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:responseData
