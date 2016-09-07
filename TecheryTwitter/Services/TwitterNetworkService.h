@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, TwitterNetworkServiceErrorCode) {
 
 
 - (void)connectToTwitterAccountWithResultBlock:(void(^)(BOOL isGranted, BOOL isAccountAvailable))resultBlock;
-//- (void)retriveTwitterProfileInfoWithResultBlock:(void(^)(BOOL success, NSError *error))resultBlock;
+- (void)retriveTwitterProfileInfoWithResultBlock:(void(^)(BOOL success, NSError *error))resultBlock;
 
 - (void)retrieveHomeTimelineTweetsWithCount:(NSNumber *)count
                                     sinceId:(NSString *)sinceId

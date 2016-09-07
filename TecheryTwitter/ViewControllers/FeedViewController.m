@@ -142,7 +142,7 @@ static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.viewModel numberOfRowsInFeedTable];// + 1;    // Load more button
+    return [self.viewModel numberOfRowsInFeedTable];// + 1;    // Load more button, disabled for now
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

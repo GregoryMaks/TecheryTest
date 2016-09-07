@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, FeedViewModelErrorCode) {
 
 @property (assign, readonly) BOOL isFeedRefreshing;
 @property (strong, readonly) RACSubject *dataUpdatedSignal;   ///< hot signal for notifying about new data
-@property (strong, readonly) RACSubject *errorOccuredSignal;    ///< hot signal for displaying errors to user, paramer NSError*
+@property (strong, readonly) RACSubject *errorOccuredSignal;    ///< hot signal for displaying errors to user, paramer NSError *
 
 @property (copy, readonly) NSString *twitterUsername;
 @property (assign, readonly) BOOL isOnline;
