@@ -20,16 +20,15 @@
 static NSString * const PresentFeedSegueIdentifier = @"PresentFeedSegue";
 
 
-typedef NS_ENUM(NSInteger, LoginViewModelError) {
-    LoginViewModelError_None = 0,
-    LoginViewModelError_AccessDenied,
-    LoginViewModelError_NoAccountExists
-};
+static NSString * const LoginViewModelErrorDomain = @"LoginViewModelErrorDomain";
+
+static NSInteger const LoginViewModelErrorAccessDeniedCode = 1;
+static NSInteger const LoginViewModelErrorNoAccountExistsCode = 2;
 
 
 @protocol LoginViewModelProtocol <NSObject>
 
-@property (assign, readonly) LoginViewModelError error;
+@property (strong, readonly) NSError *error;
 
 @property (weak) id <LoginViewModelCoordinatorDelegate> coordinatorDelegate;
 

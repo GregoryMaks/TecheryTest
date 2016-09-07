@@ -19,7 +19,7 @@
 
 @interface LoginViewModel ()
 
-@property (readwrite, assign) LoginViewModelError error;
+@property (strong, readwrite) NSError *error;
 
 @property (strong) TwitterNetworkService *twitterNetworkService;
 
@@ -35,14 +35,14 @@
 - (instancetype)initWithTwitterNetworkService:(TwitterNetworkService *)twitterNetworkService {
     self = [super init];
     if (self) {
-        self.error = LoginViewModelError_None;
+        self.error = nil;
         self.twitterNetworkService = twitterNetworkService;
     }
     return self;
 }
 
 - (void)connectToTwitterAccount {
-    self.error = LoginViewModelError_None;
+    self.error = nil;
     
     [self.twitterNetworkService connectToTwitterAccountWithResultBlock:^(BOOL isGranted, BOOL isAccountAvailable) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -54,12 +54,16 @@
                 }
                 else {
                     NSLog(@"Account non existent");
-                    self.error = LoginViewModelError_NoAccountExists;
+                    self.error = [NSError errorWithDomain:LoginViewModelErrorDomain
+                                                     code:LoginViewModelErrorNoAccountExistsCode
+                                                 userInfo:@{ NSLocalizedDescriptionKey : @"Twitter account was not found" }];
                 }
             }
             else {
                 NSLog(@"Primary access denied");
-                self.error = LoginViewModelError_AccessDenied;
+                self.error = [NSError errorWithDomain:LoginViewModelErrorDomain
+                                                 code:LoginViewModelErrorAccessDeniedCode
+                                             userInfo:@{ NSLocalizedDescriptionKey : @"Access to twitter account is denied" }];
             }
         });
     }];

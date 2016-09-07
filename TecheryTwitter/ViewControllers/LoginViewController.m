@@ -32,48 +32,50 @@
 }
 
 - (void)bindViewModel {
+    NSAssert(self.viewModel != nil, @"Model should not be nil");
+    if (self.viewModel == nil) {
+        return;
+    }
+    
     @weakify(self);
     [RACObserve(self.viewModel, error)
-     subscribeNext:^(NSNumber *errorType) {
+     subscribeNext:^(NSError *error) {
          @strongify(self);
-         switch([errorType integerValue]) {
-             case LoginViewModelError_None: {
-                 self.statusTextLabel.text = @"Connecting to twitter...";
-                 self.auxiliaryButton.hidden = YES;
-                 break;
-             }
-             case LoginViewModelError_AccessDenied: {
-                 self.statusTextLabel.text = @"Please grant access to twitter account in system Settings";
-                 self.auxiliaryButton.hidden = NO;
-                 [self.auxiliaryButton setTitle:@"Goto settings" forState:UIControlStateNormal];
-                 
-                 @weakify(self);
-                 // TODO: there should be a better way of chaining
-                 __block RACDisposable *signalForButton = [[self.auxiliaryButton rac_signalForControlEvents:UIControlEventTouchUpInside]
-                                                           subscribeNext:^(UIButton *button) {
-                                                               @strongify(self);
-                                                               [self.viewModel navigateToExternalTwitterSettings];
-                                                               [signalForButton dispose];
-                                                           }];
-                 break;
-             }
-             case LoginViewModelError_NoAccountExists: {
-                 self.statusTextLabel.text = @"Please sign in to twitter account in settings";
-                 self.auxiliaryButton.hidden = NO;
-                 [self.auxiliaryButton setTitle:@"Goto settings" forState:UIControlStateNormal];
-                 
-                 @weakify(self);
-                 // TODO: there should be a better way of chaining
-                 __block RACDisposable *signalForButton = [[self.auxiliaryButton rac_signalForControlEvents:UIControlEventTouchUpInside]
-                                                           subscribeNext:^(UIButton *button) {
-                                                               @strongify(self);
-                                                               [self.viewModel navigateToExternalTwitterSettings];
-                                                               [signalForButton dispose];
-                                                           }];
-                 break;
-             }
+         if (error == nil) {
+             self.statusTextLabel.text = @"Connecting to twitter...";
+             self.auxiliaryButton.hidden = YES;
+         }
+         else if (error.code == LoginViewModelErrorAccessDeniedCode) {
+             self.statusTextLabel.text = @"Please grant access to twitter account in system Settings";
+             self.auxiliaryButton.hidden = NO;
+             [self.auxiliaryButton setTitle:@"Goto settings" forState:UIControlStateNormal];
+             
+             @weakify(self);
+             // TODO: there should be a better way of chaining
+             __block RACDisposable *signalForButton = [[self.auxiliaryButton rac_signalForControlEvents:UIControlEventTouchUpInside]
+                                                       subscribeNext:^(UIButton *button) {
+                                                           @strongify(self);
+                                                           [self.viewModel navigateToExternalTwitterSettings];
+                                                           [signalForButton dispose];
+                                                       }];
+         }
+         else if (error.code == LoginViewModelErrorNoAccountExistsCode) {
+             self.statusTextLabel.text = @"Please sign in to twitter account in settings";
+             self.auxiliaryButton.hidden = NO;
+             [self.auxiliaryButton setTitle:@"Goto settings" forState:UIControlStateNormal];
+             
+             @weakify(self);
+             // TODO: there should be a better way of chaining
+             __block RACDisposable *signalForButton = [[self.auxiliaryButton rac_signalForControlEvents:UIControlEventTouchUpInside]
+                                                       subscribeNext:^(UIButton *button) {
+                                                           @strongify(self);
+                                                           [self.viewModel navigateToExternalTwitterSettings];
+                                                           [signalForButton dispose];
+                                                       }];
          }
     }];
+    
+    [self.viewModel connectToTwitterAccount];
 }
 
 #pragma mark Lifecycle
@@ -83,21 +85,18 @@
     
     [self bindViewModel];
     
-    [self.viewModel connectToTwitterAccount];
-    
-    // TODO
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(applicationDidBecomeActive:)
-//                                                 name:UIApplicationDidBecomeActiveNotification
-//                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidBecomeActive:)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
 }
-//
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:animated];
-//}
 
-//- (void)applicationDidBecomeActive:(NSNotification *)notif {
-//    [self.viewModel connectToTwitterAccount];
-//}
+#pragma mark Notifications
+
+- (void)applicationDidBecomeActive:(NSNotification *)notif {
+    if (self.viewModel.error != nil) {
+        [self.viewModel connectToTwitterAccount];
+    }
+}
 
 @end
