@@ -42,21 +42,17 @@ static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell
 
 #pragma mark ViewModel
 
-- (id <FeedViewModelProtocol>)viewModel {
-    // Default model
-    // TODO: maybe delegate to C in MVVM-C
-    if (_viewModel == nil) {
-        _viewModel = [[FeedViewModel alloc] init];
-    }
-    return _viewModel;
-}
-
 - (void)setViewModelExternally:(id <FeedViewModelProtocol>)model {
     NSAssert(model != nil, @"Model should not be nil");
     self.viewModel = model;
 }
 
 - (void)bindViewModel {
+    NSAssert(self.viewModel != nil, @"Model should not be nil");
+    if (self.viewModel == nil) {
+        return;
+    }
+    
     @weakify(self);
     [self.viewModel.dataUpdatedSignal subscribeNext:^(id parameter) {
         @strongify(self);
