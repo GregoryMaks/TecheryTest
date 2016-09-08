@@ -1,17 +1,16 @@
-# TecheryTest Description 
+# TecheryTest description 
 
 Initial requirements for the project: [gist](https://gist.github.com/soxjke/d4b13c772569a7188d5741afa32f2cef)
 </br>
 
-# Architectural considerations
+## Architectural considerations
 
 <ul>
 <li>MVVM-C as main architecture</li>
 <li>BDD unit tests powered by Kiwi</li>
 </ul>
-</br>
 
-# Some implementation details
+## Some implementation details
 
 <ul>
 <li>Correct handling account switch without reinstalling app</li>
