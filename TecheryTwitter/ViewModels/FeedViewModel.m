@@ -115,6 +115,7 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
                                                               code:FeedViewModel_NoInternetConnection
                                                           userInfo:@{ NSLocalizedDescriptionKey : @"Internet connection is down" }]];
                     self.isFeedRefreshing = NO;
+                    
                     return nil;
                 }
                 
@@ -125,14 +126,15 @@ NSString * const FeedViewModelErrorDomain = @"FeedViewModelErrorDomain";
                 [[self.twitterFeedModel loadNewerTweetsSignal] subscribeNext:^(NSNumber *newTweetsLoaded) {
                     @strongify(self);
                     
-                    self.isFeedRefreshing = NO;
                     if ([newTweetsLoaded boolValue]) {
                         [self refreshCachedTweets];
                     }
                     [subscriber sendNext:newTweetsLoaded];
                 } error:^(NSError *error) {
+                    self.isFeedRefreshing = NO;
                     [subscriber sendError:error];
                 } completed:^{
+                    self.isFeedRefreshing = NO;
                     [subscriber sendCompleted];
                 }];
                 

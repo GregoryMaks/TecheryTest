@@ -115,8 +115,10 @@ static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell
 
 - (void)refreshFeed {
     @weakify(self);
-    [[self.viewModel refreshFeedSignal] subscribeNext:^(id x) {
-    } error:^(NSError *error) {
+    RACSignal *refreshSignal = [self.viewModel refreshFeedSignal];
+    refreshSignal = [refreshSignal deliverOn:[RACScheduler mainThreadScheduler]];
+    [refreshSignal subscribeNext:^(id x) {}
+                           error:^(NSError *error) {
         @strongify(self);
         [self displayError:error];
     }];

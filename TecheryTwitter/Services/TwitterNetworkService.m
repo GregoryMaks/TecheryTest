@@ -86,7 +86,6 @@ NSString * const TwitterNetworkServiceErrorDomain = @"TwitterNetworkServiceError
                                                                            error:&jsonError];
             if (jsonError == nil) {
                 self.profileInfo = responseJSON;
-                NSLog(@"profile info = %@", self.profileInfo);
                 if (resultBlock) {
                     resultBlock(YES, nil);
                 }

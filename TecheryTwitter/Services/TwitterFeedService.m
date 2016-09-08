@@ -51,7 +51,7 @@ static NSInteger const kDefaultTweetBatchSize = 20;
         return result;
     }
     else {
-        NSLog(@"error retrieving data from DB, %@", [error localizedDescription]);
+        NSLog(@"Error retrieving data from DB, %@", [error localizedDescription]);
         return nil;
     }
 }
@@ -61,7 +61,7 @@ static NSInteger const kDefaultTweetBatchSize = 20;
     @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self);
-        NSLog(@"loadNewerTweets");
+        NSLog(@"Loading newer tweets");
         
         long long int maxStoredTweetId = [self maxTweetIdForUser:self.user];
         NSLog(@"maxId = %lld", maxStoredTweetId != NSNotFound ? maxStoredTweetId : -1);
@@ -76,7 +76,6 @@ static NSInteger const kDefaultTweetBatchSize = 20;
              if (error) {
                  NSLog(@"Error retrieving tweets, %@", [error localizedDescription]);
                  [subscriber sendError:error];
-                 [subscriber sendCompleted];
                  return;
              }
              
