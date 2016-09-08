@@ -18,6 +18,10 @@
 		93308FED1D63302300E5437B /* NSDate+Twitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FEC1D63302300E5437B /* NSDate+Twitter.m */; };
 		93308FF11D6A060900E5437B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 93308FF01D6A060900E5437B /* Reachability.m */; };
 		93308FF31D6A062000E5437B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93308FF21D6A062000E5437B /* SystemConfiguration.framework */; };
+		935B38CF1D8188E400F32F20 /* TwitterFeedServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 935B38C71D817E8B00F32F20 /* TwitterFeedServiceTest.m */; };
+		935B38D01D8188E400F32F20 /* LoginViewModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 935B38CA1D817E8B00F32F20 /* LoginViewModelTest.m */; };
+		935B38D11D8188E400F32F20 /* FeedViewModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 935B38C91D817E8B00F32F20 /* FeedViewModelTest.m */; };
+		935B38D21D8188E800F32F20 /* RawTweetDataModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 935B38C51D817E8B00F32F20 /* RawTweetDataModelTest.m */; };
 		9370DB361D5C8573004B0934 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB351D5C8573004B0934 /* main.m */; };
 		9370DB391D5C8573004B0934 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9370DB381D5C8573004B0934 /* AppDelegate.m */; };
 		9370DB3F1D5C8573004B0934 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9370DB3D1D5C8573004B0934 /* Main.storyboard */; };
@@ -33,13 +37,9 @@
 		93EDF9501D748CC400E59152 /* NSDateTwitterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF94F1D748CC400E59152 /* NSDateTwitterTest.m */; };
 		93EDF9611D7615A000E59152 /* TwitterFeedService.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF95E1D7615A000E59152 /* TwitterFeedService.m */; };
 		93EDF9621D7615A000E59152 /* TwitterNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9601D7615A000E59152 /* TwitterNetworkService.m */; };
-		93EDF9641D76207300E59152 /* RawTweetDataModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9631D76207300E59152 /* RawTweetDataModelTest.m */; };
 		93EDF9671D7627A300E59152 /* EmptyTestsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9661D7627A300E59152 /* EmptyTestsAppDelegate.m */; };
-		93EDF96A1D76DB0B00E59152 /* LoginViewModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9691D76DB0B00E59152 /* LoginViewModelTest.m */; };
 		93EDF9711D7872FA00E59152 /* TwitterNetworkServiceMock.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9701D7872FA00E59152 /* TwitterNetworkServiceMock.m */; };
-		93EDF9731D7894AF00E59152 /* FeedViewModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9721D7894AF00E59152 /* FeedViewModelTest.m */; };
 		93EDF9761D78BDFA00E59152 /* ReachabilityMock.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9751D78BDFA00E59152 /* ReachabilityMock.m */; };
-		93EDF9781D7EDC4A00E59152 /* TwitterFeedServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9771D7EDC4900E59152 /* TwitterFeedServiceTest.m */; };
 		93EDF97B1D7EFBCF00E59152 /* TwitterUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF97A1D7EFBCF00E59152 /* TwitterUser+CoreDataProperties.m */; };
 		93EDF97E1D7EFBE800E59152 /* TwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF97D1D7EFBE800E59152 /* TwitterUser.m */; };
 		93EDF9851D7F5F0200E59152 /* Coordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EDF9841D7F5F0200E59152 /* Coordinator.m */; };
@@ -207,6 +207,10 @@
 		93308FEF1D6A060900E5437B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Submodules/Reachability/Reachability.h; sourceTree = "<group>"; };
 		93308FF01D6A060900E5437B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Submodules/Reachability/Reachability.m; sourceTree = "<group>"; };
 		93308FF21D6A062000E5437B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		935B38C51D817E8B00F32F20 /* RawTweetDataModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawTweetDataModelTest.m; sourceTree = "<group>"; };
+		935B38C71D817E8B00F32F20 /* TwitterFeedServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFeedServiceTest.m; sourceTree = "<group>"; };
+		935B38C91D817E8B00F32F20 /* FeedViewModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewModelTest.m; sourceTree = "<group>"; };
+		935B38CA1D817E8B00F32F20 /* LoginViewModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewModelTest.m; sourceTree = "<group>"; };
 		9370DB311D5C8573004B0934 /* TecheryTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TecheryTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9370DB351D5C8573004B0934 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9370DB371D5C8573004B0934 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -234,16 +238,12 @@
 		93EDF95E1D7615A000E59152 /* TwitterFeedService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFeedService.m; sourceTree = "<group>"; };
 		93EDF95F1D7615A000E59152 /* TwitterNetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterNetworkService.h; sourceTree = "<group>"; };
 		93EDF9601D7615A000E59152 /* TwitterNetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterNetworkService.m; sourceTree = "<group>"; };
-		93EDF9631D76207300E59152 /* RawTweetDataModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawTweetDataModelTest.m; sourceTree = "<group>"; };
 		93EDF9651D7627A300E59152 /* EmptyTestsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyTestsAppDelegate.h; sourceTree = "<group>"; };
 		93EDF9661D7627A300E59152 /* EmptyTestsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyTestsAppDelegate.m; sourceTree = "<group>"; };
-		93EDF9691D76DB0B00E59152 /* LoginViewModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewModelTest.m; sourceTree = "<group>"; };
 		93EDF96F1D7872FA00E59152 /* TwitterNetworkServiceMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterNetworkServiceMock.h; sourceTree = "<group>"; };
 		93EDF9701D7872FA00E59152 /* TwitterNetworkServiceMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterNetworkServiceMock.m; sourceTree = "<group>"; };
-		93EDF9721D7894AF00E59152 /* FeedViewModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewModelTest.m; sourceTree = "<group>"; };
 		93EDF9741D78BDFA00E59152 /* ReachabilityMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityMock.h; sourceTree = "<group>"; };
 		93EDF9751D78BDFA00E59152 /* ReachabilityMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityMock.m; sourceTree = "<group>"; };
-		93EDF9771D7EDC4900E59152 /* TwitterFeedServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFeedServiceTest.m; sourceTree = "<group>"; };
 		93EDF9791D7EFBCF00E59152 /* TwitterUser+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TwitterUser+CoreDataProperties.h"; sourceTree = "<group>"; };
 		93EDF97A1D7EFBCF00E59152 /* TwitterUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TwitterUser+CoreDataProperties.m"; sourceTree = "<group>"; };
 		93EDF97C1D7EFBE800E59152 /* TwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterUser.h; sourceTree = "<group>"; };
@@ -414,6 +414,31 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		935B38C41D817E8B00F32F20 /* ModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				935B38C51D817E8B00F32F20 /* RawTweetDataModelTest.m */,
+			);
+			path = ModelTests;
+			sourceTree = "<group>";
+		};
+		935B38C61D817E8B00F32F20 /* ServiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				935B38C71D817E8B00F32F20 /* TwitterFeedServiceTest.m */,
+			);
+			path = ServiceTests;
+			sourceTree = "<group>";
+		};
+		935B38C81D817E8B00F32F20 /* ViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				935B38CA1D817E8B00F32F20 /* LoginViewModelTest.m */,
+				935B38C91D817E8B00F32F20 /* FeedViewModelTest.m */,
+			);
+			path = ViewModelTests;
+			sourceTree = "<group>";
+		};
 		9370DB281D5C8573004B0934 = {
 			isa = PBXGroup;
 			children = (
@@ -471,11 +496,10 @@
 			isa = PBXGroup;
 			children = (
 				93EDF96B1D7872C600E59152 /* Mocks */,
+				935B38C41D817E8B00F32F20 /* ModelTests */,
+				935B38C61D817E8B00F32F20 /* ServiceTests */,
+				935B38C81D817E8B00F32F20 /* ViewModelTests */,
 				93EDF94F1D748CC400E59152 /* NSDateTwitterTest.m */,
-				93EDF9631D76207300E59152 /* RawTweetDataModelTest.m */,
-				93EDF9691D76DB0B00E59152 /* LoginViewModelTest.m */,
-				93EDF9721D7894AF00E59152 /* FeedViewModelTest.m */,
-				93EDF9771D7EDC4900E59152 /* TwitterFeedServiceTest.m */,
 				9370DB531D5C8573004B0934 /* Info.plist */,
 			);
 			path = TecheryTwitterTests;
@@ -562,8 +586,8 @@
 			children = (
 				93EDF9931D80623300E59152 /* FeedViewModel.h */,
 				93EDF9941D80623300E59152 /* FeedViewModel.m */,
-				93EDF9951D80623300E59152 /* FeedViewModelCoordinatorDelegate.h */,
 				93EDF9961D80623300E59152 /* FeedViewModelProtocol.h */,
+				93EDF9951D80623300E59152 /* FeedViewModelCoordinatorDelegate.h */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -573,8 +597,8 @@
 			children = (
 				93EDF9971D80623300E59152 /* LoginViewModel.h */,
 				93EDF9981D80623300E59152 /* LoginViewModel.m */,
-				93EDF9991D80623300E59152 /* LoginViewModelCoordinatorDelegate.h */,
 				93EDF99A1D80623300E59152 /* LoginViewModelProtocol.h */,
+				93EDF9991D80623300E59152 /* LoginViewModelCoordinatorDelegate.h */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -921,13 +945,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93EDF9641D76207300E59152 /* RawTweetDataModelTest.m in Sources */,
-				93EDF96A1D76DB0B00E59152 /* LoginViewModelTest.m in Sources */,
 				93EDF9711D7872FA00E59152 /* TwitterNetworkServiceMock.m in Sources */,
-				93EDF9781D7EDC4A00E59152 /* TwitterFeedServiceTest.m in Sources */,
 				93EDF9501D748CC400E59152 /* NSDateTwitterTest.m in Sources */,
 				93EDF9761D78BDFA00E59152 /* ReachabilityMock.m in Sources */,
-				93EDF9731D7894AF00E59152 /* FeedViewModelTest.m in Sources */,
+				935B38CF1D8188E400F32F20 /* TwitterFeedServiceTest.m in Sources */,
+				935B38D11D8188E400F32F20 /* FeedViewModelTest.m in Sources */,
+				935B38D01D8188E400F32F20 /* LoginViewModelTest.m in Sources */,
+				935B38D21D8188E800F32F20 /* RawTweetDataModelTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
