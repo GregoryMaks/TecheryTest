@@ -61,7 +61,7 @@ static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell
     
     [self.viewModel.errorOccuredSignal subscribeNext:^(NSError *error) {
         @strongify(self);
-        [self displayError:error];
+        [self processError:error];
     }];
     
     [RACObserve(self.viewModel, isFeedRefreshing) subscribeNext:^(NSNumber *value) {
@@ -120,7 +120,7 @@ static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell
     [refreshSignal subscribeNext:^(id x) {}
                            error:^(NSError *error) {
         @strongify(self);
-        [self displayError:error];
+        [self processError:error];
     }];
 }
 
@@ -182,14 +182,19 @@ static NSString * const kLoadMoreFeedTableViewCell = @"LoadMoreFeedTableViewCell
 
 #pragma mark Private
 
-- (void)displayError:(NSError *)error {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                   message:[error localizedDescription]
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    [alertVC addAction:[UIAlertAction actionWithTitle:@"Ok"
-                                                style:UIAlertActionStyleCancel
-                                              handler:nil]];
-    [self presentViewController:alertVC animated:YES completion:nil];
+- (void)processError:(NSError *)error {
+    if (error.code == FeedViewModel_NoInternetConnection) {
+        NSLog(@"No internet connection");
+    }
+    else {
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                       message:[error localizedDescription]
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [alertVC addAction:[UIAlertAction actionWithTitle:@"Ok"
+                                                    style:UIAlertActionStyleCancel
+                                                  handler:nil]];
+        [self presentViewController:alertVC animated:YES completion:nil];
+    }
 }
 
 @end
