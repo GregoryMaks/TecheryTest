@@ -18,3 +18,10 @@ Initial requirements for the project: [gist](https://gist.github.com/soxjke/d4b1
 <li>Using NSLog, as CocoaLumberjack or any other logging framework is an overkill here</li>
 <li>Usit tests are not fully finished</li> 
 </ul>
+
+## Possible future improvements
+
+<ul>
+<li>Bind UITableView to FeedModel using RAC</li>
+<li>Chain ```- (RACSignal *)refreshFeedSignal``` and ```- (RACSignal *)loadNewerTweetsSignal``` correctly using RAC methods
+</ul>
