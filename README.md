@@ -13,7 +13,7 @@ Initial requirements for the project: [gist](https://gist.github.com/soxjke/d4b1
 ## Some implementation details
 
 <ul>
-<li>Correct handling account switch without reinstalling app</li>
+<li>Correct handling of account switching without reinstalling app</li>
 <li>Simple handling of gaps between tweet feed loads by removing old tweets (temporary solution)</li>
 <li>Using NSLog, as CocoaLumberjack or any other are is an overkill here</li>
 <li>UsitTest are not fully finished</li> 
